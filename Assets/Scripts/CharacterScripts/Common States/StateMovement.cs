@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
+﻿
 public class StateMovement : State
 {
     IMovable objectToMove;
@@ -18,16 +15,15 @@ public class StateMovement : State
     {
         base.Enter();
 
-        //calculate speed
-        Vector3 targetPosition = objectToMove.CalculateTargetPosition(waypointToReach);
-        objectToMove.CalculateObjectSpeed(targetPosition);
+        //calculate necessary to move object
+        objectToMove.CalculateMovement(waypointToReach);
     }
 
     public override void Execution()
     {
         base.Execution();
 
-        //move object to waypoint
-        objectToMove.MoveToWaypoint();
+        //move object
+        objectToMove.Movement();
     }
 }
