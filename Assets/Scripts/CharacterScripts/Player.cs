@@ -4,17 +4,13 @@ using UnityEngine;
 
 public class Player : Character
 {
-
-
-    private void Start()
+    void Start()
     {
-        
+        SetState(new PlayerWaitInput(this));
     }
 
-    private void Update()
+    void Update()
     {
-        
+        state?.Execution();
     }
-
-
 }
