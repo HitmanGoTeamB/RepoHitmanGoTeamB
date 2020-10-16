@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-public class Character : MonoBehaviour
+public class Character : StateMachine, IMovable
 {
-    [SerializeField] float timeToMove = 1.5f;
-    Waypoint currentWaypoint;
+    [Tooltip("Time to move from one waypoint to another")]
+    [SerializeField] float timeToMove = 2;
 
+    Waypoint currentWaypoint;
     Waypoint CurrentWaypoint
     {
         get
@@ -24,27 +25,41 @@ public class Character : MonoBehaviour
         }
     }
 
-    protected void MoveToWaypoint(Vector3 directionToMove)
+    Vector3 targetPosition;
+    float speedToMove;
+
+    public void Movement()
     {
-        Waypoint waypointToMove = GetWaypointToMove(directionToMove);
-        Vector3 targetPosition = new Vector3(waypointToMove.transform.position.x, transform.position.y, waypointToMove.transform.position.z);
-        float SpeedToMove = Vector3.Distance(transform.position, targetPosition) / timeToMove;
-        transform.position = Vector3.MoveTowards(transform.position, targetPosition, SpeedToMove);
+        //move
+        transform.position = Vector3.MoveTowards(transform.position, targetPosition, speedToMove * Time.deltaTime);
     }
 
-    Waypoint GetWaypointToMove(Vector3 direction)
+    public void CalculateMovement(Waypoint waypointToReach)
+    {
+        //get target position (waypoint X and Z axis, but character Y axis)
+        targetPosition = new Vector3(waypointToReach.transform.position.x, transform.position.y, waypointToReach.transform.position.z);
+
+        //set speed
+        speedToMove = Vector3.Distance(waypointToReach.transform.position, targetPosition) / timeToMove;
+    }
+
+    public Waypoint GetWaypointToMove(Vector3 direction)
     {
         Waypoint waypointToMove = null;
+
+        //get nearest waypoint in that direction
         CurrentWaypoint.WalkableWaypoints.OrderBy(distance => Vector3.Distance(distance.transform.position, CurrentWaypoint.transform.position + direction));
-        if(CurrentWaypoint.WalkableWaypoints[0] != null)
+        if (CurrentWaypoint.WalkableWaypoints[0] != null)
         {
-            waypointToMove = CurrentWaypoint.WalkableWaypoints[0];           
+            waypointToMove = CurrentWaypoint.WalkableWaypoints[0];
         }
+
         return waypointToMove;
     }
 
     void GetCurrentWaypoint()
     {
+        //find current waypoint with a raycast to the down
         RaycastHit hit;
         Physics.Raycast(this.transform.position, Vector3.down, out hit);
         currentWaypoint = hit.transform.gameObject.GetComponent<Waypoint>();
