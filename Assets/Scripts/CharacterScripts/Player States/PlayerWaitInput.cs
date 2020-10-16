@@ -13,37 +13,33 @@ public class PlayerWaitInput : State
         IMovable objectToMove = null;
         Waypoint waypointToMove = null;
 
-        //wait input
+        //wait input, then set waypoint
         if(Input.GetKeyDown(KeyCode.W))
         {
             objectToMove = stateMachine.GetComponent<IMovable>();
 
-            //set waypoint
-            waypointToMove = objectToMove.GetWaypointToMove(Vector3.forward);            
+            waypointToMove = objectToMove.GetWaypointToMove(Vector2Int.up);            
         }
         else if(Input.GetKeyDown(KeyCode.S))
         {
             objectToMove = stateMachine.GetComponent<IMovable>();
 
-            //set waypoint
-            waypointToMove = objectToMove.GetWaypointToMove(Vector3.forward);
+            waypointToMove = objectToMove.GetWaypointToMove(Vector2Int.down);
         }
         else if (Input.GetKeyDown(KeyCode.A))
         {
             objectToMove = stateMachine.GetComponent<IMovable>();
 
-            //set waypoint
-            waypointToMove = objectToMove.GetWaypointToMove(Vector3.forward);
+            waypointToMove = objectToMove.GetWaypointToMove(Vector2Int.left);
         }
         else if(Input.GetKeyDown(KeyCode.D))
         {
             objectToMove = stateMachine.GetComponent<IMovable>();
 
-            //set waypoint
-            waypointToMove = objectToMove.GetWaypointToMove(Vector3.forward);
+            waypointToMove = objectToMove.GetWaypointToMove(Vector2Int.right);
         }
 
-        //if there is a waypoint, then change state to movement
+        //if there is a waypoint, change state to movement
         if(waypointToMove != null)
         {
             stateMachine.SetState(new StateMovement(stateMachine, objectToMove, waypointToMove));

@@ -3,25 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-public class MapCreator : MonoBehaviour
+public class Map : MonoBehaviour
 {
-    [Header("Update")]
-    [SerializeField] bool updateCoordinates = false;
-
     Dictionary<Vector2Int, Waypoint> waypointsInMap = new Dictionary<Vector2Int, Waypoint>();
 
-    void OnValidate()
+    void Start()
     {
-        if (updateCoordinates)
-        {
-            UpdateCoordinates();
-        }
+        UpdateCoordinates();
     }
+
+    #region private API
 
     void UpdateCoordinates()
     {
-        updateCoordinates = false;
-
         //find every waypoint in scene
         Waypoint[] waypointsInScene = FindObjectsOfType<Waypoint>();
 
@@ -53,4 +47,23 @@ public class MapCreator : MonoBehaviour
             x++;
         }
     }
+
+    #endregion
+
+    #region public API
+
+    public Waypoint GetWaypointInDirection(Waypoint currentWaypoint, Vector2Int direction)
+    {
+        //get coordinates
+        int x = currentWaypoint.X + direction.x;
+        int y = currentWaypoint.Y + direction.y;
+
+        //if there is a waypoint in these coordinates, return it
+        if (waypointsInMap.ContainsKey(new Vector2Int(x, y)))
+            return waypointsInMap[new Vector2Int(x, y)];
+
+        return null;
+    }
+
+    #endregion
 }
