@@ -5,9 +5,13 @@ using UnityEngine;
 [SelectionBase]
 public class Waypoint : MonoBehaviour
 {
-    [SerializeField] int x;
-    [SerializeField] int y;
+    [SerializeField]Waypoint[] walkableWaypoints = default;
 
+    public Waypoint[] WalkableWaypoints { get; set; }
+
+    [Header("Debug")]
+    [SerializeField] int x = 0;
+    [SerializeField] int y = 0;
     public int X => x;
     public int Y => y;
 
