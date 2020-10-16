@@ -8,7 +8,7 @@ public class MapCreator : MonoBehaviour
     [Header("Update")]
     [SerializeField] bool updateCoordinates = false;
 
-    Waypoint[,] waypointsInMap;
+    Dictionary<Vector2Int, Waypoint> waypointsInMap = new Dictionary<Vector2Int, Waypoint>();
 
     void OnValidate()
     {
@@ -28,7 +28,8 @@ public class MapCreator : MonoBehaviour
         //order on x and y
         Waypoint[] waypointsByOrder = waypointsInScene.OrderBy(zAxis => zAxis.transform.position.z).ThenBy(xAxis => xAxis.transform.position.x).ToArray();
 
-        waypointsInMap = new Waypoint[waypointsByOrder.Length, waypointsByOrder.Length];
+        //reset map
+        waypointsInMap.Clear();
 
         int currentZ = Mathf.RoundToInt(waypointsByOrder[0].transform.position.z);
         int x = 0;
@@ -45,8 +46,8 @@ public class MapCreator : MonoBehaviour
                 currentZ = Mathf.RoundToInt(currentWaypoint.transform.position.z);
             }
 
-            //put in the array and set coordinates
-            waypointsInMap[x, y] = currentWaypoint;
+            //put in the dictionary and set coordinates
+            waypointsInMap.Add(new Vector2Int(x, y), currentWaypoint);
             currentWaypoint.SetCoordinates(x, y);
 
             x++;
