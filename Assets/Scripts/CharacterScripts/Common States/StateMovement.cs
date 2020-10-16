@@ -16,14 +16,9 @@ public class StateMovement : State
         base.Enter();
 
         //calculate necessary to move object
-        objectToMove.CalculateMovement(waypointToReach);
-    }
+        objectToMove.SetTargetPosition(waypointToReach);
 
-    public override void Execution()
-    {
-        base.Execution();
-
-        //move object
-        objectToMove.Movement();
+        //start movement
+        stateMachine.StartCoroutine(objectToMove.Move(waypointToReach));
     }
 }

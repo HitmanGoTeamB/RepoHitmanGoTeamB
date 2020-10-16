@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 public interface IMovable
 {
-    Waypoint GetWaypointToMove(Vector3 direction);
-    void CalculateMovement(Waypoint waypointToReach);
-    void Movement();
+    Waypoint GetWaypointToMove(Vector2Int direction);
+    void SetTargetPosition(Waypoint waypointToReach);
+    IEnumerator Move(Waypoint waypointToReach);
 }

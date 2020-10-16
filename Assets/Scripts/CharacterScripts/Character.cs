@@ -5,15 +5,18 @@ using System.Linq;
 
 public class Character : StateMachine, IMovable
 {
+    #region variables
+
     [Tooltip("Time to move from one waypoint to another")]
-    [SerializeField] float timeToMove = 2;
+    [SerializeField] float timeToMove = 1.5f;
 
     Waypoint currentWaypoint;
     Waypoint CurrentWaypoint
     {
         get
         {
-            if(currentWaypoint == null)
+            //if not set, get current waypoint
+            if (currentWaypoint == null)
             {
                 GetCurrentWaypoint();
             }
@@ -26,36 +29,61 @@ public class Character : StateMachine, IMovable
     }
 
     Vector3 targetPosition;
-    float speedToMove;
 
-    public void Movement()
+    #endregion
+
+    #region movement
+
+    public IEnumerator Move(Waypoint waypointToReach)
     {
-        //move
-        transform.position = Vector3.MoveTowards(transform.position, targetPosition, speedToMove * Time.deltaTime);
+        //save start position
+        Vector3 startPosition = transform.position;
+
+        //movement
+        float delta = 0;
+        while(delta < 1)
+        {
+            delta += Time.deltaTime / timeToMove;
+
+            transform.position = Vector3.Lerp(startPosition, targetPosition, delta);
+
+            yield return null;
+        }
+
+        //set final position
+        transform.position = targetPosition;
+
+        //set new current waypoint
+        currentWaypoint = waypointToReach;
+
+        //TEMP
+        SetState(new PlayerWaitInput(this));
     }
 
-    public void CalculateMovement(Waypoint waypointToReach)
+    public void SetTargetPosition(Waypoint waypointToReach)
     {
         //get target position (waypoint X and Z axis, but character Y axis)
         targetPosition = new Vector3(waypointToReach.transform.position.x, transform.position.y, waypointToReach.transform.position.z);
-
-        //set speed
-        speedToMove = Vector3.Distance(waypointToReach.transform.position, targetPosition) / timeToMove;
     }
 
-    public Waypoint GetWaypointToMove(Vector3 direction)
+    public Waypoint GetWaypointToMove(Vector2Int direction)
     {
-        Waypoint waypointToMove = null;
+        //get waypoint in that direction
+        Waypoint waypointToReach = GameManager.instance.map.GetWaypointInDirection(CurrentWaypoint, direction);
 
-        //get nearest waypoint in that direction
-        CurrentWaypoint.WalkableWaypoints.OrderBy(distance => Vector3.Distance(distance.transform.position, CurrentWaypoint.transform.position + direction));
-        if (CurrentWaypoint.WalkableWaypoints[0] != null)
+        //if there is a waypoint, check if is walkable and return
+        if(waypointToReach != null)
         {
-            waypointToMove = CurrentWaypoint.WalkableWaypoints[0];
+            if(CurrentWaypoint.WalkableWaypoints.Contains(waypointToReach))
+            {
+                return waypointToReach;
+            }
         }
 
-        return waypointToMove;
+        return null;
     }
+
+    #endregion
 
     void GetCurrentWaypoint()
     {
