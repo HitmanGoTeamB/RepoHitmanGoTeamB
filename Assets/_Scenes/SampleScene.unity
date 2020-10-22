@@ -846,6 +846,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8754062050573643667, guid: a4cd555420559024b942fce8ce1b7dbc,
+        type: 3}
+      propertyPath: walkableWaypoints.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8754062050573643667, guid: a4cd555420559024b942fce8ce1b7dbc,
+        type: 3}
+      propertyPath: walkableWaypoints.Array.data[0]
+      value: 
+      objectReference: {fileID: 1538475923}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a4cd555420559024b942fce8ce1b7dbc, type: 3}
 --- !u!4 &860474915 stripped
@@ -1172,7 +1182,7 @@ PrefabInstance:
     - target: {fileID: 6323935487840350987, guid: 3d78a7f622a38f44d88f27d2fed73c80,
         type: 3}
       propertyPath: walkableWaypoints.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6323935487840350987, guid: 3d78a7f622a38f44d88f27d2fed73c80,
         type: 3}
@@ -1188,7 +1198,7 @@ PrefabInstance:
         type: 3}
       propertyPath: walkableWaypoints.Array.data[1]
       value: 
-      objectReference: {fileID: 1614295016}
+      objectReference: {fileID: 0}
     - target: {fileID: 6323935487840350987, guid: 3d78a7f622a38f44d88f27d2fed73c80,
         type: 3}
       propertyPath: everyWaypointAround.Array.data[0]

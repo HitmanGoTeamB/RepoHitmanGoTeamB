@@ -18,7 +18,8 @@ public class PlayerWaitInput : State
         {
             objectToMove = stateMachine.GetComponent<IMovable>();
 
-            waypointToMove = objectToMove.GetWaypointToMove(Vector2Int.up);            
+            waypointToMove = objectToMove.GetWaypointToMove(Vector2Int.up);
+            
         }
         else if(Input.GetKeyDown(KeyCode.S))
         {

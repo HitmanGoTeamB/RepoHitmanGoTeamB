@@ -11,7 +11,7 @@ public class Character : StateMachine, IMovable
     [SerializeField] float timeToMove = 1.5f;
 
     Waypoint currentWaypoint;
-    Waypoint CurrentWaypoint
+    protected Waypoint CurrentWaypoint
     {
         get
         {
@@ -56,8 +56,9 @@ public class Character : StateMachine, IMovable
         //set new current waypoint
         currentWaypoint = waypointToReach;
 
-        //TEMP
-        SetState(new PlayerWaitInput(this));
+        //go to wait state after finish the movement
+        SetState(new Wait(this));
+
     }
 
     public void SetTargetPosition(Waypoint waypointToReach)

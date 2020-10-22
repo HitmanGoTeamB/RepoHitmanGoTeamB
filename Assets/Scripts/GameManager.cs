@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour
     public static GameManager instance { get; private set; }
 
     public Map map { get; private set; }
+    public Player player { get; private set; }
+    public LevelManager LevelManager { get; private set; }
 
     void Awake()
     {
@@ -28,5 +30,7 @@ public class GameManager : MonoBehaviour
     void SetReferences()
     {
         map = FindObjectOfType<Map>();
+        player = FindObjectOfType<Player>();
+        LevelManager = FindObjectOfType<LevelManager>();
     }
 }

@@ -21,4 +21,12 @@ public class StateMovement : State
         //start movement
         stateMachine.StartCoroutine(objectToMove.Move(waypointToReach));
     }
+
+    public override void Exit()
+    {
+        base.Exit();
+
+        if(stateMachine is Player)
+            GameManager.instance.LevelManager.EndPlayerTurn();
+    }
 }
