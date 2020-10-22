@@ -26,7 +26,21 @@ public class StateMovement : State
     {
         base.Exit();
 
-        if(stateMachine is Player)
-            GameManager.instance.LevelManager.EndPlayerTurn();
+        //when the player move
+        if (stateMachine is Player)
+        {
+            Player player = stateMachine as Player;
+
+            //check if end game
+            if (player.CheckIsFinalWaypoint())
+            {
+                GameManager.instance.LevelManager.EndGame(true);
+            }
+            //or end turn
+            else
+            {
+                GameManager.instance.LevelManager.EndPlayerTurn();
+            }
+        }
     }
 }

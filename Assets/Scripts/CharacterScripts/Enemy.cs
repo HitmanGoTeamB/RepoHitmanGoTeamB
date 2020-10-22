@@ -5,44 +5,41 @@ using System.Linq;
 
 public class Enemy : Character, IMovable
 {
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         SetState(new Wait(this));
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    /// <summary>
+    /// Called from Level Manager on start enemy turn
+    /// </summary>
     public void ActiveEnemy()
     {
         SetState(new IdleState(this));
     }
 
-    public void CheckForPlayerInRange()
+    /// <summary>
+    /// Called from idle state. If there is enemy in range, kill him. Else end turn
+    /// </summary>
+    public bool CheckForPlayerInRange(out Waypoint forwardWaypoint)
     {
-        //transform vector3 transform to vector2int
-        //usa funzione nella mappa per waypoint
-        //check se il waypoint è camminabile
-        //check se il player e' sul quel waypoint
-        //se il player e' li cambia stato in attacco
-        //se il player non e' li vai in wait e comunica che hai finito il turno 
-
+        //get transform forward in Vector2Int
         Vector2Int forwardtransform = new Vector2Int(Mathf.RoundToInt(transform.forward.x), Mathf.RoundToInt(transform.forward.z));
-        Waypoint forwardWaypoint = GameManager.instance.map.GetWaypointInDirection(CurrentWaypoint, forwardtransform);
+
+        //get waypoint
+        forwardWaypoint = GameManager.instance.map.GetWaypointInDirection(CurrentWaypoint, forwardtransform);
         if (forwardWaypoint != null)
         {
-            if (forwardWaypoint.WalkableWaypoints.Contains(forwardWaypoint) && forwardWaypoint.ObjetsOnWaypoint.Contains(GameManager.instance.player.gameObject))
+            //if walkable and there is player on it
+            if (CurrentWaypoint.WalkableWaypoints.Contains(forwardWaypoint))
             {
-                SetState(new AttackState(this, this, forwardWaypoint));
-                return;
+                if (forwardWaypoint.ObjectsOnWaypoint.Contains(GameManager.instance.player.gameObject))
+                {
+                    return true;
+                }
             }
         }
 
-        SetState(new Wait(this));
-        GameManager.instance.LevelManager.EndEnemyTurn(this);
+        return false;
     }
 }

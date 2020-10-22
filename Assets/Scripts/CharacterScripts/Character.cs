@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
+[SelectionBase]
 public class Character : StateMachine, IMovable
 {
     #region variables
@@ -32,6 +33,12 @@ public class Character : StateMachine, IMovable
 
     #endregion
 
+    void Start()
+    {
+        //add on this waypoint
+        CurrentWaypoint.AddObjectToWaypoint(this.gameObject);
+    }
+
     #region movement
 
     public IEnumerator Move(Waypoint waypointToReach)
@@ -50,11 +57,13 @@ public class Character : StateMachine, IMovable
             yield return null;
         }
 
-        //set final position
+        //set final position and remove from waypoint
         transform.position = targetPosition;
+        CurrentWaypoint.RemoveObjectFromWaypoint(this.gameObject);
 
-        //set new current waypoint
+        //set new current waypoint and add to this waypoint
         currentWaypoint = waypointToReach;
+        CurrentWaypoint.AddObjectToWaypoint(this.gameObject);
 
         //go to wait state after finish the movement
         SetState(new Wait(this));

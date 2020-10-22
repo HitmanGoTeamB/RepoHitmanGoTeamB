@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
 
     void SetReferences()
     {
+        //set references
         map = FindObjectOfType<Map>();
         player = FindObjectOfType<Player>();
         LevelManager = FindObjectOfType<LevelManager>();

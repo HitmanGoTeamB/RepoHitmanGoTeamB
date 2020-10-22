@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Player : Character
 {
-    void Start()
+    void Awake()
     {
         SetState(new Wait(this));
     }
@@ -14,14 +14,31 @@ public class Player : Character
         state?.Execution();
     }
 
+    /// <summary>
+    /// Called from Level Manager on start player turn
+    /// </summary>
     public void ActivePlayer()
     {
         SetState(new PlayerWaitInput(this));
     }
 
+    /// <summary>
+    /// Called from enemy when kill player
+    /// </summary>
     public void PlayerGotKilled()
     {
         //animazione di morte
         //chiama un endgame
+        //REMEMBER this can be called more times, but it has to work only one time
+        //TODO
+        GameManager.instance.LevelManager.EndGame(false);
+    }
+
+    /// <summary>
+    /// Called from movement state to check if move to final waypoint
+    /// </summary>
+    public bool CheckIsFinalWaypoint()
+    {
+        return CurrentWaypoint.IsFInalWaypoint;
     }
 }

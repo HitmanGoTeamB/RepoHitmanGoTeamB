@@ -7,7 +7,7 @@ public class Map : MonoBehaviour
 {
     Dictionary<Vector2Int, Waypoint> waypointsInMap = new Dictionary<Vector2Int, Waypoint>();
 
-    void Start()
+    void Awake()
     {
         UpdateCoordinates();
     }
