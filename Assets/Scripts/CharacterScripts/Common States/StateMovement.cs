@@ -2,7 +2,7 @@
 public class StateMovement : State
 {
     IMovable objectToMove;
-    Waypoint waypointToReach;
+    protected Waypoint waypointToReach;
 
     public StateMovement(StateMachine stateMachine, IMovable objectToMove, Waypoint waypointToReach) : base(stateMachine)
     {
@@ -20,27 +20,5 @@ public class StateMovement : State
 
         //start movement
         stateMachine.StartCoroutine(objectToMove.Move(waypointToReach));
-    }
-
-    public override void Exit()
-    {
-        base.Exit();
-
-        //when the player move
-        if (stateMachine is Player)
-        {
-            Player player = stateMachine as Player;
-
-            //check if end game
-            if (player.CheckIsFinalWaypoint())
-            {
-                GameManager.instance.LevelManager.EndGame(true);
-            }
-            //or end turn
-            else
-            {
-                GameManager.instance.LevelManager.EndPlayerTurn();
-            }
-        }
     }
 }

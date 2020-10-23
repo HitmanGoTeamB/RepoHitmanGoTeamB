@@ -94,11 +94,22 @@ public class LevelManager : StateMachine
         }
     }
 
+    public void SetEnemiesPathFinding(Waypoint waypointToReach)
+    {
+        //foreach enemy, set path finding
+        foreach(Enemy enemy in enemiesInScene)
+        {
+            enemy.SetPathFinding(waypointToReach);
+        }
+    }
+
     /// <summary>
     /// Called by player when is killed or reached final waypoint
     /// </summary>
     public void EndGame(bool win)
     {
+        //NB do only one time
+
         if(win)
         {
             //show achievement and menu to change level

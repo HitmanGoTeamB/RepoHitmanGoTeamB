@@ -63,7 +63,7 @@ public class Map : MonoBehaviour
             return waypointsInMap[new Vector2Int(x, y)];
 
         return null;
-    }
+    }    
 
     #endregion
 }

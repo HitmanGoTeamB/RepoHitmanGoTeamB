@@ -49,5 +49,24 @@ public class Waypoint : MonoBehaviour
         ObjectsOnWaypoint.Remove(objectToRemove);
     }
 
+    public List<T> GetObjectsOnWaypoint<T>() where T : Component
+    {
+        List<T> objectsOfThisType = new List<T>();
+
+        //foreach object in the list
+        foreach(GameObject obj in ObjectsOnWaypoint)
+        {
+            //if the object is of this type, add to the list
+            T objInTheList = obj.GetComponent<T>();
+            if (objInTheList)
+            {
+                objectsOfThisType.Add(objInTheList);
+            }
+        }
+
+        //return the list
+        return objectsOfThisType;
+    }
+
     #endregion
 }

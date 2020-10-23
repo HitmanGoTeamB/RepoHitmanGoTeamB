@@ -42,4 +42,13 @@ public class Enemy : Character, IMovable
 
         return false;
     }
+
+    public void SetPathFinding(Waypoint waypointToReach)
+    {
+        //TODO
+        //set waypoint
+        //NB this must to do only if not dead
+
+
+    }
 }

@@ -12,7 +12,7 @@ public class Character : StateMachine, IMovable
     [SerializeField] float timeToMove = 1.5f;
 
     Waypoint currentWaypoint;
-    protected Waypoint CurrentWaypoint
+    public Waypoint CurrentWaypoint
     {
         get
         {
@@ -30,6 +30,8 @@ public class Character : StateMachine, IMovable
     }
 
     Vector3 targetPosition;
+
+    Vector2Int[] fourDirectionsVectors = new Vector2Int[4] { Vector2Int.up, Vector2Int.down, Vector2Int.right, Vector2Int.left };
 
     #endregion
 
@@ -76,15 +78,12 @@ public class Character : StateMachine, IMovable
         targetPosition = new Vector3(waypointToReach.transform.position.x, transform.position.y, waypointToReach.transform.position.z);
     }
 
-    public Waypoint GetWaypointToMove(Vector2Int direction)
+    public Waypoint GetWaypointToMove(Waypoint waypointToReach, bool getEveryWaypoint)
     {
-        //get waypoint in that direction
-        Waypoint waypointToReach = GameManager.instance.map.GetWaypointInDirection(CurrentWaypoint, direction);
-
         //if there is a waypoint, check if is walkable and return
         if(waypointToReach != null)
         {
-            if(CurrentWaypoint.WalkableWaypoints.Contains(waypointToReach))
+            if(getEveryWaypoint || CurrentWaypoint.WalkableWaypoints.Contains(waypointToReach))
             {
                 return waypointToReach;
             }
@@ -102,4 +101,30 @@ public class Character : StateMachine, IMovable
         Physics.Raycast(this.transform.position, Vector3.down, out hit);
         currentWaypoint = hit.transform.gameObject.GetComponent<Waypoint>();
     }
+
+    #region public API
+
+    public List<Waypoint> GetAllWaypointsAroundMe(Waypoint currentWaypoint)
+    {
+        List<Waypoint> allWaypointsAround = new List<Waypoint>();
+
+        //foreach direction, add waypoint to the list
+        foreach (Vector2Int direction in fourDirectionsVectors)
+        {
+            allWaypointsAround.Add(GameManager.instance.map.GetWaypointInDirection(currentWaypoint, direction));
+        }
+
+        return allWaypointsAround;
+    }
+
+    public void GetAllWaypointsAroundMe(Dictionary<Vector2Int, Waypoint> dictionary)
+    {
+        //fill dictionary for every direction
+        foreach (Vector2Int direction in fourDirectionsVectors)
+        {
+            dictionary.Add(direction, GameManager.instance.map.GetWaypointInDirection(CurrentWaypoint, direction));
+        }
+    }
+
+    #endregion
 }
