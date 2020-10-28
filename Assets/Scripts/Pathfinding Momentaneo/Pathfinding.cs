@@ -4,86 +4,141 @@ using UnityEngine;
 
 public static class Pathfinding 
 {
-    //pathfinding algorithm
-    public static List<Waypoint> FindPath(Waypoint StartWaypoint, Waypoint TargetWaypoint)
+    public static List<Waypoint> FindPath(Waypoint startWaypoint, Waypoint targetWaypoint)
     {
-        //open list is all waypoint that are not checked
-        List<Waypoint> OpenList = new List<Waypoint>();
-        //cloase list is all waypoint that are already checked
-        List<Waypoint> ClosedList = new List<Waypoint>();
-        //add the start node to openlist
-        OpenList.Add(StartWaypoint);
+        /*
+         * OPEN - the set of nodes to be evaluated
+         * CLOSE - the set of nodes already evaluated
+         * 
+         * G cost - distance from start point
+         * H cost - distance from end point
+         * F cost - sum of G cost and H cost
+         */
 
-        //loop
-        while (OpenList.Count > 0)
+        //=================================================================
+
+        /*
+         * add the start node to OPEN
+         * 
+         * loop
+         *  Current = node in OPEN with the lowest F cost
+         *  remove Current from OPEN
+         *  add Current to CLOSED
+         *  
+         * if Current is the target node (path has been found)
+         *  return
+         *  
+         * foreach Neighbour of the Current node
+         *  if Neighbour is not traversable or Neighbour is in CLOSED
+         *      skip to the next Neighbour
+         *      
+         *  if new path to Neighbour is shorter OR Neighbour is not in OPEN
+         *      set F cost of Neighbour
+         *      set parent of Neighbour to Current
+         *      if Neighbour is not in OPEN
+         *          add Neighbour to OPEN
+         */
+
+        List<Waypoint> openList = new List<Waypoint>();     //nodes to be evaluated
+        List<Waypoint> closedList = new List<Waypoint>();   //already evaluated
+
+        //add the start node to OPEN
+        openList.Add(startWaypoint);
+
+        while (openList.Count > 0)
         {
             //Current = node in OPEN with the lowest F cost
-            Waypoint CurrentWaypoint = OpenList[0];
-            for(int i = 1; i < OpenList.Count; i++)
+            Waypoint currentWaypoint = openList[0];
+            for(int i = 1; i < openList.Count; i++)
             {
-                if(OpenList[i].fCost < CurrentWaypoint.fCost || OpenList[i].fCost == CurrentWaypoint.fCost && OpenList[i].hCost < CurrentWaypoint.hCost)
+                //if F cost is lower or is the same but H cost is lower
+                if(openList[i].fCost < currentWaypoint.fCost || openList[i].fCost == currentWaypoint.fCost && openList[i].hCost < currentWaypoint.hCost)
                 {
-                    CurrentWaypoint = OpenList[i];
+                    currentWaypoint = openList[i];
                 }
             }
 
-            //remove Current from openlist
-            OpenList.Remove(CurrentWaypoint);
-            //add Current to closedlist
-            ClosedList.Add(CurrentWaypoint);
+            //remove Current from OPEN and add to CLOSED
+            openList.Remove(currentWaypoint);
+            closedList.Add(currentWaypoint);
 
-            //se sei alla fine 
-            if (CurrentWaypoint == TargetWaypoint)
-                return CreatePath(StartWaypoint, CurrentWaypoint);
+            //path has been found, return it
+            if (currentWaypoint == targetWaypoint)
+                return CreatePath(startWaypoint, currentWaypoint);
 
-            foreach (Waypoint Neighbour in CurrentWaypoint.WalkableWaypoints)
+            //foreach Neighbour of the Current node (only walkables)
+            foreach (Waypoint neighbour in currentWaypoint.WalkableWaypoints)
             {
-                //see if neighbour is inside closed list and is already checked
-                if (ClosedList.Contains(Neighbour))
+                //if is in CLOSED, skip it
+                if (closedList.Contains(neighbour))
                     continue;
 
-                //calculate cost of Neighbour and check if is inside open list
-                int newCostToNeighbour = CurrentWaypoint.gCost + GetDistance(CurrentWaypoint, Neighbour);
-                if(newCostToNeighbour < Neighbour.gCost || !OpenList.Contains(Neighbour))
-                {
-                    Neighbour.gCost = newCostToNeighbour;
-                    Neighbour.hCost = GetDistance(Neighbour, TargetWaypoint);
-                    Neighbour.parentWaypoint = CurrentWaypoint;
+                //get distance to Neighbour
+                int newCostToNeighbour = currentWaypoint.gCost + GetDistance(currentWaypoint, neighbour);
 
-                    if (!OpenList.Contains(Neighbour))
-                        OpenList.Add(Neighbour);
+                //if new path to Neighbour is shorter or Neighbour is not in OPEN
+                if(newCostToNeighbour < neighbour.gCost || !openList.Contains(neighbour))
+                {
+                    //set F cost of Neighbour
+                    neighbour.gCost = newCostToNeighbour;
+                    neighbour.hCost = GetDistance(neighbour, targetWaypoint);
+
+                    //set parent of Neighbour to Current
+                    neighbour.parentWaypoint = currentWaypoint;
+
+                    //if Neighbour is not in OPEN, add it
+                    if (!openList.Contains(neighbour))
+                        openList.Add(neighbour);
                 }
             }
         }
 
+        //if there is no path, return null
         return null;
     }
 
-    //method that calculate cost(distance) between 2 points
-    static int GetDistance(Waypoint WaypointA, Waypoint WaypointB)
-    {
-        int distanceX = Mathf.Abs(WaypointA.X - WaypointB.X);
-        int distanceY = Mathf.Abs(WaypointA.Y - WaypointB.Y);
+    #region private API
 
+    /// <summary>
+    /// Calculate distance between 2 points
+    /// </summary>
+    static int GetDistance(Waypoint waypointA, Waypoint waypointB)
+    {
+        //get distance on X and Y
+        int distanceX = Mathf.Abs(waypointA.X - waypointB.X);
+        int distanceY = Mathf.Abs(waypointA.Y - waypointB.Y);
+
+        //if distance on X is greater, move oblique (14) to reach Y axis, then move along X axis
         if (distanceX > distanceY)
             return 14 * distanceY + 10 * (distanceX - distanceY);
+
+        //else move oblique (14) to reach X axis, then move along Y axis
         return 14 * distanceX + 10 * (distanceY - distanceX);
     }
 
-    //method that create the path you need to move through
-    static List<Waypoint> CreatePath(Waypoint startWaypoint, Waypoint LastWaypoint)
+    /// <summary>
+    /// Retrace path from start to end
+    /// </summary>
+    static List<Waypoint> CreatePath(Waypoint startWaypoint, Waypoint endWaypoint)
     {
         List<Waypoint> path = new List<Waypoint>();
-        Waypoint currentWaypoint = LastWaypoint;
 
+        //start from end waypoint
+        Waypoint currentWaypoint = endWaypoint;
+
+        //while not reached start waypoint
         while(currentWaypoint != startWaypoint)
         {
+            //add current waypoint and move to next one
             path.Add(currentWaypoint);
             currentWaypoint = currentWaypoint.parentWaypoint;
         }
+
+        //reverse list to get from start to end
         path.Reverse();
 
         return path;
     }
 
+    #endregion
 }

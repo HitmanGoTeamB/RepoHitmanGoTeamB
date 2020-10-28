@@ -47,9 +47,15 @@ public class PlayerWaitThrowInput : State
         //if there is a waypoint, throw
         if (waypointsAround[direction] != null)
         {
+            //set enemies path finding and set player state to Wait
             GameManager.instance.LevelManager.SetEnemiesPathFinding(waypointsAround[direction]);
-            waypointsAround[direction].gameObject.GetComponentInChildren<Renderer>().material.color = Color.cyan;
             stateMachine.SetState(new Wait(stateMachine));
+
+            //TEMP
+            foreach(Renderer renderer in waypointsAround[direction].GetComponentsInChildren<Renderer>())
+            {
+                renderer.material.color = Color.cyan;
+            }
         }
     }
 
@@ -64,7 +70,7 @@ public class PlayerWaitThrowInput : State
         //wait
         yield return new WaitForSeconds(player.RockThrowTime);
 
-        //end player turn
-        GameManager.instance.LevelManager.EndPlayerTurn();
+        //set player wait input state
+        stateMachine.SetState(new PlayerWaitInput(stateMachine));
     }
 }

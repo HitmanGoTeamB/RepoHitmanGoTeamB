@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class Player : Character
 {
+    [Header("Time animation throw rock")]
     [SerializeField] float rockThrowTime = 1;
-    private bool isAlive = true;
 
     public float RockThrowTime => rockThrowTime;
+
+    private bool isAlive = true;
 
     void Awake()
     {

@@ -8,25 +8,31 @@ public class EnemyMovement : StateMovement
     {
     }
 
-    public override void Enter()
-    {
-        base.Enter();
-    }
-
     public override void Exit()
     {
         base.Exit();
+
+        //if next waypoint has player, kill him
         if (waypointToReach.ObjectsOnWaypoint.Contains(GameManager.instance.player.gameObject))
         {
             GameManager.instance.player.PlayerGotKilled();
         }
+        //else end turn
         else
         {
             Enemy enemy = stateMachine as Enemy;
 
-            enemy.PathToRock.RemoveAt(0);
+            //if his a rock path, remove waypoint from the list
+            CheckIsRockPath(enemy);
+
             GameManager.instance.LevelManager.EndEnemyTurn(enemy);
         }
     }
 
+    void CheckIsRockPath(Enemy enemy)
+    {
+        //if this is a rock path, remove waypoint from the list
+        if (enemy.PathToRock.Contains(waypointToReach))
+            enemy.PathToRock.Remove(waypointToReach);
+    }
 }

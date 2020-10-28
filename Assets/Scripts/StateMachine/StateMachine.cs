@@ -13,7 +13,6 @@ public class StateMachine : MonoBehaviour
 
         //set new one
         state = stateToSet;
-        Debug.Log(state.ToString() + name);
 
         //exit from previous
         if (previousState != null)

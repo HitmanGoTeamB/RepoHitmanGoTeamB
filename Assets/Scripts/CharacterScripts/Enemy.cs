@@ -5,8 +5,8 @@ using System.Linq;
 
 public class Enemy : Character, IMovable
 {
-    private List<Waypoint> pathToRock = new List<Waypoint>();
-    public List<Waypoint> PathToRock => pathToRock;
+    //to use when set pathfinding
+    public List<Waypoint> PathToRock { get; private set; } = new List<Waypoint>();
 
     void Awake()
     {
@@ -18,14 +18,16 @@ public class Enemy : Character, IMovable
     /// </summary>
     public void ActiveEnemy()
     {
-        if (pathToRock.Count > 0)
-            SetState(new EnemyMovement(this, GetComponent<IMovable>(), pathToRock[0]));
+        //if there is a path, follow it
+        if (PathToRock != null && PathToRock.Count > 0)
+            SetState(new EnemyMovement(this, GetComponent<IMovable>(), PathToRock[0]));
+        //else go in idle state
         else
             SetState(new IdleState(this));
     }
 
     /// <summary>
-    /// Called from idle state. If there is enemy in range, kill him. Else end turn
+    /// Called from idle state. Check if there is player in front of enemy
     /// </summary>
     public bool CheckForPlayerInRange(out Waypoint forwardWaypoint)
     {
@@ -51,15 +53,17 @@ public class Enemy : Character, IMovable
 
     public void SetPathFinding(Waypoint waypointToReach)
     {
-        pathToRock = Pathfinding.FindPath(CurrentWaypoint, waypointToReach);
+        //set path to rock
+        PathToRock = Pathfinding.FindPath(CurrentWaypoint, waypointToReach);
     }
 
     public void Die()
     {
+        //remove from level manager list
         GameManager.instance.LevelManager.enemiesInScene.Remove(this);
-        Destroy(this.gameObject);
 
         //TODO
         //muovilo alla nello spazio adiacente alla scacchiera
+        Destroy(this.gameObject);
     }
 }

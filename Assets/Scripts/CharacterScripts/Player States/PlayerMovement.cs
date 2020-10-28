@@ -10,7 +10,6 @@ public class PlayerMovement : StateMovement
 
     public override void Exit()
     {
-
         //check if end game
         if (waypointToReach.IsFInalWaypoint)
         {
@@ -22,7 +21,7 @@ public class PlayerMovement : StateMovement
         {
             stateMachine.SetState(new PlayerWaitThrowInput(stateMachine));
         }
-        //else check if there are enemies to kill
+        //else check if there are enemies to kill (and kill 'em)
         else if(IsOnEnemy())
         {
             GameManager.instance.LevelManager.EndPlayerTurn();
@@ -58,8 +57,6 @@ public class PlayerMovement : StateMovement
         {
             waypointToReach.RemoveObjectFromWaypoint(enemy.gameObject);
             enemy.Die();
-            //TODO
-            //death animation (move to grid side)
         }
 
         return enemies.Count > 0;

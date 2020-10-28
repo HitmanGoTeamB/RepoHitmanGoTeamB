@@ -18,6 +18,8 @@ public class LevelManager : StateMachine
     //every enemy that must to end turn
     List<Enemy> enemiesInMovement = new List<Enemy>();
 
+    bool isGameEnded;
+
     #endregion
 
     void Start()
@@ -109,7 +111,11 @@ public class LevelManager : StateMachine
     /// </summary>
     public void EndGame(bool win)
     {
-        //NB do only one time
+        //do only one time
+        if (isGameEnded)
+            return;
+
+        isGameEnded = true;
 
         if(win)
         {

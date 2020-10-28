@@ -8,7 +8,7 @@ public class Character : StateMachine, IMovable
 {
     #region variables
 
-    [Tooltip("Time to move from one waypoint to another")]
+    [Header("Time animation movement")]
     [SerializeField] float timeToMove = 1.5f;
 
     Waypoint currentWaypoint;
@@ -29,6 +29,7 @@ public class Character : StateMachine, IMovable
         }
     }
 
+    //position to reach (over waypoint)
     Vector3 targetPosition;
 
     Vector2Int[] fourDirectionsVectors = new Vector2Int[4] { Vector2Int.up, Vector2Int.down, Vector2Int.right, Vector2Int.left };

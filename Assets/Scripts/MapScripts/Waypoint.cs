@@ -7,39 +7,49 @@ public class Waypoint : MonoBehaviour
 {
     #region variables
 
-    //Used this to know where the character can move
     [Header("Walkable Points")]
+    [Tooltip("Used this to know where the character can move")]
     [SerializeField] Waypoint[] walkableWaypoints = default;
-
-    public Waypoint[] WalkableWaypoints => walkableWaypoints;
 
     [Header("Is Final Waypoint?")]
     [SerializeField] bool isFinalWaypoint = false;
-
-    public bool IsFInalWaypoint => isFinalWaypoint;
 
     [Header("Debug")]
     [SerializeField] int x = 0;
     [SerializeField] int y = 0;
 
+    #region properties
+
+    public Waypoint[] WalkableWaypoints => walkableWaypoints;
+
+    public bool IsFInalWaypoint => isFinalWaypoint;
+
     public int X => x;
     public int Y => y;
 
-    //values for pathfinding
-    public int gCost { get; set; }
-    public int hCost { get; set; }
-    public int fCost => gCost + hCost;
+    #endregion
 
-    public Waypoint parentWaypoint;
+    #region values for pathfinding
+
+    public int gCost { get; set; }      //distance from start point
+    public int hCost { get; set; }      //distance from end point
+    public int fCost => gCost + hCost;  //sum of G cost and H cost
+
+    //used to retrace path
+    public Waypoint parentWaypoint { get; set; }
+
+    #endregion
 
     //objects on this waypoint (player, rock, enemies, ecc...)
-    public List<GameObject> ObjectsOnWaypoint;// { get; private set; }
+    public List<GameObject> ObjectsOnWaypoint { get; private set; } = new List<GameObject>();
 
     #endregion
 
     #region public API
 
-    //set waypoint coordinates
+    /// <summary>
+    /// Set waypoint coordinates
+    /// </summary>
     public void SetCoordinates(int x, int y)
     {
         this.x = x;
@@ -56,6 +66,11 @@ public class Waypoint : MonoBehaviour
         ObjectsOnWaypoint.Remove(objectToRemove);
     }
 
+    /// <summary>
+    /// Get objects on waypoint with this class
+    /// </summary>
+    /// <typeparam name="T">class to look for</typeparam>
+    /// <returns></returns>
     public List<T> GetObjectsOnWaypoint<T>() where T : Component
     {
         List<T> objectsOfThisType = new List<T>();
