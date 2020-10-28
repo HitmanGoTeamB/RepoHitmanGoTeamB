@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Linq;
 
 public class LevelManager : StateMachine
 {
@@ -12,7 +13,7 @@ public class LevelManager : StateMachine
     public float MinimumEnemyTurnDuration => minimumEnemyTurnDuration;
 
     //every enemies in scene
-    Enemy[] enemiesInScene;
+    public List<Enemy> enemiesInScene { get; set; }
 
     //every enemy that must to end turn
     List<Enemy> enemiesInMovement = new List<Enemy>();
@@ -22,7 +23,7 @@ public class LevelManager : StateMachine
     void Start()
     {
         //find every enemy and start prelevel state
-        enemiesInScene = FindObjectsOfType<Enemy>();
+        enemiesInScene = FindObjectsOfType<Enemy>().ToList();
         SetState(new PrelevelState(this));
     }
 

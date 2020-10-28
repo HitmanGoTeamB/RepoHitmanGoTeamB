@@ -48,6 +48,7 @@ public class PlayerWaitThrowInput : State
         if (waypointsAround[direction] != null)
         {
             GameManager.instance.LevelManager.SetEnemiesPathFinding(waypointsAround[direction]);
+            waypointsAround[direction].gameObject.GetComponentInChildren<Renderer>().material.color = Color.cyan;
             stateMachine.SetState(new Wait(stateMachine));
         }
     }

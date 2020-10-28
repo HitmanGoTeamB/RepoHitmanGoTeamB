@@ -119,6 +119,8 @@ public class Character : StateMachine, IMovable
 
     public void GetAllWaypointsAroundMe(Dictionary<Vector2Int, Waypoint> dictionary)
     {
+        dictionary.Clear();
+
         //fill dictionary for every direction
         foreach (Vector2Int direction in fourDirectionsVectors)
         {

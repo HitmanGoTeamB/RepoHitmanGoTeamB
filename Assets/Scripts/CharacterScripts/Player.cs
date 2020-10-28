@@ -5,6 +5,7 @@ using UnityEngine;
 public class Player : Character
 {
     [SerializeField] float rockThrowTime = 1;
+    private bool isAlive = true;
 
     public float RockThrowTime => rockThrowTime;
 
@@ -35,6 +36,11 @@ public class Player : Character
         //chiama un endgame
         //REMEMBER this can be called more times, but it has to work only one time
         //TODO
-        GameManager.instance.LevelManager.EndGame(false);
+        if(isAlive == true)
+        {
+            GameManager.instance.LevelManager.EndGame(false);
+            isAlive = false;
+        }
+        
     }
 }

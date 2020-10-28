@@ -25,6 +25,13 @@ public class Waypoint : MonoBehaviour
     public int X => x;
     public int Y => y;
 
+    //values for pathfinding
+    public int gCost { get; set; }
+    public int hCost { get; set; }
+    public int fCost => gCost + hCost;
+
+    public Waypoint parentWaypoint;
+
     //objects on this waypoint (player, rock, enemies, ecc...)
     public List<GameObject> ObjectsOnWaypoint;// { get; private set; }
 

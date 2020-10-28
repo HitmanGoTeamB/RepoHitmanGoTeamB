@@ -5,6 +5,9 @@ using System.Linq;
 
 public class Enemy : Character, IMovable
 {
+    private List<Waypoint> pathToRock = new List<Waypoint>();
+    public List<Waypoint> PathToRock => pathToRock;
+
     void Awake()
     {
         SetState(new Wait(this));
@@ -15,7 +18,10 @@ public class Enemy : Character, IMovable
     /// </summary>
     public void ActiveEnemy()
     {
-        SetState(new IdleState(this));
+        if (pathToRock.Count > 0)
+            SetState(new EnemyMovement(this, GetComponent<IMovable>(), pathToRock[0]));
+        else
+            SetState(new IdleState(this));
     }
 
     /// <summary>
@@ -45,10 +51,15 @@ public class Enemy : Character, IMovable
 
     public void SetPathFinding(Waypoint waypointToReach)
     {
+        pathToRock = Pathfinding.FindPath(CurrentWaypoint, waypointToReach);
+    }
+
+    public void Die()
+    {
+        GameManager.instance.LevelManager.enemiesInScene.Remove(this);
+        Destroy(this.gameObject);
+
         //TODO
-        //set waypoint
-        //NB this must to do only if not dead
-
-
+        //muovilo alla nello spazio adiacente alla scacchiera
     }
 }
