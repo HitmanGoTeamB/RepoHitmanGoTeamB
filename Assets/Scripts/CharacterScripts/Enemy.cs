@@ -5,12 +5,54 @@ using System.Linq;
 
 public class Enemy : Character, IMovable
 {
+    [Header("Time animation rotation")]
+    [SerializeField] float timeToRotate = 1;
+
     //to use when set pathfinding
     public List<Waypoint> PathToRock { get; private set; } = new List<Waypoint>();
+
+    Coroutine rotate_Coroutine;
 
     void Awake()
     {
         SetState(new Wait(this));
+    }
+
+    IEnumerator Rotate_Coroutine(Quaternion lookRotation)
+    {
+        //set start variables
+        Quaternion startRotation = transform.rotation;
+        float delta = 0;
+
+        //animation
+        while(delta < 1)
+        {
+            delta += Time.deltaTime / timeToRotate;
+            transform.rotation = Quaternion.Lerp(startRotation, lookRotation, delta);
+
+            yield return null;
+        }
+
+        //set final to be sure
+        transform.rotation = lookRotation;
+    }
+
+    public void Rotate()
+    {
+        //if there is a next waypoint in the path
+        if(PathToRock != null && PathToRock.Count > 0)
+        {
+            //get rotation to reach
+            Vector3 lookDirection = PathToRock[0].transform.position - CurrentWaypoint.transform.position;
+            Quaternion lookRotation = Quaternion.FromToRotation(transform.forward, lookDirection) * transform.rotation;
+
+            //be sure is going only one coroutine
+            if (rotate_Coroutine != null)
+                StopCoroutine(rotate_Coroutine);
+
+            //start rotation coroutine (animation)
+            rotate_Coroutine = StartCoroutine(Rotate_Coroutine(lookRotation));
+        }
     }
 
     /// <summary>
@@ -55,6 +97,7 @@ public class Enemy : Character, IMovable
     {
         //set path to rock
         PathToRock = Pathfinding.FindPath(CurrentWaypoint, waypointToReach);
+        Rotate();
     }
 
     public void Die()
