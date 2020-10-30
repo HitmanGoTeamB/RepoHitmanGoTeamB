@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-[AddComponentMenu("Hitman/Achievements/End Level")]
+[AddComponentMenu("Hitman GO/Achievements/End Level")]
 public class EndLevel : Achievement
 {
     public override bool CheckAchievement(bool win)

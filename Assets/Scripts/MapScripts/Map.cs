@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
+[AddComponentMenu("Hitman GO/Map/Map")]
 public class Map : MonoBehaviour
 {
     Dictionary<Vector2Int, Waypoint> waypointsInMap = new Dictionary<Vector2Int, Waypoint>();

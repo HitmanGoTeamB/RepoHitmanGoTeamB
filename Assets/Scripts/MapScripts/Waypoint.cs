@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[AddComponentMenu("Hitman GO/Map/Waypoint")]
 [SelectionBase]
 public class Waypoint : MonoBehaviour
 {

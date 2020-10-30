@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
+[AddComponentMenu("Hitman GO/Characters/Enemy")]
 public class Enemy : Character, IMovable
 {
     [Header("Time animation rotation")]

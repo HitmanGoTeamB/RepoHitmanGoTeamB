@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[AddComponentMenu("Hitman GO/Managers/Game Manager")]
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance { get; private set; }

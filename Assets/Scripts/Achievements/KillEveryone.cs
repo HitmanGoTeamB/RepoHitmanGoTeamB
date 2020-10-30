@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-[AddComponentMenu("Hitman/Achievements/Kill Everyone")]
+[AddComponentMenu("Hitman GO/Achievements/Kill Everyone")]
 public class KillEveryone : Achievement
 {
     public override bool CheckAchievement(bool win)

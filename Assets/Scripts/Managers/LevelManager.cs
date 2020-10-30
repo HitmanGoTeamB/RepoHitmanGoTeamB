@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Linq;
 
+[AddComponentMenu("Hitman GO/Managers/Level Manager")]
 public class LevelManager : StateMachine
 {
     #region variables

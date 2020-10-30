@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-[AddComponentMenu("Hitman/Achievements/No Kill")]
+[AddComponentMenu("Hitman GO/Achievements/No Kill")]
 public class NoKill : Achievement
 {
     Enemy[] startingEnemiesInScene;
