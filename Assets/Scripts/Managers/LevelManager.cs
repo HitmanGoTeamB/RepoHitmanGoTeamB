@@ -13,6 +13,8 @@ public class LevelManager : StateMachine
     [SerializeField] float minimumEnemyTurnDuration = 0.5f;
     public float MinimumEnemyTurnDuration => minimumEnemyTurnDuration;
 
+    [SerializeField] int rockAreaEffect = 2;
+
     //every enemies in scene
     public List<Enemy> enemiesInScene { get; set; }
 
@@ -100,10 +102,18 @@ public class LevelManager : StateMachine
 
     public void SetEnemiesPathFinding(Waypoint waypointToReach)
     {
-        //foreach enemy, set path finding
-        foreach(Enemy enemy in enemiesInScene)
+        //get every waypoint in rock area
+        foreach(Waypoint waypoint in GameManager.instance.map.GetWaypointsInArea(waypointToReach, rockAreaEffect))
         {
-            enemy.SetPathFinding(waypointToReach);
+            //foreach enemy on waypoint, set path finding
+            foreach (Enemy enemy in waypoint.GetObjectsOnWaypoint<Enemy>())
+                enemy.SetPathFinding(waypointToReach);
+
+            //TEMP
+            foreach (Renderer renderer in waypoint.GetComponentsInChildren<Renderer>())
+            {
+                renderer.material.color = Color.black;
+            }
         }
     }
 

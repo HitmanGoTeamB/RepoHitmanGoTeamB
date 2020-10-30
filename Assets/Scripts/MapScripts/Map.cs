@@ -64,7 +64,29 @@ public class Map : MonoBehaviour
             return waypointsInMap[new Vector2Int(x, y)];
 
         return null;
-    }    
+    }
+    
+    public Waypoint[] GetWaypointsInArea(Waypoint currentWaypoint, int area)
+    {
+        List<Waypoint> waypoints = new List<Waypoint>();
+
+        //foreach waypoint in the area
+        for(int x = currentWaypoint.X - area; x <= currentWaypoint.X + area; x++)
+        {
+            for(int y = currentWaypoint.Y - area; y <= currentWaypoint.Y + area; y++)
+            {
+                //don't add if is current waypoint
+                if (x == currentWaypoint.X && y == currentWaypoint.Y)
+                    continue;
+
+                //if there is this waypoint, add to the list
+                if (waypointsInMap.ContainsKey(new Vector2Int(x, y)))
+                    waypoints.Add(waypointsInMap[new Vector2Int(x, y)]);
+            }
+        }
+
+        return waypoints.ToArray();
+    }
 
     #endregion
 }
