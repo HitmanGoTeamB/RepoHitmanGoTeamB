@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 [AddComponentMenu("Hitman GO/Managers/Game Manager")]
 public class GameManager : MonoBehaviour
@@ -10,6 +8,7 @@ public class GameManager : MonoBehaviour
     public Map map { get; private set; }
     public Player player { get; private set; }
     public LevelManager LevelManager { get; private set; }
+    public ShowPath showPath { get; private set; }
 
     void Awake()
     {
@@ -34,5 +33,6 @@ public class GameManager : MonoBehaviour
         map = FindObjectOfType<Map>();
         player = FindObjectOfType<Player>();
         LevelManager = FindObjectOfType<LevelManager>();
+        showPath = FindObjectOfType<ShowPath>();
     }
 }

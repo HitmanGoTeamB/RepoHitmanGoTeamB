@@ -13,8 +13,13 @@ public class PrelevelState : State
     {
         base.Enter();
 
-        //TODO
-        //now just start player turn
+        //TODO cinemachine
+        GameManager.instance.showPath.CreatePath(EndPrelevel);
+    }
+
+    void EndPrelevel()
+    {
+        //just start player turn
         stateMachine.SetState(new PlayerTurnState(stateMachine));
     }
 }
