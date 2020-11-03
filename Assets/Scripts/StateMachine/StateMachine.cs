@@ -9,12 +9,14 @@ public class StateMachine : MonoBehaviour
     /// </summary>
     public void SetState(State stateToSet)
     {
-        //exit from previous
-        if (state != null)
-            state.Exit();
+        State previousState = state;
 
         //set new one
         state = stateToSet;
+
+        //exit from previous
+        if (previousState != null)
+            previousState.Exit();
 
         //enter in new one
         if (state != null)

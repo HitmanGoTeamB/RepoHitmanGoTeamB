@@ -13,6 +13,31 @@ public class IdleState : State
         base.Enter();
 
         Enemy enemy = stateMachine as Enemy;
-        enemy.CheckForPlayerInRange();
+        Waypoint forwardWaypoint;
+
+        //check player in range
+        if (enemy.CheckForPlayerInRange(out forwardWaypoint))
+        {
+            //if in range, move to kill him
+            stateMachine.SetState(new AttackState(stateMachine, stateMachine.GetComponent<IMovable>(), forwardWaypoint));
+        }
+        else
+        {
+            //else end turn
+            stateMachine.SetState(new Wait(stateMachine));
+
+            stateMachine.StartCoroutine(EndTurnInIdle());
+        }
+    }
+
+    IEnumerator EndTurnInIdle()
+    {
+        LevelManager levelManager = GameManager.instance.LevelManager;
+
+        //wait minimum time turn
+        yield return new WaitForSeconds(levelManager.MinimumEnemyTurnDuration);
+
+        //end turn
+        levelManager.EndEnemyTurn(stateMachine as Enemy);
     }
 }

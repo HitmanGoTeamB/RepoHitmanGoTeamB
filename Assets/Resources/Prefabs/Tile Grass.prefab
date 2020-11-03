@@ -79,6 +79,7 @@ MonoBehaviour:
   walkableWaypoints: []
   x: 0
   y: 0
+  ObjectsOnWaypoint: []
 --- !u!65 &6230161172975148663
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -2,17 +2,75 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerWaitThrowInput : MonoBehaviour
+public class PlayerWaitThrowInput : State
 {
-    // Start is called before the first frame update
-    void Start()
+    public PlayerWaitThrowInput(StateMachine stateMachine) : base(stateMachine)
     {
-        
     }
 
-    // Update is called once per frame
-    void Update()
+    Dictionary<Vector2Int, Waypoint> waypointsAround = new Dictionary<Vector2Int, Waypoint>();
+    Player player;
+
+    public override void Enter()
     {
-        
+        player = stateMachine as Player;
+
+        //fill waypoints around me
+        player.GetAllWaypointsAroundMe(waypointsAround);
+    }
+
+    public override void Execution()
+    {
+        //wait input, then set waypoint
+        //TODO 
+        //do animation
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            ThrowRock(Vector2Int.up);
+        }
+        else if (Input.GetKeyDown(KeyCode.S))
+        {
+            ThrowRock(Vector2Int.down);
+        }
+        else if (Input.GetKeyDown(KeyCode.A))
+        {
+            ThrowRock(Vector2Int.left);
+        }
+        else if (Input.GetKeyDown(KeyCode.D))
+        {
+            ThrowRock(Vector2Int.right);
+        }
+    }
+
+    void ThrowRock(Vector2Int direction)
+    {
+        //if there is a waypoint, throw
+        if (waypointsAround[direction] != null)
+        {
+            //set enemies path finding and set player state to Wait
+            GameManager.instance.LevelManager.SetEnemiesPathFinding(waypointsAround[direction]);
+            stateMachine.SetState(new Wait(stateMachine));
+
+            //TEMP
+            foreach(Renderer renderer in waypointsAround[direction].GetComponentsInChildren<Renderer>())
+            {
+                renderer.material.color = Color.cyan;
+            }
+        }
+    }
+
+    public override void Exit()
+    {
+        //coroutine to throw
+        stateMachine.StartCoroutine(WaitAnimationToEnd());
+    }
+
+    IEnumerator WaitAnimationToEnd()
+    {
+        //wait
+        yield return new WaitForSeconds(player.RockThrowTime);
+
+        //set player wait input state
+        stateMachine.SetState(new PlayerWaitInput(stateMachine));
     }
 }
