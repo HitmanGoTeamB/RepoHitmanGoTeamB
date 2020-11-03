@@ -92,4 +92,17 @@ public class Waypoint : MonoBehaviour
     }
 
     #endregion
+
+    #region private API
+
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.white;
+
+        //draw line to every walkable waypoint
+        foreach (Waypoint waypoint in WalkableWaypoints)
+            Gizmos.DrawLine(transform.position, waypoint.transform.position);
+    }
+
+    #endregion
 }

@@ -13,7 +13,7 @@ public class LevelManager : StateMachine
     [SerializeField] float minimumEnemyTurnDuration = 0.5f;
     public float MinimumEnemyTurnDuration => minimumEnemyTurnDuration;
 
-    [SerializeField] int rockAreaEffect = 2;
+    [SerializeField] int rockAreaEffect = 1;
 
     //every enemies in scene
     public List<Enemy> enemiesInScene { get; set; }

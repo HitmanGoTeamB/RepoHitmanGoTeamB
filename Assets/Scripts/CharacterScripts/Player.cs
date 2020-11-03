@@ -19,6 +19,7 @@ public class Player : Character
 
     void Awake()
     {
+        NormalPose();
         SetState(new Wait(this));
     }
 

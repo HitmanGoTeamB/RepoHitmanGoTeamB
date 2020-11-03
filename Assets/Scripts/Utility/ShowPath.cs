@@ -10,8 +10,10 @@ public class ShowPath : MonoBehaviour
     [SerializeField] GameObject point = default;
 
     [Header("Important")]
-    [SerializeField] float timeForTile = 1;
-    [SerializeField] float height = 4.1f;
+    [SerializeField] float timeForTile = 0.5f;
+    [SerializeField] float height = 2f;
+
+    public float Height => height;
 
     List<Waypoint> waypointsAlreadyEvaluated = new List<Waypoint>();
     List<Waypoint> waypointsToEvaluate = new List<Waypoint>();
