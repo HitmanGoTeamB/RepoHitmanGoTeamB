@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
+﻿using UnityEngine;
 
 [AddComponentMenu("Hitman GO/Achievements/No Kill")]
 public class NoKill : Achievement
@@ -13,7 +10,7 @@ public class NoKill : Achievement
         startingEnemiesInScene = FindObjectsOfType<Enemy>();
     }
 
-    public override bool CheckAchievement(bool win)
+    protected override bool CheckSucceeded(bool win)
     {
         //check if there are all enemies in scene
         return GameManager.instance.LevelManager.enemiesInScene.Count >= startingEnemiesInScene.Length;
