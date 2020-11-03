@@ -33,24 +33,23 @@ public class PlayerMovement : StateMovement
         if (waypointToReach.IsFInalWaypoint)
         {
             GameManager.instance.LevelManager.EndGame(true);
+            return;
         }
 
         //else check if there are rocks to throw
         else if(IsOnRock())
         {
-            stateMachine.SetState(new PlayerWaitThrowInput(stateMachine));
+            Player player = stateMachine as Player;
+            player.ThrowRockPose();
         }
-        //else check if there are enemies to kill, then kill 'em and end turn
+        //else check if there are enemies to kill, then kill 'em
         else if(IsOnEnemy())
         {
             KillEnemies();
-            GameManager.instance.LevelManager.EndPlayerTurn();
         }
-        //or end turn
-        else
-        {
-            GameManager.instance.LevelManager.EndPlayerTurn();
-        }
+
+        //then end turn
+        GameManager.instance.LevelManager.EndPlayerTurn();
     }
 
     bool IsOnRock()

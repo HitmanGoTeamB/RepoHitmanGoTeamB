@@ -33,7 +33,12 @@ public class Player : Character
     /// </summary>
     public void ActivePlayer()
     {
-        SetState(new PlayerWaitInput(this));
+        //wait input to move
+        if (normalModel.activeInHierarchy)
+            SetState(new PlayerWaitInput(this));
+        //else wait input to throw rock
+        else
+            SetState(new PlayerWaitThrowInput(this));
     }
 
     /// <summary>

@@ -20,9 +20,6 @@ public class PlayerWaitInput : State
     {
         Player player = stateMachine as Player;
 
-        //active normal pose
-        player.NormalPose();
-
         //fill waypoints around me
         player.GetAllWaypointsAroundMe(waypointsAround);
 

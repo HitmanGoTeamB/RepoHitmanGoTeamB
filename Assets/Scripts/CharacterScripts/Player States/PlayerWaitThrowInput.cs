@@ -21,9 +21,6 @@ public class PlayerWaitThrowInput : State
     {
         player = stateMachine as Player;
 
-        //active throw rock pose
-        player.ThrowRockPose();
-
         //fill waypoints around me
         player.GetAllWaypointsAroundMe(waypointsAround);
 
@@ -147,6 +144,7 @@ public class PlayerWaitThrowInput : State
         yield return new WaitForSeconds(player.RockThrowTime);
 
         //set player wait input state
+        player.NormalPose();
         stateMachine.SetState(new PlayerWaitInput(stateMachine));
     }
 }
