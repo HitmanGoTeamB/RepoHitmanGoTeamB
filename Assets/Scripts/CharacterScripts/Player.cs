@@ -9,6 +9,10 @@ public class Player : Character
     [Header("Time animation throw rock")]
     [SerializeField] float rockThrowTime = 1;
 
+    [Header("Models")]
+    [SerializeField] GameObject normalModel = default;
+    [SerializeField] GameObject throwRockModel = default;
+
     public float RockThrowTime => rockThrowTime;
 
     private bool isAlive = true;
@@ -48,5 +52,17 @@ public class Player : Character
             isAlive = false;
         }
         
+    }
+
+    public void NormalPose()
+    {
+        normalModel.SetActive(true);
+        throwRockModel.SetActive(false);
+    }
+
+    public void ThrowRockPose()
+    {
+        normalModel.SetActive(false);
+        throwRockModel.SetActive(true);
     }
 }

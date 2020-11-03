@@ -15,15 +15,21 @@ public class PlayerWaitThrowInput : State
     bool isThrowing;
     Waypoint startInputPosition;
 
+    Animator anim;
+
     public override void Enter()
     {
         player = stateMachine as Player;
 
+        //active throw rock pose
+        player.ThrowRockPose();
+
         //fill waypoints around me
         player.GetAllWaypointsAroundMe(waypointsAround);
 
-        //get camera reference
+        //get references
         cam = Camera.main;
+        anim = stateMachine.GetComponentInChildren<Animator>();
     }
 
     public override void Execution()
@@ -122,6 +128,8 @@ public class PlayerWaitThrowInput : State
             //set enemies path finding and set player state to Wait
             GameManager.instance.LevelManager.SetEnemiesPathFinding(waypoint);
             stateMachine.SetState(new Wait(stateMachine));
+
+            anim.SetTrigger("Throw Rock");
 
             //TEMP
             foreach(Renderer renderer in waypoint.GetComponentsInChildren<Renderer>())

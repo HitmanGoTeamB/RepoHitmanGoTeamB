@@ -5,7 +5,10 @@ ModelImporter:
   internalIDToNameTable:
   - first:
       74: 1827226128182048838
-    second: Take 001
+    second: Throw Rock
+  - first:
+      74: -947523056387878590
+    second: Idle Rock Throw
   externalObjects: {}
   materials:
     importMaterials: 0
@@ -35,7 +38,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Take 001
+      name: Throw Rock
       takeName: Take 001
       internalID: 1827226128182048838
       firstFrame: 0

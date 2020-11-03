@@ -42,7 +42,7 @@ Animator:
   m_GameObject: {fileID: 5788322395452542286}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: a48bc2d740ec2fb4583ed3f2dc29974e, type: 2}
+  m_Controller: {fileID: 9100000, guid: 6860d9a923aa3a442b769e07f51ceffd, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -98,6 +98,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeToMove: 0.7
   rockThrowTime: 1
+  normalModel: {fileID: 5444617898134328268}
+  throwRockModel: {fileID: 5788322395452542286}
 --- !u!114 &4551857780677896268
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -156,11 +158,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Agent 47 Holds Rock Pose
-      objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: 908c0ad64a4669f4784f74312bbe6004,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 689370215946888575, guid: 908c0ad64a4669f4784f74312bbe6004,
         type: 3}
@@ -222,6 +219,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -1504981713932161579, guid: 908c0ad64a4669f4784f74312bbe6004,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: cf47b1fa44fcc6a4fab2c68429456fb8, type: 2}
+    - target: {fileID: 590364065950188444, guid: 908c0ad64a4669f4784f74312bbe6004,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 579316996b0d31442b757a09249c7784, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 908c0ad64a4669f4784f74312bbe6004, type: 3}
 --- !u!1 &5788322395452542286 stripped
