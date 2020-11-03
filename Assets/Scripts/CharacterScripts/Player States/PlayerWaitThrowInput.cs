@@ -11,12 +11,19 @@ public class PlayerWaitThrowInput : State
     Dictionary<Vector2Int, Waypoint> waypointsAround = new Dictionary<Vector2Int, Waypoint>();
     Player player;
 
+    Camera cam;
+    bool isThrowing;
+    Waypoint startInputPosition;
+
     public override void Enter()
     {
         player = stateMachine as Player;
 
         //fill waypoints around me
         player.GetAllWaypointsAroundMe(waypointsAround);
+
+        //get camera reference
+        cam = Camera.main;
     }
 
     public override void Execution()
@@ -24,39 +31,32 @@ public class PlayerWaitThrowInput : State
         //wait input, then set waypoint
         //TODO 
         //do animation
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            ThrowRock(Vector2Int.up);
-        }
-        else if (Input.GetKeyDown(KeyCode.S))
-        {
-            ThrowRock(Vector2Int.down);
-        }
-        else if (Input.GetKeyDown(KeyCode.A))
-        {
-            ThrowRock(Vector2Int.left);
-        }
-        else if (Input.GetKeyDown(KeyCode.D))
-        {
-            ThrowRock(Vector2Int.right);
-        }
-    }
 
-    void ThrowRock(Vector2Int direction)
-    {
-        //if there is a waypoint, throw
-        if (waypointsAround[direction] != null)
-        {
-            //set enemies path finding and set player state to Wait
-            GameManager.instance.LevelManager.SetEnemiesPathFinding(waypointsAround[direction]);
-            stateMachine.SetState(new Wait(stateMachine));
+        //check on click and on release (touch or mouse)
+#if UNITY_ANDROID
+        if (Input.touchCount <= 0)
+            return;
 
-            //TEMP
-            foreach(Renderer renderer in waypointsAround[direction].GetComponentsInChildren<Renderer>())
-            {
-                renderer.material.color = Color.cyan;
-            }
+        Touch touch = Input.GetTouch(0);
+
+        if(!isThrowing && touch.phase == TouchPhase.Began)
+        {
+            OnClick();
         }
+        else if(isThrowing && (touch.phase == TouchPhase.Canceled || touch.phase == TouchPhase.Ended))
+        {
+            OnRelease();
+        }
+#else
+        if (!isThrowing && Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            OnClick();
+        }
+        else if (isThrowing && Input.GetKeyUp(KeyCode.Mouse0))
+        {
+            OnRelease();
+        }
+#endif
     }
 
     public override void Exit()
@@ -64,6 +64,74 @@ public class PlayerWaitThrowInput : State
         //coroutine to throw
         stateMachine.StartCoroutine(WaitAnimationToEnd());
     }
+
+    #region private API
+
+    Vector2 GetInput()
+    {
+        //return touch position or mouse position
+#if UNITY_ANDROID
+        return Input.GetTouch(0).position;
+#else
+        return Input.mousePosition;
+#endif
+    }
+
+    void OnClick()
+    {
+        Vector2 inputPosition = GetInput();
+        Ray ray = cam.ScreenPointToRay(inputPosition);
+        int layer = CreateLayer.LayerAllExcept("Player");   //layer all except player, unique colliders in scene are player and waypoints
+
+        RaycastHit hit;
+
+        //if hit waypoint, save start input waypoint and start throwing
+        if (Physics.Raycast(ray, out hit, 100, layer))
+        {
+            startInputPosition = hit.transform.GetComponentInParent<Waypoint>();
+            isThrowing = true;
+        }
+    }
+
+    void OnRelease()
+    {
+        //stop throwing
+        isThrowing = false;
+
+        Vector2 inputPosition = GetInput();
+        Ray ray = cam.ScreenPointToRay(inputPosition);
+        int layer = CreateLayer.LayerAllExcept("Player");   //layer all except player, unique colliders in scene are player and waypoints
+
+        RaycastHit hit;
+
+        //if hit waypoint, check is the same waypoint and throw rock
+        if (Physics.Raycast(ray, out hit, 100, layer))
+        {
+            if(hit.transform.GetComponentInParent<Waypoint>() == startInputPosition)
+            {
+                ThrowRock(startInputPosition);
+            }
+        }
+    }
+
+    void ThrowRock(Waypoint waypoint)
+    {
+        //if there is a waypoint, throw
+        if (waypoint != null)
+        {
+            //set enemies path finding and set player state to Wait
+            GameManager.instance.LevelManager.SetEnemiesPathFinding(waypoint);
+            stateMachine.SetState(new Wait(stateMachine));
+
+            //TEMP
+            foreach(Renderer renderer in waypoint.GetComponentsInChildren<Renderer>())
+            {
+                renderer.material.color = Color.cyan;
+            }
+        }
+    }
+
+    #endregion
 
     IEnumerator WaitAnimationToEnd()
     {

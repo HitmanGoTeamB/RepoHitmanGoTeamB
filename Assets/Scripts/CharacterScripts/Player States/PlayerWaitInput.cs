@@ -77,7 +77,6 @@ public class PlayerWaitInput : State
         {
             startInputPosition = inputPosition;
             isMoving = true;
-            Debug.Log(inputPosition);
         }
     }
 
@@ -95,8 +94,6 @@ public class PlayerWaitInput : State
             return;
 
         Vector2 movement = inputPosition - startInputPosition;
-        Debug.Log(inputPosition);
-        Debug.Log(movement);
 
         //move on y axis
         if (Mathf.Abs(movement.y) > Mathf.Abs(movement.x))
