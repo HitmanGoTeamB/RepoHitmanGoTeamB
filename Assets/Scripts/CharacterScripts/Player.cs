@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(LookCamera))]
 [AddComponentMenu("Hitman GO/Characters/Player")]
 public class Player : Character
 {
