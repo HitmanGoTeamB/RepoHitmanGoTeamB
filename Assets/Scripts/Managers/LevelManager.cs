@@ -10,7 +10,7 @@ public class LevelManager : StateMachine
     #region variables
 
     [Tooltip("Minimum time duration for enemy turn (when there is no enemy, or every enemy is in idle)")] 
-    [SerializeField] float minimumEnemyTurnDuration = 0.5f;
+    [SerializeField] float minimumEnemyTurnDuration = 0f;
     public float MinimumEnemyTurnDuration => minimumEnemyTurnDuration;
 
     [SerializeField] int rockAreaEffect = 1;
