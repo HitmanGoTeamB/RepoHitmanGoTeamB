@@ -14,6 +14,8 @@ public class PlayerWaitInput : State
     bool isMoving;
     Vector2 startInputPosition;
 
+    Animator anim;
+
     public override void Enter()
     {
         Player player = stateMachine as Player;
@@ -21,8 +23,9 @@ public class PlayerWaitInput : State
         //fill waypoints around me
         player.GetAllWaypointsAroundMe(waypointsAround);
 
-        //get camera reference
+        //get references
         cam = Camera.main;
+        anim = stateMachine.GetComponentInChildren<Animator>();
     }
 
     public override void Execution()
@@ -77,6 +80,8 @@ public class PlayerWaitInput : State
         {
             startInputPosition = inputPosition;
             isMoving = true;
+
+            anim.SetTrigger("OnClick");
         }
     }
 
@@ -91,7 +96,10 @@ public class PlayerWaitInput : State
 
         //be sure doesn't hit player again (no movement)
         if (Physics.Raycast(ray, 100, layer))
+        {
+            anim.SetTrigger("OnRelease");
             return;
+        }
 
         Vector2 movement = inputPosition - startInputPosition;
 
@@ -124,6 +132,10 @@ public class PlayerWaitInput : State
         if (waypointToMove != null)
         {
             stateMachine.SetState(new PlayerMovement(stateMachine, objectToMove, waypointToMove));
+        }
+        else
+        {
+            anim.SetTrigger("OnRelease");
         }
     }
 }

@@ -8,6 +8,25 @@ public class PlayerMovement : StateMovement
     {
     }
 
+    Animator anim;
+
+    public override void Enter()
+    {
+        base.Enter();
+
+        //get references
+        anim = stateMachine.GetComponentInChildren<Animator>();
+
+        if(IsOnEnemy())
+        {
+            anim.SetTrigger("Attack");
+        }
+        else
+        {
+            anim.SetTrigger("Move");
+        }
+    }
+
     public override void Exit()
     {
         //check if end game
@@ -21,9 +40,10 @@ public class PlayerMovement : StateMovement
         {
             stateMachine.SetState(new PlayerWaitThrowInput(stateMachine));
         }
-        //else check if there are enemies to kill (and kill 'em)
+        //else check if there are enemies to kill, then kill 'em and end turn
         else if(IsOnEnemy())
         {
+            KillEnemies();
             GameManager.instance.LevelManager.EndPlayerTurn();
         }
         //or end turn
@@ -50,6 +70,12 @@ public class PlayerMovement : StateMovement
     bool IsOnEnemy()
     {
         //all enemy in the waypoint you are moving into
+        return waypointToReach.GetObjectsOnWaypoint<Enemy>().Count > 0;
+    }
+
+    void KillEnemies()
+    {
+        //all enemy in the waypoint you are moving into
         List<Enemy> enemies = waypointToReach.GetObjectsOnWaypoint<Enemy>();
 
         //remove every enemy from the waypoint list and kill 'em
@@ -58,7 +84,5 @@ public class PlayerMovement : StateMovement
             waypointToReach.RemoveObjectFromWaypoint(enemy.gameObject);
             enemy.Die();
         }
-
-        return enemies.Count > 0;
     }
 }

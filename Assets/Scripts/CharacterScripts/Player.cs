@@ -42,6 +42,8 @@ public class Player : Character
         //TODO
         if(isAlive == true)
         {
+            GetComponentInChildren<Animator>().SetTrigger("Death");
+
             GameManager.instance.LevelManager.EndGame(false);
             isAlive = false;
         }
