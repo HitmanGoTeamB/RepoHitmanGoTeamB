@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+[AddComponentMenu("Hitman GO/Rock")]
 public class Rock : MonoBehaviour
 {
     Waypoint currentWaypoint;

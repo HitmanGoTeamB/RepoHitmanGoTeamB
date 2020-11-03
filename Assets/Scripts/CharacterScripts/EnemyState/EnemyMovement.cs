@@ -33,6 +33,10 @@ public class EnemyMovement : StateMovement
     {
         //if this is a rock path, remove waypoint from the list
         if (enemy.PathToRock.Contains(waypointToReach))
+        {
             enemy.PathToRock.Remove(waypointToReach);
+
+            enemy.Rotate();
+        }
     }
 }

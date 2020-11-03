@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[AddComponentMenu("Hitman GO/Characters/Player")]
 public class Player : Character
 {
     [Header("Time animation throw rock")]

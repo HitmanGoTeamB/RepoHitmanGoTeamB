@@ -621,6 +621,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minimumEnemyTurnDuration: 0.5
+  rockAreaEffect: 2
 --- !u!4 &524136000
 Transform:
   m_ObjectHideFlags: 0
@@ -934,7 +935,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 3.1e-44, z: 4.029e-42, w: 1.05e-43}
+  m_BoundingSphereOverride: {x: 7.71e-43, y: 5.84064e+16, z: 7.71e-43, w: 0}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -2475,7 +2476,7 @@ PrefabInstance:
     - target: {fileID: 7587752211206422865, guid: eb7f28eeb79343044a85ca35099235ea,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7587752211206422865, guid: eb7f28eeb79343044a85ca35099235ea,
         type: 3}

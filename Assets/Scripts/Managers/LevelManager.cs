@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Linq;
 
+[AddComponentMenu("Hitman GO/Managers/Level Manager")]
 public class LevelManager : StateMachine
 {
     #region variables
@@ -11,6 +12,8 @@ public class LevelManager : StateMachine
     [Tooltip("Minimum time duration for enemy turn (when there is no enemy, or every enemy is in idle)")] 
     [SerializeField] float minimumEnemyTurnDuration = 0.5f;
     public float MinimumEnemyTurnDuration => minimumEnemyTurnDuration;
+
+    [SerializeField] int rockAreaEffect = 2;
 
     //every enemies in scene
     public List<Enemy> enemiesInScene { get; set; }
@@ -99,10 +102,18 @@ public class LevelManager : StateMachine
 
     public void SetEnemiesPathFinding(Waypoint waypointToReach)
     {
-        //foreach enemy, set path finding
-        foreach(Enemy enemy in enemiesInScene)
+        //get every waypoint in rock area
+        foreach(Waypoint waypoint in GameManager.instance.map.GetWaypointsInArea(waypointToReach, rockAreaEffect))
         {
-            enemy.SetPathFinding(waypointToReach);
+            //foreach enemy on waypoint, set path finding
+            foreach (Enemy enemy in waypoint.GetObjectsOnWaypoint<Enemy>())
+                enemy.SetPathFinding(waypointToReach);
+
+            //TEMP
+            foreach (Renderer renderer in waypoint.GetComponentsInChildren<Renderer>())
+            {
+                renderer.material.color = Color.black;
+            }
         }
     }
 
@@ -121,6 +132,10 @@ public class LevelManager : StateMachine
         {
             //show achievement and menu to change level
             //TODO
+
+            //check every achievement
+            foreach (Achievement achievement in GetComponents<Achievement>())
+                achievement.CheckAchievement(win);
 
 #if UNITY_EDITOR
             UnityEditor.EditorApplication.isPlaying = false;
