@@ -36,6 +36,7 @@ public class ShowPath : MonoBehaviour
         this.onEnd = onEnd;
 
         //start create path from player
+        waypointsAlreadyEvaluated.Add(GameManager.instance.player.CurrentWaypoint);
         PathsFrom(GameManager.instance.player.CurrentWaypoint);
     }
 
@@ -52,8 +53,8 @@ public class ShowPath : MonoBehaviour
             }
         }
 
-        //if 0 walkable waypoints and there are no other waypoints, call end function
-        if(startWaypoint.WalkableWaypoints.Length <= 0 && waypointsToEvaluate.Count <= 0)
+        //if there are no other waypoints to evaluate, call end function
+        if(waypointsToEvaluate.Count <= 0)
         {
             onEnd?.Invoke();
         }
