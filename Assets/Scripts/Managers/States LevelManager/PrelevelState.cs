@@ -14,7 +14,13 @@ public class PrelevelState : State
         base.Enter();
 
         //TODO cinemachine
-        GameManager.instance.showPath.CreatePath(EndPrelevel);
+
+        //show path if component in scene
+        if (GameManager.instance.showPath)
+            GameManager.instance.showPath.CreatePath(EndPrelevel);
+        //else end prelevel
+        else
+            EndPrelevel();
     }
 
     void EndPrelevel()
