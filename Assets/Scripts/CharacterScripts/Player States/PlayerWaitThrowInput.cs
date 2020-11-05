@@ -36,7 +36,7 @@ public class PlayerWaitThrowInput : State
         //do animation
 
         //check on click and on release (touch or mouse)
-#if UNITY_ANDROID
+#if UNITY_ANDROID && !UNITY_EDITOR
         if (Input.touchCount <= 0)
             return;
 
@@ -73,7 +73,7 @@ public class PlayerWaitThrowInput : State
     Vector2 GetInput()
     {
         //return touch position or mouse position
-#if UNITY_ANDROID
+#if UNITY_ANDROID && !UNITY_EDITOR
         return Input.GetTouch(0).position;
 #else
         return Input.mousePosition;
