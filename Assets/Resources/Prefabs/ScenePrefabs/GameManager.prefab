@@ -59,4 +59,4 @@ MonoBehaviour:
   height: 2
   rockPoint: {fileID: 291216751608493578, guid: 5018f3dd813738a46ab414f5619ec7dc,
     type: 3}
-  rockArea: {fileID: 0}
+  rockArea: {fileID: 426929677527230889, guid: e0e09a4ddbaf1f04ca552af2a366a2cf, type: 3}

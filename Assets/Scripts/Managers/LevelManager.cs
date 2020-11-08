@@ -14,6 +14,7 @@ public class LevelManager : StateMachine
     public float MinimumEnemyTurnDuration => minimumEnemyTurnDuration;
 
     [SerializeField] int rockAreaEffect = 1;
+    public int RockAreaEffect => rockAreaEffect;
 
     //every enemies in scene
     public List<Enemy> enemiesInScene { get; set; }
@@ -108,12 +109,6 @@ public class LevelManager : StateMachine
             //foreach enemy on waypoint, set path finding
             foreach (Enemy enemy in waypoint.GetObjectsOnWaypoint<Enemy>())
                 enemy.SetPathFinding(waypointToReach);
-
-            //TEMP
-            foreach (Renderer renderer in waypoint.GetComponentsInChildren<Renderer>())
-            {
-                renderer.material.color = Color.black;
-            }
         }
     }
 

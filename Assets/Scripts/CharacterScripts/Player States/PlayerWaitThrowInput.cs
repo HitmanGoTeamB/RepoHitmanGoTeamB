@@ -125,17 +125,13 @@ public class PlayerWaitThrowInput : State
         //if there is a waypoint, throw
         if (waypoint != null)
         {
+            GameManager.instance.uiManager.ShowRockArea(waypoint);
+
             //set enemies path finding and set player state to Wait
             GameManager.instance.LevelManager.SetEnemiesPathFinding(waypoint);
             stateMachine.SetState(new Wait(stateMachine));
 
             anim.SetTrigger("Throw Rock");
-
-            //TEMP
-            foreach(Renderer renderer in waypoint.GetComponentsInChildren<Renderer>())
-            {
-                renderer.material.color = Color.cyan;
-            }
         }
     }
 
