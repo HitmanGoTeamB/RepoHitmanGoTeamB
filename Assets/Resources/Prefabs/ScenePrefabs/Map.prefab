@@ -57,6 +57,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   line: {fileID: 2933690841141614695, guid: 0f0db49b8c7c21745b5e6c5cb736d3cb, type: 3}
-  point: {fileID: 0}
+  point: {fileID: 6259549515028149640, guid: d5c8fe66c52c9be4b9acf9b4162f0373, type: 3}
+  endPoint: {fileID: 6259549515028149640, guid: d90bd1eb7ad977346a671c8a67fcc283,
+    type: 3}
   timeForTile: 0.3
   height: 2
+  distFromCenterTile: 0.2

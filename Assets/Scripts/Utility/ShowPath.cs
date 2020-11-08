@@ -8,10 +8,12 @@ public class ShowPath : MonoBehaviour
     [Header("Prefabs")]
     [SerializeField] LineRenderer line = default;
     [SerializeField] GameObject point = default;
+    [SerializeField] GameObject endPoint = default;
 
     [Header("Important")]
     [SerializeField] float timeForTile = 0.5f;
     [SerializeField] float height = 2f;
+    [SerializeField] float distFromCenterTile = 0.2f;
 
     public float Height => height;
 
@@ -37,9 +39,20 @@ public class ShowPath : MonoBehaviour
         //save function
         this.onEnd = onEnd;
 
+        StartPath();
+    }
+
+    void StartPath()
+    {
+        Waypoint playerWaypoint = GameManager.instance.player.CurrentWaypoint;
+
+        //create point on player waypoint
+        Vector3 playerPosition = playerWaypoint.transform.position + Vector3.up * height;
+        InstantiatePoint(playerWaypoint, playerPosition);
+
         //start create path from player
-        waypointsAlreadyEvaluated.Add(GameManager.instance.player.CurrentWaypoint);
-        PathsFrom(GameManager.instance.player.CurrentWaypoint);
+        waypointsAlreadyEvaluated.Add(playerWaypoint);
+        PathsFrom(playerWaypoint);
     }
 
     void PathsFrom(Waypoint startWaypoint)
@@ -67,12 +80,15 @@ public class ShowPath : MonoBehaviour
         //create line and set parent
         LineRenderer lineRenderer = Instantiate(line, Parent.transform);
 
+        //dist from center tile (used to not have line on point object)
+        Vector3 dist = (endWaypoint.transform.position - startWaypoint.transform.position).normalized * distFromCenterTile;
+
         //set start position
-        Vector3 startPosition = startWaypoint.transform.position + Vector3.up * height;
+        Vector3 startPosition = startWaypoint.transform.position + Vector3.up * height + dist;
         lineRenderer.SetPosition(0, startPosition);
 
         //set end position
-        Vector3 endPosition = endWaypoint.transform.position + Vector3.up * height;
+        Vector3 endPosition = endWaypoint.transform.position + Vector3.up * height - dist;
 
         //create line
         float delta = 0;
@@ -86,15 +102,12 @@ public class ShowPath : MonoBehaviour
             yield return null;
         }
 
-        //set final position
+        //set final position (just to be sure)
         lineRenderer.SetPosition(1, endPosition);
 
         //create point, set parent and position
-        if (point)
-        {
-            GameObject pointObject = Instantiate(point, transform);
-            pointObject.transform.position = endPosition;
-        }
+        Vector3 pointPosition = endWaypoint.transform.position + Vector3.up * height;
+        InstantiatePoint(endWaypoint, pointPosition);
 
         //set waypoint evaluated
         waypointsToEvaluate.Remove(endWaypoint);
@@ -102,5 +115,18 @@ public class ShowPath : MonoBehaviour
 
         //and start new path
         PathsFrom(endWaypoint);
+    }
+
+    void InstantiatePoint(Waypoint waypoint, Vector3 position)
+    {
+        //get prefab if final waypoint or normal waypoint
+        GameObject prefab = waypoint.IsFInalWaypoint ? endPoint : point;
+
+        //if there is prefab, instantiate, set parent and position
+        if(prefab)
+        {
+            GameObject pointObject = Instantiate(prefab, transform);
+            pointObject.transform.position = position;
+        }
     }
 }
