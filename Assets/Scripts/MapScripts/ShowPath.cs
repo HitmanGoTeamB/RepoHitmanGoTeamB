@@ -28,8 +28,6 @@ public class ShowPath : MonoBehaviour
     [SerializeField] float distFromPoint = 0.2f;
     [SerializeField] float distFromEndPoint = 0.3f;
 
-    public float Height => height;
-
     List<Waypoint> waypointsAlreadyEvaluated = new List<Waypoint>();
     List<Waypoint> waypointsToEvaluate = new List<Waypoint>();
     List<Path> pathsAlreadyEvaluated = new List<Path>();
