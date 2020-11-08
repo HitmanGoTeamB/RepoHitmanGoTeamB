@@ -1,5 +1,59 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &5300795974934155885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2840017596699778426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16ab58e109be21b45b7602e712416fb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  curve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.9976349
+      inSlope: -0.0010209695
+      outSlope: -0.0010209695
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.7219909
+      value: 0.99689776
+      inSlope: -0.0010209695
+      outSlope: 0.59716773
+      tangentMode: 5
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.8333379
+      value: 1.4952774
+      inSlope: 4.4759135
+      outSlope: -2.9859369
+      tangentMode: 69
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 0.9976349
+      inSlope: -2.9859369
+      outSlope: -2.9859369
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 1
+    m_PostInfinity: 1
+    m_RotationOrder: 4
 --- !u!1001 &136900536997863331
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -121,7 +175,32 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: c096f50d9010bb14d8779c7644dd5d53,
+      objectReference: {fileID: 0}
+    - target: {fileID: 100515537931816660, guid: c332c2335d692e44484ee1033ad398d7,
         type: 3}
+      propertyPath: m_Type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100515537931816660, guid: c332c2335d692e44484ee1033ad398d7,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100515537931816660, guid: c332c2335d692e44484ee1033ad398d7,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100515537931816660, guid: c332c2335d692e44484ee1033ad398d7,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c332c2335d692e44484ee1033ad398d7, type: 3}
+--- !u!1 &2840017596699778426 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2778609529149407961, guid: c332c2335d692e44484ee1033ad398d7,
+    type: 3}
+  m_PrefabInstance: {fileID: 136900536997863331}
+  m_PrefabAsset: {fileID: 0}
