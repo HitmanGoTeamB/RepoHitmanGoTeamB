@@ -15,6 +15,10 @@ public class Waypoint : MonoBehaviour
     [Header("Is Final Waypoint?")]
     [SerializeField] bool isFinalWaypoint = false;
 
+    [Header("Objects Positions")]
+    [SerializeField] float timeToPositionate = 0.2f;
+    [SerializeField] Transform[] objectPositions = default;
+
     [Header("Debug")]
     [SerializeField] int x = 0;
     [SerializeField] int y = 0;
@@ -60,6 +64,20 @@ public class Waypoint : MonoBehaviour
     public void AddObjectToWaypoint(GameObject objectToAdd)
     {
         ObjectsOnWaypoint.Add(objectToAdd);
+
+        //if there are more than 1 object on this waypoint, positionate 'em
+        if(ObjectsOnWaypoint.Count > 1)
+        {
+            for(int i = 0; i < ObjectsOnWaypoint.Count; i++)
+            {
+                //do only if there is position to move
+                if (objectPositions.Length <= i)
+                    break;
+
+                Vector3 position = new Vector3(objectPositions[i].position.x, ObjectsOnWaypoint[i].transform.position.y, objectPositions[i].position.z);
+                StartCoroutine(PositionateObjectOnWaypoint(ObjectsOnWaypoint[i], position));
+            }
+        }
     }
 
     public void RemoveObjectFromWaypoint(GameObject objectToRemove)
@@ -102,6 +120,22 @@ public class Waypoint : MonoBehaviour
         //draw line to every walkable waypoint
         foreach (Waypoint waypoint in WalkableWaypoints)
             Gizmos.DrawLine(transform.position, waypoint.transform.position);
+    }
+
+    IEnumerator PositionateObjectOnWaypoint(GameObject go, Vector3 position)
+    {
+        //start position
+        Vector3 startPosition = go.transform.position;
+
+        //animation
+        float delta = 0;
+        while(delta < 1)
+        {
+            delta += Time.deltaTime / timeToPositionate;
+            go.transform.position = Vector3.Lerp(startPosition, position, delta);
+
+            yield return null;
+        }
     }
 
     #endregion

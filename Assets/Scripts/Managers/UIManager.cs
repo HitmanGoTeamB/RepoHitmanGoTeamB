@@ -7,7 +7,6 @@ public class UIManager : MonoBehaviour
 {
     [Header("Important")]
     [SerializeField] float height = 2;
-    [SerializeField] float tileSize = 4;
 
     [Header("Rock")]
     [SerializeField] Canvas rockPoint = default;
