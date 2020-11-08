@@ -13,7 +13,8 @@ public class ShowPath : MonoBehaviour
     [Header("Important")]
     [SerializeField] float timeForTile = 0.5f;
     [SerializeField] float height = 2f;
-    [SerializeField] float distFromCenterTile = 0.2f;
+    [SerializeField] float distFromPoint = 0.2f;
+    [SerializeField] float distFromEndPoint = 0.3f;
 
     public float Height => height;
 
@@ -81,14 +82,16 @@ public class ShowPath : MonoBehaviour
         LineRenderer lineRenderer = Instantiate(line, Parent.transform);
 
         //dist from center tile (used to not have line on point object)
-        Vector3 dist = (endWaypoint.transform.position - startWaypoint.transform.position).normalized * distFromCenterTile;
+        Vector3 direction = (endWaypoint.transform.position - startWaypoint.transform.position).normalized;
+        Vector3 startDist = direction * (startWaypoint.IsFInalWaypoint ? distFromEndPoint : distFromPoint);
+        Vector3 endDist = direction * (endWaypoint.IsFInalWaypoint ? distFromEndPoint : distFromPoint);
 
         //set start position
-        Vector3 startPosition = startWaypoint.transform.position + Vector3.up * height + dist;
+        Vector3 startPosition = startWaypoint.transform.position + Vector3.up * height + startDist;
         lineRenderer.SetPosition(0, startPosition);
 
         //set end position
-        Vector3 endPosition = endWaypoint.transform.position + Vector3.up * height - dist;
+        Vector3 endPosition = endWaypoint.transform.position + Vector3.up * height - endDist;
 
         //create line
         float delta = 0;

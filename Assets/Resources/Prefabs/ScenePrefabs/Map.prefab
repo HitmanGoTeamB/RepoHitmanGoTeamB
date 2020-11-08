@@ -62,4 +62,5 @@ MonoBehaviour:
     type: 3}
   timeForTile: 0.3
   height: 2
-  distFromCenterTile: 0.2
+  distFromPoint: 0.1
+  distFromEndPoint: 0.7
