@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+[AddComponentMenu("Hitman GO/Utility/Look Camera")]
 public class LookCamera : MonoBehaviour
 {
     [Header("Important")]
