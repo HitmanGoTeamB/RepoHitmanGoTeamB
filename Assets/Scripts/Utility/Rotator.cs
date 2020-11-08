@@ -6,7 +6,7 @@ using UnityEngine;
 public class Rotator : MonoBehaviour
 {
     [SerializeField] Vector3 axisToRotate = Vector3.up;
-    [SerializeField] float speed = 2;
+    [SerializeField] float speed = 4;
 
     void Update()
     {

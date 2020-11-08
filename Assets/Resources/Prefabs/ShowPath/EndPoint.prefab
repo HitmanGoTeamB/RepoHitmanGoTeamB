@@ -1,5 +1,19 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &1457663105925805148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6259549515028149640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 700ae0182ad225d468ad5bc7131a2009, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  axisToRotate: {x: 0, y: 1, z: 0}
+  speed: 4
 --- !u!1001 &945318741377886188
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -90,3 +104,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b444c93a1c2df2140a2858c61366a7ae, type: 3}
+--- !u!1 &6259549515028149640 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6611303484004340324, guid: b444c93a1c2df2140a2858c61366a7ae,
+    type: 3}
+  m_PrefabInstance: {fileID: 945318741377886188}
+  m_PrefabAsset: {fileID: 0}

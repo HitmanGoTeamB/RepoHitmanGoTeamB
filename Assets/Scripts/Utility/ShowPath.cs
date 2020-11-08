@@ -2,6 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public struct Path
+{
+    Waypoint startWaypoint;
+    Waypoint endWaypoint;
+
+    public Path(Waypoint startWaypoint, Waypoint endWaypoint)
+    {
+        this.startWaypoint = startWaypoint;
+        this.endWaypoint = endWaypoint;
+    }
+}
+
 [AddComponentMenu("Hitman GO/Map/Show Path")]
 public class ShowPath : MonoBehaviour
 {
@@ -20,20 +32,8 @@ public class ShowPath : MonoBehaviour
 
     List<Waypoint> waypointsAlreadyEvaluated = new List<Waypoint>();
     List<Waypoint> waypointsToEvaluate = new List<Waypoint>();
+    List<Path> pathsAlreadyEvaluated = new List<Path>();
     System.Action onEnd;
-
-    GameObject parent;
-    GameObject Parent { 
-        get 
-        {
-            if (parent == null)
-            {
-                parent = new GameObject("Path");
-                parent.transform.position = Vector3.zero;
-            }
-
-            return parent;
-        } }
 
     public void CreatePath(System.Action onEnd)
     {
@@ -61,9 +61,14 @@ public class ShowPath : MonoBehaviour
         //foreach walkable waypoint, add to list and start coroutine
         foreach (Waypoint waypoint in startWaypoint.WalkableWaypoints)
         {
+            //need to check path but also reverse
+            Path path = new Path(startWaypoint, waypoint);
+            Path reverse = new Path(waypoint, startWaypoint);
+
             //only if not already evaluated
-            if (!waypointsAlreadyEvaluated.Contains(waypoint))
+            if(!pathsAlreadyEvaluated.Contains(path) && !pathsAlreadyEvaluated.Contains(reverse))
             {
+                pathsAlreadyEvaluated.Add(path);
                 waypointsToEvaluate.Add(waypoint);
                 StartCoroutine(Path_Coroutine(startWaypoint, waypoint));
             }
@@ -79,7 +84,7 @@ public class ShowPath : MonoBehaviour
     IEnumerator Path_Coroutine(Waypoint startWaypoint, Waypoint endWaypoint)
     {
         //create line and set parent
-        LineRenderer lineRenderer = Instantiate(line, Parent.transform);
+        LineRenderer lineRenderer = Instantiate(line, transform);
 
         //dist from center tile (used to not have line on point object)
         Vector3 direction = (endWaypoint.transform.position - startWaypoint.transform.position).normalized;
@@ -108,9 +113,12 @@ public class ShowPath : MonoBehaviour
         //set final position (just to be sure)
         lineRenderer.SetPosition(1, endPosition);
 
-        //create point, set parent and position
-        Vector3 pointPosition = endWaypoint.transform.position + Vector3.up * height;
-        InstantiatePoint(endWaypoint, pointPosition);
+        //if waypoint is not already evaluated, create point
+        if (!waypointsAlreadyEvaluated.Contains(endWaypoint))
+        {
+            Vector3 pointPosition = endWaypoint.transform.position + Vector3.up * height;
+            InstantiatePoint(endWaypoint, pointPosition);
+        }
 
         //set waypoint evaluated
         waypointsToEvaluate.Remove(endWaypoint);
