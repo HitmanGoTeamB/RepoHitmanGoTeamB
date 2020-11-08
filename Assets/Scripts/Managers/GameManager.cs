@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public Player player { get; private set; }
     public LevelManager LevelManager { get; private set; }
     public ShowPath showPath { get; private set; }
+    public UIManager uiManager { get; private set; }
 
     void Awake()
     {
@@ -34,5 +35,6 @@ public class GameManager : MonoBehaviour
         player = FindObjectOfType<Player>();
         LevelManager = FindObjectOfType<LevelManager>();
         showPath = FindObjectOfType<ShowPath>();
+        uiManager = FindObjectOfType<UIManager>();
     }
 }

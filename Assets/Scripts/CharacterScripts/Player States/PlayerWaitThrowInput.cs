@@ -23,6 +23,7 @@ public class PlayerWaitThrowInput : State
 
         //fill waypoints around me
         player.GetAllWaypointsAroundMe(waypointsAround);
+        GameManager.instance.uiManager.ShowRockPoints(waypointsAround);
 
         //get references
         cam = Camera.main;
@@ -64,6 +65,8 @@ public class PlayerWaitThrowInput : State
 
     public override void Exit()
     {
+        GameManager.instance.uiManager.HideRockPoints();
+
         //coroutine to throw
         stateMachine.StartCoroutine(WaitAnimationToEnd());
     }
