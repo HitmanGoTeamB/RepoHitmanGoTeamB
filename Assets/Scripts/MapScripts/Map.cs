@@ -21,7 +21,7 @@ public class Map : MonoBehaviour
         Waypoint[] waypointsInScene = FindObjectsOfType<Waypoint>();
 
         //order on x and y
-        Waypoint[] waypointsByOrder = waypointsInScene.OrderBy(zAxis => zAxis.transform.position.z).ThenBy(xAxis => xAxis.transform.position.x).ToArray();
+        Waypoint[] waypointsByOrder = waypointsInScene.OrderBy(zAxis => Mathf.RoundToInt(zAxis.transform.position.z)).ThenBy(xAxis => Mathf.RoundToInt(xAxis.transform.position.x)).ToArray();
 
         //reset map
         waypointsInMap.Clear();
