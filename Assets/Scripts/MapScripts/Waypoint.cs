@@ -64,11 +64,19 @@ public class Waypoint : MonoBehaviour
     public void AddObjectToWaypoint(GameObject objectToAdd)
     {
         ObjectsOnWaypoint.Add(objectToAdd);
+    }
 
+    public void RemoveObjectFromWaypoint(GameObject objectToRemove)
+    {
+        ObjectsOnWaypoint.Remove(objectToRemove);
+    }
+
+    public void SetPositionsOnWaypoint()
+    {
         //if there are more than 1 object on this waypoint, positionate 'em
-        if(ObjectsOnWaypoint.Count > 1)
+        if (ObjectsOnWaypoint.Count > 1)
         {
-            for(int i = 0; i < ObjectsOnWaypoint.Count; i++)
+            for (int i = 0; i < ObjectsOnWaypoint.Count; i++)
             {
                 //do only if there is position to move
                 if (objectPositions.Length <= i)
@@ -78,11 +86,6 @@ public class Waypoint : MonoBehaviour
                 StartCoroutine(PositionateObjectOnWaypoint(ObjectsOnWaypoint[i], position));
             }
         }
-    }
-
-    public void RemoveObjectFromWaypoint(GameObject objectToRemove)
-    {
-        ObjectsOnWaypoint.Remove(objectToRemove);
     }
 
     /// <summary>

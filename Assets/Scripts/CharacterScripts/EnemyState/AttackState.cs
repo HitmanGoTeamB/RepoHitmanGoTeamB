@@ -12,5 +12,7 @@ public class AttackState : StateMovement
     {
         //kill player (this state is called when the enemy move on the player waypoint)
         GameManager.instance.player.PlayerGotKilled();
+
+        base.Exit();
     }
 }

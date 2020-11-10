@@ -56,6 +56,8 @@ public class PlayerMovement : StateMovement
 
         //then end turn
         GameManager.instance.LevelManager.EndPlayerTurn();
+
+        base.Exit();
     }
 
     bool IsOnRock()
