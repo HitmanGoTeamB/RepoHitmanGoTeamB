@@ -113,8 +113,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ignoreYAxis: 1
+  rotateOnlyYAxis: 1
   cam: {fileID: 0}
   transformToRotate: {fileID: 7983012677303653057}
+  otherTransformToRotate: {fileID: 6182749783122990241}
 --- !u!1 &7587752211912066697
 GameObject:
   m_ObjectHideFlags: 0
@@ -240,6 +242,12 @@ GameObject:
 --- !u!4 &7354124573374545757 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 908c0ad64a4669f4784f74312bbe6004,
+    type: 3}
+  m_PrefabInstance: {fileID: 2555139246653199431}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &6182749783122990241 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -668740904000487194, guid: 908c0ad64a4669f4784f74312bbe6004,
     type: 3}
   m_PrefabInstance: {fileID: 2555139246653199431}
   m_PrefabAsset: {fileID: 0}
