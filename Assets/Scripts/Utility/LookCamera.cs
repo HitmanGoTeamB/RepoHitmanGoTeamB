@@ -5,7 +5,7 @@ public class LookCamera : MonoBehaviour
 {
     [Header("Important")]
     [Tooltip("Don't follow y axis of the camera (up or down)")]
-    [SerializeField] bool ignoreYAxis = false;
+    [SerializeField] bool ignoreYAxis = true;
     [SerializeField] bool rotateOnlyYAxis = true;
 
     [Header("Override, if you don't want to use defaults")]

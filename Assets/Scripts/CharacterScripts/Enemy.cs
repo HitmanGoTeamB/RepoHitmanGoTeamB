@@ -9,15 +9,26 @@ public class Enemy : Character, IMovable
     [Header("Time animation rotation")]
     [SerializeField] float timeToRotate = 1;
 
+    [Header("Alert Feedback")]
+    [SerializeField] GameObject alertFeedback = default;
+    [SerializeField] float timeBeforeRemove = 1.5f;
+
     //to use when set pathfinding
     public List<Waypoint> PathToRock { get; private set; } = new List<Waypoint>();
 
     Coroutine rotate_Coroutine;
+    Coroutine removeAlertFeedback;
 
     void Awake()
     {
         SetState(new Wait(this));
+
+        //hide alert feedback at start
+        if (alertFeedback)
+            alertFeedback.SetActive(false);
     }
+
+    #region private API
 
     IEnumerator Rotate_Coroutine(Quaternion lookRotation)
     {
@@ -37,6 +48,18 @@ public class Enemy : Character, IMovable
         //set final to be sure
         transform.rotation = lookRotation;
     }
+
+    IEnumerator RemoveAlertFeedback()
+    {
+        //wait
+        yield return new WaitForSeconds(timeBeforeRemove);
+
+        //deactive alert feedback
+        if (alertFeedback)
+            alertFeedback.SetActive(false);
+    }
+
+    #endregion
 
     public void Rotate()
     {
@@ -99,6 +122,18 @@ public class Enemy : Character, IMovable
         //set path to rock
         PathToRock = Pathfinding.FindPath(CurrentWaypoint, waypointToReach);
         Rotate();
+
+        //active alert feedback
+        if (alertFeedback)
+        {
+            alertFeedback.SetActive(true);
+
+            //start coroutine
+            if (removeAlertFeedback != null)
+                StopCoroutine(removeAlertFeedback);
+
+            removeAlertFeedback = StartCoroutine(RemoveAlertFeedback());
+        }
     }
 
     public void Die()

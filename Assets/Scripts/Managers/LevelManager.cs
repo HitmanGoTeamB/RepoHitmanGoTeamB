@@ -33,6 +33,8 @@ public class LevelManager : StateMachine
         SetState(new PrelevelState(this));
     }
 
+    #region private API
+
     IEnumerator EndEnemyTurnAfterFewSeconds()
     {
         //called when there is no enemy in scene
@@ -43,6 +45,47 @@ public class LevelManager : StateMachine
         //end enemy turn
         EndEnemyTurn(null);
     }
+
+    IEnumerator PlayerDeath()
+    {
+        //wait player death animation
+        yield return new WaitForSeconds(1.5f);
+
+        //wait click
+        while (true)
+        {
+            if (OnClick())
+                break;
+
+            yield return null;
+        }
+
+        //reload
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    bool OnClick()
+    {
+#if UNITY_ANDROID && !UNITY_EDITOR
+        //if touch began
+        if (Input.touchCount > 0)
+        {
+            if(Input.GetTouch(0).phase == TouchPhase.Began)
+            {
+                return true;
+            }
+        }
+#else
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            return true;
+        }
+#endif
+
+        return false;
+    }
+
+    #endregion
 
     #region public API
 
@@ -141,47 +184,8 @@ public class LevelManager : StateMachine
         else
         {
             //restart scene
-            StartCoroutine(EndGame());
+            StartCoroutine(PlayerDeath());
         }
-    }
-
-    IEnumerator EndGame()
-    {
-        //wait player death animation
-        yield return new WaitForSeconds(1.5f);
-
-        //wait click
-        while(true)
-        {
-            if (OnClick())
-                break;
-
-            yield return null;
-        }
-
-        //reload
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
-
-    bool OnClick()
-    {
-#if UNITY_ANDROID && !UNITY_EDITOR
-        //if touch began
-        if (Input.touchCount > 0)
-        {
-            if(Input.GetTouch(0).phase == TouchPhase.Began)
-            {
-                return true;
-            }
-        }
-#else
-        if (Input.GetKeyDown(KeyCode.Mouse0))
-        {
-            return true;
-        }
-#endif
-
-        return false;
     }
 
     #endregion
