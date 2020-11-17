@@ -141,8 +141,13 @@ public class LevelManager : StateMachine
         else
         {
             //restart scene
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            Invoke("EndGame", 2);
         }
+    }
+
+    void EndGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     #endregion

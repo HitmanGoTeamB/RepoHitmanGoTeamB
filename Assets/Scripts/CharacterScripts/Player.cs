@@ -52,6 +52,7 @@ public class Player : Character
         //TODO
         if(isAlive == true)
         {
+            GetComponent<LookCamera>().enabled = false;
             GetComponentInChildren<Animator>().SetTrigger("Death");
 
             GameManager.instance.LevelManager.EndGame(false);
