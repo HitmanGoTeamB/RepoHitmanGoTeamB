@@ -28,15 +28,18 @@ public class ShowPath : MonoBehaviour
     [SerializeField] float distFromPoint = 0.2f;
     [SerializeField] float distFromEndPoint = 0.3f;
 
+    bool isAgainSameLevel;
+
     List<Waypoint> waypointsAlreadyEvaluated = new List<Waypoint>();
     List<Waypoint> waypointsToEvaluate = new List<Waypoint>();
     List<Path> pathsAlreadyEvaluated = new List<Path>();
     System.Action onEnd;
 
-    public void CreatePath(System.Action onEnd)
+    public void CreatePath(System.Action onEnd, bool isAgainSameLevel)
     {
-        //save function
+        //save references
         this.onEnd = onEnd;
+        this.isAgainSameLevel = isAgainSameLevel;
 
         StartPath();
     }
@@ -100,7 +103,7 @@ public class ShowPath : MonoBehaviour
         float delta = 0;
         while(delta < 1)
         {
-            delta += Time.deltaTime / timeForTile;
+            delta += Time.deltaTime / (isAgainSameLevel ? 0 : timeForTile);
 
             Vector3 deltaPosition = Vector3.Lerp(startPosition, endPosition, delta);
             lineRenderer.SetPosition(1, deltaPosition);

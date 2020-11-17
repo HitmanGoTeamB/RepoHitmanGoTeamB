@@ -8,16 +8,23 @@ using System.Linq;
 public class LevelManager : StateMachine
 {
     #region variables
+    [Header("Prelevel")]
+    [SerializeField] float timeCinemachine = 5;
 
+    [Header("Gameplay")]
     [Tooltip("Minimum time duration for enemy turn (when there is no enemy, or every enemy is in idle)")] 
     [SerializeField] float minimumEnemyTurnDuration = 0f;
-    public float MinimumEnemyTurnDuration => minimumEnemyTurnDuration;
 
     [SerializeField] int rockAreaEffect = 1;
+
+    public float TimeCinemachine => timeCinemachine;
+    public float MinimumEnemyTurnDuration => minimumEnemyTurnDuration;
     public int RockAreaEffect => rockAreaEffect;
 
     //every enemies in scene
     public List<Enemy> enemiesInScene { get; set; }
+
+    public bool isAgainSameLevel { get; set; }
 
     //every enemy that must to end turn
     List<Enemy> enemiesInMovement = new List<Enemy>();
