@@ -54,8 +54,9 @@ public class FunctionsUI : MonoBehaviour
             newQuality = 0;
         }
 
-        //TODO deve cambiare il text della UI
-        Debug.Log(QualitySettings.names[newQuality]);
+        //UI
+        string s = QualitySettings.names[newQuality];
+        FindObjectOfType<OptionsUI>().UpdateQualityText(s);
     }
 
     public void ChangeResolution()
@@ -73,8 +74,9 @@ public class FunctionsUI : MonoBehaviour
             }
         }
 
-        //TODO deve cambiare il text della UI
-        Debug.Log(newResolution.width + " x " + newResolution.height + ", " + newResolution.refreshRate + "Hz");
+        //UI
+        string s = newResolution.width + " x " + newResolution.height + ", " + newResolution.refreshRate + "Hz";
+        FindObjectOfType<OptionsUI>().UpdateResolutionText(s);
     }
 
     public void SetResolution()
@@ -86,13 +88,17 @@ public class FunctionsUI : MonoBehaviour
     {
         Screen.fullScreen = !Screen.fullScreen;
 
-        Debug.Log(Screen.fullScreen ? "FULLSCREEN" : "WINDOW MODE");
+        //UI
+        string s = Screen.fullScreen ? "FULLSCREEN" : "WINDOW MODE";
+        FindObjectOfType<OptionsUI>().UpdateFullScreenText(s);
     }
 
     public void SetVSync()
     {
         QualitySettings.vSyncCount = QualitySettings.vSyncCount <= 0 ? 1 : 0;
 
-        Debug.Log(QualitySettings.vSyncCount <= 0 ? "V SYNC OFF" : "V SYNC ON");
+        //UI
+        string s = QualitySettings.vSyncCount <= 0 ? "V SYNC OFF" : "V SYNC ON";
+        FindObjectOfType<OptionsUI>().UpdateVSyncText(s);
     }
 }
