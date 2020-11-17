@@ -68,7 +68,7 @@ public class Enemy : Character, IMovable
         {
             //get rotation to reach
             Vector3 lookDirection = PathToRock[0].transform.position - CurrentWaypoint.transform.position;
-            Quaternion lookRotation = Quaternion.FromToRotation(transform.forward, lookDirection) * transform.rotation;
+            Quaternion lookRotation = Quaternion.LookRotation(lookDirection, Vector3.up);
 
             //be sure is going only one coroutine
             if (rotate_Coroutine != null)
