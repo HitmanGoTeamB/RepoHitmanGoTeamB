@@ -21,7 +21,7 @@ public class PrelevelState : State
         levelManager = stateMachine as LevelManager;
 
         if (GameManager.instance.showPath && levelManager.isAgainSameLevel)
-            GameManager.instance.showPath.CreatePath(EndPrelevel, true);
+            GameManager.instance.showPath.CreatePath(null, true);
 
         //start coroutine for cinemachine
         if (waitCinemachine != null)
