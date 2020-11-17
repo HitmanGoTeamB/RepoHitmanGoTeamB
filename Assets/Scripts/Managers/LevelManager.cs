@@ -141,13 +141,47 @@ public class LevelManager : StateMachine
         else
         {
             //restart scene
-            Invoke("EndGame", 2);
+            StartCoroutine(EndGame());
         }
     }
 
-    void EndGame()
+    IEnumerator EndGame()
     {
+        //wait player death animation
+        yield return new WaitForSeconds(1.5f);
+
+        //wait click
+        while(true)
+        {
+            if (OnClick())
+                break;
+
+            yield return null;
+        }
+
+        //reload
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    bool OnClick()
+    {
+#if UNITY_ANDROID && !UNITY_EDITOR
+        //if touch began
+        if (Input.touchCount > 0)
+        {
+            if(Input.GetTouch(0).phase == TouchPhase.Began)
+            {
+                return true;
+            }
+        }
+#else
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            return true;
+        }
+#endif
+
+        return false;
     }
 
     #endregion
