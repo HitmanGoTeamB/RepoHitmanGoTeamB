@@ -2,11 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(LookCamera))]
 [AddComponentMenu("Hitman GO/Characters/Player")]
 public class Player : Character
 {
     [Header("Time animation throw rock")]
     [SerializeField] float rockThrowTime = 1;
+
+    [Header("Models")]
+    [SerializeField] GameObject normalModel = default;
+    [SerializeField] GameObject throwRockModel = default;
 
     public float RockThrowTime => rockThrowTime;
 
@@ -14,6 +19,7 @@ public class Player : Character
 
     void Awake()
     {
+        NormalPose();
         SetState(new Wait(this));
     }
 
@@ -27,7 +33,12 @@ public class Player : Character
     /// </summary>
     public void ActivePlayer()
     {
-        SetState(new PlayerWaitInput(this));
+        //wait input to move
+        if (normalModel.activeInHierarchy)
+            SetState(new PlayerWaitInput(this));
+        //else wait input to throw rock
+        else
+            SetState(new PlayerWaitThrowInput(this));
     }
 
     /// <summary>
@@ -41,9 +52,24 @@ public class Player : Character
         //TODO
         if(isAlive == true)
         {
+            GetComponent<LookCamera>().enabled = false;
+            GetComponentInChildren<Animator>().SetTrigger("Death");
+
             GameManager.instance.LevelManager.EndGame(false);
             isAlive = false;
         }
         
+    }
+
+    public void NormalPose()
+    {
+        normalModel.SetActive(true);
+        throwRockModel.SetActive(false);
+    }
+
+    public void ThrowRockPose()
+    {
+        normalModel.SetActive(false);
+        throwRockModel.SetActive(true);
     }
 }

@@ -8,15 +8,23 @@ using System.Linq;
 public class LevelManager : StateMachine
 {
     #region variables
+    [Header("Prelevel")]
+    [SerializeField] float timeCinemachine = 5;
 
+    [Header("Gameplay")]
     [Tooltip("Minimum time duration for enemy turn (when there is no enemy, or every enemy is in idle)")] 
-    [SerializeField] float minimumEnemyTurnDuration = 0.5f;
-    public float MinimumEnemyTurnDuration => minimumEnemyTurnDuration;
+    [SerializeField] float minimumEnemyTurnDuration = 0f;
 
-    [SerializeField] int rockAreaEffect = 2;
+    [SerializeField] int rockAreaEffect = 1;
+
+    public float TimeCinemachine => timeCinemachine;
+    public float MinimumEnemyTurnDuration => minimumEnemyTurnDuration;
+    public int RockAreaEffect => rockAreaEffect;
 
     //every enemies in scene
     public List<Enemy> enemiesInScene { get; set; }
+
+    public bool isAgainSameLevel { get; set; }
 
     //every enemy that must to end turn
     List<Enemy> enemiesInMovement = new List<Enemy>();
@@ -32,6 +40,8 @@ public class LevelManager : StateMachine
         SetState(new PrelevelState(this));
     }
 
+    #region private API
+
     IEnumerator EndEnemyTurnAfterFewSeconds()
     {
         //called when there is no enemy in scene
@@ -42,6 +52,47 @@ public class LevelManager : StateMachine
         //end enemy turn
         EndEnemyTurn(null);
     }
+
+    IEnumerator PlayerDeath()
+    {
+        //wait player death animation
+        yield return new WaitForSeconds(1.5f);
+
+        //wait click
+        while (true)
+        {
+            if (OnClick())
+                break;
+
+            yield return null;
+        }
+
+        //reload
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    bool OnClick()
+    {
+#if UNITY_ANDROID && !UNITY_EDITOR
+        //if touch began
+        if (Input.touchCount > 0)
+        {
+            if(Input.GetTouch(0).phase == TouchPhase.Began)
+            {
+                return true;
+            }
+        }
+#else
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            return true;
+        }
+#endif
+
+        return false;
+    }
+
+    #endregion
 
     #region public API
 
@@ -108,12 +159,6 @@ public class LevelManager : StateMachine
             //foreach enemy on waypoint, set path finding
             foreach (Enemy enemy in waypoint.GetObjectsOnWaypoint<Enemy>())
                 enemy.SetPathFinding(waypointToReach);
-
-            //TEMP
-            foreach (Renderer renderer in waypoint.GetComponentsInChildren<Renderer>())
-            {
-                renderer.material.color = Color.black;
-            }
         }
     }
 
@@ -146,7 +191,7 @@ public class LevelManager : StateMachine
         else
         {
             //restart scene
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            StartCoroutine(PlayerDeath());
         }
     }
 

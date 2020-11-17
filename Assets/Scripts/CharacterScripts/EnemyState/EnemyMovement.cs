@@ -10,8 +10,6 @@ public class EnemyMovement : StateMovement
 
     public override void Exit()
     {
-        base.Exit();
-
         //if next waypoint has player, kill him
         if (waypointToReach.ObjectsOnWaypoint.Contains(GameManager.instance.player.gameObject))
         {
@@ -27,6 +25,8 @@ public class EnemyMovement : StateMovement
 
             GameManager.instance.LevelManager.EndEnemyTurn(enemy);
         }
+
+        base.Exit();
     }
 
     void CheckIsRockPath(Enemy enemy)

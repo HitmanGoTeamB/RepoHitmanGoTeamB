@@ -99,7 +99,8 @@ public class Character : StateMachine, IMovable
     {
         //find current waypoint with a raycast to the down
         RaycastHit hit;
-        Physics.Raycast(this.transform.position, Vector3.down, out hit);
+        int layer = CreateLayer.LayerAllExcept("Player");                                           //use layer to ignore Player layer
+        Physics.Raycast(this.transform.position + Vector3.up, Vector3.down, out hit, 10, layer);    //vector3 up to be sure
         currentWaypoint = hit.transform.gameObject.GetComponent<Waypoint>();
     }
 

@@ -18,7 +18,7 @@ public class Rock : MonoBehaviour
     {
         //find current waypoint with a raycast to the down
         RaycastHit hit;
-        Physics.Raycast(this.transform.position, Vector3.down, out hit);
+        Physics.Raycast(this.transform.position + Vector3.up, Vector3.down, out hit);
         currentWaypoint = hit.transform.gameObject.GetComponent<Waypoint>();
     }
 }
