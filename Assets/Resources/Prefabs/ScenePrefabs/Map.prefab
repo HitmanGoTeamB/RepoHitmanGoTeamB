@@ -61,6 +61,6 @@ MonoBehaviour:
   endPoint: {fileID: 2840017596699778426, guid: 14e9d3388b12c9a419d98fd61b164718,
     type: 3}
   timeForTile: 0.3
-  height: 2
+  height: 1.6
   distFromPoint: 0.1
   distFromEndPoint: 0.7
