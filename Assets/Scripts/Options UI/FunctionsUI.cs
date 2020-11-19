@@ -79,7 +79,7 @@ public class FunctionsUI : MonoBehaviour
         FindObjectOfType<OptionsUI>().UpdateQualityText();
     }
 
-    public void ChangeResolution()
+    public void ChangeResolution(bool forward)
     {
         Resolution currentResolution = Screen.currentResolution;
 
@@ -88,8 +88,19 @@ public class FunctionsUI : MonoBehaviour
             //find current resolution in the list
             if(Screen.resolutions[i].width == currentResolution.width && Screen.resolutions[i].height == currentResolution.height)
             {
-                //get next resolution or the back to 0
-                int nextResolution = i < Screen.resolutions.Length - 1 ? i + 1 : 0;
+                //get next resolution
+                int nextResolution = 0;
+                if(forward)
+                {
+                    //forward or back to 0
+                    nextResolution = i < Screen.resolutions.Length - 1 ? i + 1 : 0;
+                }
+                else
+                {
+                    //back or go to last index
+                    nextResolution = i > 0 ? i - 1 : Screen.resolutions.Length - 1;
+                }
+
                 newResolution = Screen.resolutions[nextResolution];
 
                 break;
@@ -135,5 +146,10 @@ public class FunctionsUI : MonoBehaviour
 
         //UI
         FindObjectOfType<OptionsUI>().UpdateMusicText(music);
+    }
+
+    public void ResetGame()
+    {
+        //resetta i salvataggi del gioco
     }
 }
