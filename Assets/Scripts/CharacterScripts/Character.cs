@@ -49,6 +49,9 @@ public class Character : StateMachine, IMovable
         //save start position
         Vector3 startPosition = transform.position;
 
+        //remove from waypoint
+        CurrentWaypoint.RemoveObjectFromWaypoint(this.gameObject);
+
         //movement
         float delta = 0;
         while(delta < 1)
@@ -60,9 +63,8 @@ public class Character : StateMachine, IMovable
             yield return null;
         }
 
-        //set final position and remove from waypoint
+        //set final position
         transform.position = targetPosition;
-        CurrentWaypoint.RemoveObjectFromWaypoint(this.gameObject);
 
         //set new current waypoint and add to this waypoint
         currentWaypoint = waypointToReach;

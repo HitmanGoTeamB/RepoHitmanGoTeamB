@@ -9,6 +9,8 @@ public class FunctionsUI : MonoBehaviour
     public static FunctionsUI instance { get; private set; }
 
     Resolution newResolution;
+    bool music = true;
+    bool sound = true;
 
     void Awake()
     {
@@ -22,6 +24,13 @@ public class FunctionsUI : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(gameObject);
         }
+
+        instance.SetDefault();
+    }
+
+    void SetDefault()
+    {
+        newResolution = Screen.currentResolution;
     }
 
     public void LoadScene(string sceneName)
@@ -45,18 +54,15 @@ public class FunctionsUI : MonoBehaviour
 
         //set quality settings
         QualitySettings.SetQualityLevel(currentQuality + 1, true);
-        int newQuality = currentQuality + 1;
 
         //if reached limit (no change in quality), set quality to 0
         if (QualitySettings.GetQualityLevel() == currentQuality)
         {
             QualitySettings.SetQualityLevel(0, true);
-            newQuality = 0;
         }
 
         //UI
-        string s = QualitySettings.names[newQuality];
-        FindObjectOfType<OptionsUI>().UpdateQualityText(s);
+        FindObjectOfType<OptionsUI>().UpdateQualityText();
     }
 
     public void ChangeResolution()
@@ -71,12 +77,13 @@ public class FunctionsUI : MonoBehaviour
                 //get next resolution or the back to 0
                 int nextResolution = i < Screen.resolutions.Length - 1 ? i + 1 : 0;
                 newResolution = Screen.resolutions[nextResolution];
+
+                break;
             }
         }
 
         //UI
-        string s = newResolution.width + " x " + newResolution.height + ", " + newResolution.refreshRate + "Hz";
-        FindObjectOfType<OptionsUI>().UpdateResolutionText(s);
+        FindObjectOfType<OptionsUI>().UpdateResolutionText(newResolution);
     }
 
     public void SetResolution()
@@ -89,8 +96,7 @@ public class FunctionsUI : MonoBehaviour
         Screen.fullScreen = !Screen.fullScreen;
 
         //UI
-        string s = Screen.fullScreen ? "FULLSCREEN" : "WINDOW MODE";
-        FindObjectOfType<OptionsUI>().UpdateFullScreenText(s);
+        FindObjectOfType<OptionsUI>().UpdateFullScreenText();
     }
 
     public void SetVSync()
@@ -98,7 +104,22 @@ public class FunctionsUI : MonoBehaviour
         QualitySettings.vSyncCount = QualitySettings.vSyncCount <= 0 ? 1 : 0;
 
         //UI
-        string s = QualitySettings.vSyncCount <= 0 ? "V SYNC OFF" : "V SYNC ON";
-        FindObjectOfType<OptionsUI>().UpdateVSyncText(s);
+        FindObjectOfType<OptionsUI>().UpdateVSyncText();
+    }
+
+    public void SetSound()
+    {
+        sound = !sound;
+
+        //UI
+        FindObjectOfType<OptionsUI>().UpdateSoundText(sound);
+    }
+
+    public void SetMusic()
+    {
+        music = !music;
+
+        //UI
+        FindObjectOfType<OptionsUI>().UpdateMusicText(music);
     }
 }
