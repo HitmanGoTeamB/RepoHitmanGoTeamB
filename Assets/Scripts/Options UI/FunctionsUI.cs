@@ -43,6 +43,11 @@ public class FunctionsUI : MonoBehaviour
         SceneManager.LoadScene(sceneIndex);
     }
 
+    public void ReloadScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
     public void LoadURL(string url)
     {
         Application.OpenURL(url);
