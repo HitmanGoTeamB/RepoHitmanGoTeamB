@@ -6,6 +6,48 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/_Scenes/Levels/Level_1-6.unity
-    guid: 6ab434babc823ba438ef471513e833b7
+    path: Assets/_Scenes/Game+UI/UI_MainMenu.unity
+    guid: c0c9975b84e66064b9157efeee0f256d
+  - enabled: 1
+    path: Assets/_Scenes/Game+UI/Level_1-1 Alex.unity
+    guid: c81c691db6ab5cc49afc07517712991c
+  - enabled: 1
+    path: Assets/_Scenes/Game+UI/Level_1-2 Alex.unity
+    guid: 21d940cf64ce096489b24d96a275c69c
+  - enabled: 1
+    path: Assets/_Scenes/Game+UI/Level_1-3 Alex.unity
+    guid: 195d8ee715ca08c4ea435337038af9bd
+  - enabled: 1
+    path: Assets/_Scenes/Game+UI/Level_1-4 Alex.unity
+    guid: 1185850c4a739f14fb7fa24d6adeda61
+  - enabled: 1
+    path: Assets/_Scenes/Game+UI/Level_1-5 Alex.unity
+    guid: 8595589a624c98d4ba8378be3014bffb
+  - enabled: 1
+    path: Assets/_Scenes/Game+UI/Level_1-6 Alex.unity
+    guid: b9b2b79fd7991d242975d7f794614912
+  - enabled: 1
+    path: Assets/_Scenes/Game+UI/UI_Credits.unity
+    guid: 497a2ae2fbd737043b23d4e55b7b5cda
+  - enabled: 1
+    path: Assets/_Scenes/Game+UI/UI_Exit_DESKTOPONLY.unity
+    guid: 204cfc562e3fc634d8dfba2738b83444
+  - enabled: 1
+    path: Assets/_Scenes/Game+UI/UI_InGameUI.unity
+    guid: 9a50cb92e05e286498e8793197913736
+  - enabled: 1
+    path: Assets/_Scenes/Game+UI/UI_LevelSelection.unity
+    guid: c3f6d70837c77e749bd37e74f77b807f
+  - enabled: 1
+    path: Assets/_Scenes/Game+UI/UI_LoadingScreen.unity
+    guid: ab47d5a0427d2154ca237745043a60f6
+  - enabled: 1
+    path: Assets/_Scenes/Game+UI/UI_Options.unity
+    guid: 46dbd2483a4e3fd438124913d4686bcf
+  - enabled: 1
+    path: Assets/_Scenes/Game+UI/UI_ResetWarning.unity
+    guid: b2aed3b41073eda4c8653bfff39ffecb
+  - enabled: 1
+    path: Assets/_Scenes/Game+UI/UI_WorldSelection.unity
+    guid: ac9fedb2b90141c4b9bfcc298d3116e6
   m_configObjects: {}
