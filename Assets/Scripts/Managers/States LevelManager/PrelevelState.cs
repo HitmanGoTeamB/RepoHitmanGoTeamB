@@ -17,9 +17,9 @@ public class PrelevelState : State
         base.Enter();
 
         //show cinemachine, then show path, then start game
-        //if restarted level, call show path immediatly, then show cinemachine and start game
         levelManager = stateMachine as LevelManager;
 
+        //if restarted level, call show path immediatly, then show cinemachine and start game
         if (GameManager.instance.showPath && levelManager.isAgainSameLevel)
             GameManager.instance.showPath.CreatePath(null, true);
 
@@ -33,10 +33,40 @@ public class PrelevelState : State
     IEnumerator WaitCinemachine()
     {
         //wait cinemachine
-        yield return new WaitForSeconds(levelManager.TimeCinemachine);
+        float timer = Time.time + levelManager.TimeCinemachine;
+        while (Time.time < timer)
+        {
+            //if click, skip cinemachine
+            if (CheckOnClick())
+                break;
+
+            yield return null;
+        }
 
         //then do prelevel
         DoPrelevel();
+    }
+
+    bool CheckOnClick()
+    {
+#if UNITY_ANDROID && !UNITY_EDITOR
+        if (Input.touchCount <= 0)
+            return false;
+
+        if(Input.GetTouch(0).phase == TouchPhase.Began)
+        {
+            return true;
+        }
+
+        return false;
+#else
+        if(Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            return true;
+        }
+
+        return false;
+#endif
     }
 
     void DoPrelevel()
