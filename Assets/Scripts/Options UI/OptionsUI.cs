@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+[AddComponentMenu("Hitman GO/UI/Options UI")]
 public class OptionsUI : MonoBehaviour
 {
     [Header("PC - Text")]
