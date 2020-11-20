@@ -60,24 +60,27 @@ public class PlayerWaitInput : State
 
 #region private API
 
-    Vector2 GetInput()
+    Vector2 GetInput(out int id)
     {
         //return touch position or mouse position
 #if UNITY_ANDROID && !UNITY_EDITOR
+        id = Input.GetTouch(0).fingerId;
         return Input.GetTouch(0).position;
 #else
+        id = -1;
         return Input.mousePosition;
 #endif
     }
 
     void OnClick()
     {
-        Vector2 inputPosition = GetInput();
+        int pointerId;
+        Vector2 inputPosition = GetInput(out pointerId);
         Ray ray = cam.ScreenPointToRay(inputPosition);
         int layer = CreateLayer.LayerOnly("Player");
 
         //if hit player, save start input position and start moving - be sure doesn't hit UI
-        if (Physics.Raycast(ray, 100, layer) && EventSystem.current.IsPointerOverGameObject() == false)
+        if (Physics.Raycast(ray, 100, layer) && EventSystem.current.IsPointerOverGameObject(pointerId) == false)
         {
             startInputPosition = inputPosition;
             isMoving = true;
@@ -91,12 +94,13 @@ public class PlayerWaitInput : State
         //stop moving
         isMoving = false;
 
-        Vector2 inputPosition = GetInput();
+        int pointerId;
+        Vector2 inputPosition = GetInput(out pointerId);
         Ray ray = cam.ScreenPointToRay(inputPosition);
         int layer = CreateLayer.LayerOnly("Player");
 
         //be sure doesn't hit player again (no movement) - and be sure doesn't hit UI
-        if (Physics.Raycast(ray, 100, layer) || EventSystem.current.IsPointerOverGameObject())
+        if (Physics.Raycast(ray, 100, layer) || EventSystem.current.IsPointerOverGameObject(pointerId))
         {
             anim.SetTrigger("OnRelease");
             return;

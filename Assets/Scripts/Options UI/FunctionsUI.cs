@@ -9,8 +9,8 @@ public class FunctionsUI : MonoBehaviour
     public static FunctionsUI instance { get; private set; }
 
     Resolution newResolution;
-    public bool Music { get; private set; }
-    public bool Sound { get; private set; }
+    public bool Music { get; private set; } = true;
+    public bool Sound { get; private set; } = true;
 
     void Awake()
     {
