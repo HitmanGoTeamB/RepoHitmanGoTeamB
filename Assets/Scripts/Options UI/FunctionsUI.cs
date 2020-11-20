@@ -32,21 +32,23 @@ public class FunctionsUI : MonoBehaviour
         //load
         QualitySettings.SetQualityLevel(PlayerPrefs.GetInt("Quality", QualitySettings.GetQualityLevel()));      //get quality - default is current quality
         Screen.fullScreen = PlayerPrefs.GetInt("FullScreen", Screen.fullScreen ? 1 : 0) > 0 ? true : false;     //get full screen - default is current full screen (1 = true, 0 = false)
-        newResolution = Screen.resolutions[PlayerPrefs.GetInt("Resolution", FindCurrentResolution())];          //get resolution - default is current resolution
+        newResolution = Screen.resolutions[PlayerPrefs.GetInt("Resolution", FindCurrentResolution(Screen.currentResolution))];          //get resolution - default is current resolution
         if (EqualResolution() == false) Screen.SetResolution(newResolution.width, newResolution.height, Screen.fullScreen, newResolution.refreshRate);  //if new resolution, set to screen
         QualitySettings.vSyncCount = PlayerPrefs.GetInt("VSync", QualitySettings.vSyncCount);                   //get vsync - default is current vsync
         Sound = PlayerPrefs.GetInt("Sound", 1) > 0 ? true : false;                                              //get sound - default is 1 (1 = true, 0 = false)
         Music = PlayerPrefs.GetInt("Music", 1) > 0 ? true : false;                                              //get sound - default is 1 (1 = true, 0 = false)
     }
 
-    int FindCurrentResolution()
+    #region private API
+
+    int FindCurrentResolution(Resolution resolutionToFind)
     {
         for (int i = 0; i < Screen.resolutions.Length; i++)
         {
             //find current resolution in the list
-            if (Screen.resolutions[i].width == Screen.currentResolution.width 
-                && Screen.resolutions[i].height == Screen.currentResolution.height 
-                && Screen.resolutions[i].refreshRate == Screen.currentResolution.refreshRate)
+            if (Screen.resolutions[i].width == resolutionToFind.width 
+                && Screen.resolutions[i].height == resolutionToFind.height 
+                && Screen.resolutions[i].refreshRate == resolutionToFind.refreshRate)
             {
                 return i;
             }
@@ -66,6 +68,8 @@ public class FunctionsUI : MonoBehaviour
 
         return false;
     }
+
+    #endregion
 
     #region scene
 
@@ -105,6 +109,7 @@ public class FunctionsUI : MonoBehaviour
     public void ChangeQuality()
     {
         int currentQuality = QualitySettings.GetQualityLevel();
+        int nextQuality = currentQuality + 1;
 
         //set quality settings
         QualitySettings.SetQualityLevel(currentQuality + 1, true);
@@ -113,13 +118,14 @@ public class FunctionsUI : MonoBehaviour
         if (QualitySettings.GetQualityLevel() == currentQuality)
         {
             QualitySettings.SetQualityLevel(0, true);
+            nextQuality = 0;
         }
 
         //UI
-        FindObjectOfType<OptionsUI>().UpdateQualityText();
+        FindObjectOfType<OptionsUI>().UpdateQualityText(nextQuality);
 
         //Save
-        PlayerPrefs.SetInt("Quality", QualitySettings.GetQualityLevel());
+        PlayerPrefs.SetInt("Quality", nextQuality);
     }
 
     public void SetFullScreen(bool setOn)
@@ -127,7 +133,7 @@ public class FunctionsUI : MonoBehaviour
         Screen.fullScreen = setOn;
 
         //UI
-        FindObjectOfType<OptionsUI>().UpdateFullScreenText();
+        FindObjectOfType<OptionsUI>().UpdateFullScreenText(setOn);
 
         //Save
         PlayerPrefs.SetInt("FullScreen", setOn ? 1 : 0);
@@ -135,7 +141,7 @@ public class FunctionsUI : MonoBehaviour
 
     public void ChangeResolution(bool forward)
     {
-        int currentResolution = FindCurrentResolution();
+        int currentResolution = FindCurrentResolution(newResolution);
         int nextResolution = 0;
 
         //get next resolution
@@ -162,7 +168,7 @@ public class FunctionsUI : MonoBehaviour
         Screen.SetResolution(newResolution.width, newResolution.height, Screen.fullScreen, newResolution.refreshRate);
 
         //Save
-        PlayerPrefs.SetInt("Resolution", FindCurrentResolution());
+        PlayerPrefs.SetInt("Resolution", FindCurrentResolution(newResolution));
     }
 
     public void SetVSync(bool setOn)
@@ -170,7 +176,7 @@ public class FunctionsUI : MonoBehaviour
         QualitySettings.vSyncCount = setOn ? 1 : 0;
 
         //UI
-        FindObjectOfType<OptionsUI>().UpdateVSyncText();
+        FindObjectOfType<OptionsUI>().UpdateVSyncText(setOn);
 
         //Save
         PlayerPrefs.SetInt("VSync", setOn ? 1 : 0);

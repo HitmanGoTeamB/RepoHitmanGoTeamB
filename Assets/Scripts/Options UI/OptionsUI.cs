@@ -33,10 +33,10 @@ public class OptionsUI : MonoBehaviour
     {
         UpdateSoundText(FunctionsUI.instance.Sound);
         UpdateMusicText(FunctionsUI.instance.Music);
-        UpdateQualityText();
+        UpdateQualityText(QualitySettings.GetQualityLevel());
         UpdateResolutionText(Screen.currentResolution);
-        UpdateFullScreenText();
-        UpdateVSyncText();
+        UpdateFullScreenText(Screen.fullScreen);
+        UpdateVSyncText(QualitySettings.vSyncCount > 0);
     }
 
     public void UpdateSoundText(bool isOn)
@@ -59,11 +59,13 @@ public class OptionsUI : MonoBehaviour
             off.SetActive(!isOn);
     }
 
-    public void UpdateQualityText()
+    public void UpdateQualityText(int nextQuality)
     {
+        string qualityString = QualitySettings.names[nextQuality];
+
         //set text
         foreach (Text qualityText in quality)
-            qualityText.text = beforeQuality + QualitySettings.names[QualitySettings.GetQualityLevel()];
+            qualityText.text = beforeQuality + qualityString;
     }
 
     public void UpdateResolutionText(Resolution newResolution)
@@ -72,10 +74,8 @@ public class OptionsUI : MonoBehaviour
             resolutionText.text = newResolution.width + " x " + newResolution.height + ", " + newResolution.refreshRate + "hz";
     }
 
-    public void UpdateFullScreenText()
+    public void UpdateFullScreenText(bool isOn)
     {
-        bool isOn = Screen.fullScreen;
-
         //set on and off
         foreach (GameObject on in fullScreenOn)
             on.SetActive(isOn);
@@ -84,10 +84,8 @@ public class OptionsUI : MonoBehaviour
             off.SetActive(!isOn);
     }
 
-    public void UpdateVSyncText()
+    public void UpdateVSyncText(bool isOn)
     {
-        bool isOn = QualitySettings.vSyncCount > 0;
-
         //set on and off
         foreach (GameObject on in vSyncOn)
             on.SetActive(isOn);
