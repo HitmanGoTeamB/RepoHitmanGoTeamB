@@ -150,6 +150,6 @@ public class FunctionsUI : MonoBehaviour
 
     public void ResetGame()
     {
-        //resetta i salvataggi del gioco
+        PlayerPrefs.DeleteAll();
     }
 }

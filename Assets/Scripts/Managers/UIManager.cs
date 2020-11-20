@@ -16,6 +16,20 @@ public class UIManager : MonoBehaviour
     Pooling<Canvas> rockPoints = new Pooling<Canvas>();
     Pooling<Canvas> rockAreas = new Pooling<Canvas>();
 
+    [Header("Canvas")]
+    [SerializeField] GameObject[] panelInGame = default;
+    [SerializeField] GameObject[] pauseMenu = default;
+    [SerializeField] GameObject[] endMenu = default;
+    [SerializeField] GameObject[] hintMenu = default;
+
+    void Start()
+    {
+        PanelInGame(true);
+        PauseMenu(false);
+        EndMenu(false);
+        HintMenu(false);
+    }
+
     #region private API
 
     Vector3 WaypointPosition(Waypoint waypoint)
@@ -44,6 +58,12 @@ public class UIManager : MonoBehaviour
         //deactive area on end, and reset size
         area.gameObject.SetActive(false);
         area.localScale = startSize;
+    }
+
+    void ActiveElements(bool active, GameObject[] gameObjects)
+    {
+        foreach (GameObject go in gameObjects)
+            go.SetActive(active);
     }
 
     #endregion
@@ -77,6 +97,34 @@ public class UIManager : MonoBehaviour
 
         StartCoroutine(RockAreaAnimation(area.transform));
     }
+
+    #region canvas
+
+    public void PanelInGame(bool active)
+    {
+        ActiveElements(active, panelInGame);
+    }
+
+    public void PauseMenu(bool active)
+    {
+        ActiveElements(active, pauseMenu);
+    }
+
+    public void EndMenu(bool active)
+    {
+        ActiveElements(active, endMenu);
+
+        //if active, be sure to deactive pause menu
+        if (active)
+            PauseMenu(false);
+    }
+
+    public void HintMenu(bool active)
+    {
+        ActiveElements(active, hintMenu);
+    }
+
+    #endregion
 
     #endregion
 }

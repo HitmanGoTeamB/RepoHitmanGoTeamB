@@ -2,7 +2,14 @@
 
 public abstract class Achievement : MonoBehaviour
 {
-    [SerializeField] protected string achievementName = string.Empty;
+    [SerializeField] string achievementName = string.Empty;
+    [SerializeField] GameObject[] stamps = default;
+
+    protected virtual void Awake()
+    {
+        //check if activate stamps
+        ActiveStamp(LoadAchievement());
+    }
 
     public bool CheckAchievement(bool win)
     {
@@ -15,6 +22,9 @@ public abstract class Achievement : MonoBehaviour
         //if achievement was not already completed and player succeeded, save it
         if (achievementLoaded == false && succeeded)
             SaveAchievement();
+
+        //active stamp (graphics)
+        ActiveStamp(succeeded || achievementLoaded);
 
         //return completed if succeeded or achievement was already completed
         return succeeded || achievementLoaded;
@@ -30,6 +40,13 @@ public abstract class Achievement : MonoBehaviour
 
         //return achievement, completed or not
         return PlayerPrefs.GetInt(achievementName, 0) >= 1 ? true : false;
+    }
+
+    public void ActiveStamp(bool achievementCompleted)
+    {
+        //active or deactive
+        foreach (GameObject stamp in stamps)
+            stamp.SetActive(achievementCompleted);
     }
 
     void SaveAchievement()

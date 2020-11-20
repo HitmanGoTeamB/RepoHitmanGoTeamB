@@ -175,18 +175,11 @@ public class LevelManager : StateMachine
 
         if(win)
         {
-            //show achievement and menu to change level
-            //TODO
-
             //check every achievement
             foreach (Achievement achievement in GetComponents<Achievement>())
                 achievement.CheckAchievement(win);
 
-#if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;
-#else
-            Application.Quit();
-#endif
+            GameManager.instance.uiManager.EndMenu(true);
         }
         else
         {

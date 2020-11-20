@@ -965,6 +965,30 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89f59ce7760699a4d9d0257644065d0a, type: 3}
+--- !u!1 &118323786 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5080043111789397916, guid: 89f59ce7760699a4d9d0257644065d0a,
+    type: 3}
+  m_PrefabInstance: {fileID: 118323785}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &118323787 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5080043113065075304, guid: 89f59ce7760699a4d9d0257644065d0a,
+    type: 3}
+  m_PrefabInstance: {fileID: 118323785}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &118323788 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5080043113781311541, guid: 89f59ce7760699a4d9d0257644065d0a,
+    type: 3}
+  m_PrefabInstance: {fileID: 118323785}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &118323789 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5080043112929526770, guid: 89f59ce7760699a4d9d0257644065d0a,
+    type: 3}
+  m_PrefabInstance: {fileID: 118323785}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &123323563 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3054624309008697394, guid: 8df2100a25d2ff945b662448e3364c53,
@@ -1219,7 +1243,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &218364262
 Transform:
   m_ObjectHideFlags: 0
@@ -5071,7 +5095,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1176642214}
   - component: {fileID: 1176642216}
-  - component: {fileID: 1176642215}
   m_Layer: 0
   m_Name: HintModeCamera
   m_TagString: Untagged
@@ -5093,14 +5116,6 @@ Transform:
   m_Father: {fileID: 218364262}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 49.856003, y: 0, z: 0}
---- !u!81 &1176642215
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1176642213}
-  m_Enabled: 1
 --- !u!20 &1176642216
 Camera:
   m_ObjectHideFlags: 0
@@ -6005,6 +6020,36 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7687598410835700019, guid: 40558c0aac5bf844198a786a52cd6d8b,
+        type: 3}
+      propertyPath: stamps.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7687598410835700019, guid: 40558c0aac5bf844198a786a52cd6d8b,
+        type: 3}
+      propertyPath: achievementName
+      value: EndLevel_1-4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7687598410835700019, guid: 40558c0aac5bf844198a786a52cd6d8b,
+        type: 3}
+      propertyPath: stamps.Array.data[0]
+      value: 
+      objectReference: {fileID: 118323789}
+    - target: {fileID: 7687598410835700019, guid: 40558c0aac5bf844198a786a52cd6d8b,
+        type: 3}
+      propertyPath: stamps.Array.data[1]
+      value: 
+      objectReference: {fileID: 118323788}
+    - target: {fileID: 7687598410835700019, guid: 40558c0aac5bf844198a786a52cd6d8b,
+        type: 3}
+      propertyPath: stamps.Array.data[2]
+      value: 
+      objectReference: {fileID: 118323787}
+    - target: {fileID: 7687598410835700019, guid: 40558c0aac5bf844198a786a52cd6d8b,
+        type: 3}
+      propertyPath: stamps.Array.data[3]
+      value: 
+      objectReference: {fileID: 118323786}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 40558c0aac5bf844198a786a52cd6d8b, type: 3}
 --- !u!1 &1554369847

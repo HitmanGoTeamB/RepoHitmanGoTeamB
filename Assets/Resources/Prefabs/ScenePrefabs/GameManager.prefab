@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 864034640717295539}
   - component: {fileID: 864034640717295538}
-  - component: {fileID: 4154905887668064802}
   - component: {fileID: -3473883090874332273}
   m_Layer: 0
   m_Name: GameManager
@@ -45,23 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d67ba4ac6232664aa5cc827c4d9990b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4154905887668064802
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 864034640717295549}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 61082f9489cac0348b4329d56fda1267, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  height: 1.6
-  rockPoint: {fileID: 291216751608493578, guid: 5018f3dd813738a46ab414f5619ec7dc,
-    type: 3}
-  rockArea: {fileID: 426929677527230889, guid: e0e09a4ddbaf1f04ca552af2a366a2cf, type: 3}
-  rockAreaAnimation: 1
 --- !u!114 &-3473883090874332273
 MonoBehaviour:
   m_ObjectHideFlags: 0
