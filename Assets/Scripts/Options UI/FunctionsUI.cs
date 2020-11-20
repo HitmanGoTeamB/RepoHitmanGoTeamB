@@ -9,8 +9,8 @@ public class FunctionsUI : MonoBehaviour
     public static FunctionsUI instance { get; private set; }
 
     Resolution newResolution;
-    bool music = true;
-    bool sound = true;
+    public bool Music { get; private set; }
+    public bool Sound { get; private set; }
 
     void Awake()
     {
@@ -23,15 +23,51 @@ public class FunctionsUI : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
+            SetDefault();
         }
-
-        instance.SetDefault();
     }
 
     void SetDefault()
     {
-        newResolution = Screen.currentResolution;
+        //load
+        QualitySettings.SetQualityLevel(PlayerPrefs.GetInt("Quality", QualitySettings.GetQualityLevel()));      //get quality - default is current quality
+        Screen.fullScreen = PlayerPrefs.GetInt("FullScreen", Screen.fullScreen ? 1 : 0) > 0 ? true : false;     //get full screen - default is current full screen (1 = true, 0 = false)
+        newResolution = Screen.resolutions[PlayerPrefs.GetInt("Resolution", FindCurrentResolution())];          //get resolution - default is current resolution
+        if (EqualResolution() == false) Screen.SetResolution(newResolution.width, newResolution.height, Screen.fullScreen, newResolution.refreshRate);  //if new resolution, set to screen
+        QualitySettings.vSyncCount = PlayerPrefs.GetInt("VSync", QualitySettings.vSyncCount);                   //get vsync - default is current vsync
+        Sound = PlayerPrefs.GetInt("Sound", 1) > 0 ? true : false;                                              //get sound - default is 1 (1 = true, 0 = false)
+        Music = PlayerPrefs.GetInt("Music", 1) > 0 ? true : false;                                              //get sound - default is 1 (1 = true, 0 = false)
     }
+
+    int FindCurrentResolution()
+    {
+        for (int i = 0; i < Screen.resolutions.Length; i++)
+        {
+            //find current resolution in the list
+            if (Screen.resolutions[i].width == Screen.currentResolution.width 
+                && Screen.resolutions[i].height == Screen.currentResolution.height 
+                && Screen.resolutions[i].refreshRate == Screen.currentResolution.refreshRate)
+            {
+                return i;
+            }
+        }
+
+        return 0;
+    }
+
+    bool EqualResolution()
+    {
+        if (newResolution.width == Screen.currentResolution.width
+            && newResolution.height == Screen.currentResolution.height
+            && newResolution.refreshRate == Screen.currentResolution.refreshRate)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    #region scene
 
     public void ExitGame()
     {
@@ -62,6 +98,10 @@ public class FunctionsUI : MonoBehaviour
         Application.OpenURL(url);
     }
 
+    #endregion
+
+    #region options
+
     public void ChangeQuality()
     {
         int currentQuality = QualitySettings.GetQualityLevel();
@@ -77,35 +117,41 @@ public class FunctionsUI : MonoBehaviour
 
         //UI
         FindObjectOfType<OptionsUI>().UpdateQualityText();
+
+        //Save
+        PlayerPrefs.SetInt("Quality", QualitySettings.GetQualityLevel());
+    }
+
+    public void SetFullScreen(bool setOn)
+    {
+        Screen.fullScreen = setOn;
+
+        //UI
+        FindObjectOfType<OptionsUI>().UpdateFullScreenText();
+
+        //Save
+        PlayerPrefs.SetInt("FullScreen", setOn ? 1 : 0);
     }
 
     public void ChangeResolution(bool forward)
     {
-        Resolution currentResolution = Screen.currentResolution;
+        int currentResolution = FindCurrentResolution();
+        int nextResolution = 0;
 
-        for(int i = 0; i < Screen.resolutions.Length; i++)
+        //get next resolution
+        if (forward)
         {
-            //find current resolution in the list
-            if(Screen.resolutions[i].width == currentResolution.width && Screen.resolutions[i].height == currentResolution.height)
-            {
-                //get next resolution
-                int nextResolution = 0;
-                if(forward)
-                {
-                    //forward or back to 0
-                    nextResolution = i < Screen.resolutions.Length - 1 ? i + 1 : 0;
-                }
-                else
-                {
-                    //back or go to last index
-                    nextResolution = i > 0 ? i - 1 : Screen.resolutions.Length - 1;
-                }
-
-                newResolution = Screen.resolutions[nextResolution];
-
-                break;
-            }
+            //forward or back to 0
+            nextResolution = currentResolution < Screen.resolutions.Length - 1 ? currentResolution + 1 : 0;
         }
+        else
+        {
+            //back or go to last index
+            nextResolution = currentResolution > 0 ? currentResolution - 1 : Screen.resolutions.Length - 1;
+        }
+
+        //set new resolution
+        newResolution = Screen.resolutions[nextResolution];
 
         //UI
         FindObjectOfType<OptionsUI>().UpdateResolutionText(newResolution);
@@ -114,42 +160,48 @@ public class FunctionsUI : MonoBehaviour
     public void SetResolution()
     {
         Screen.SetResolution(newResolution.width, newResolution.height, Screen.fullScreen, newResolution.refreshRate);
+
+        //Save
+        PlayerPrefs.SetInt("Resolution", FindCurrentResolution());
     }
 
-    public void SetFullScreen()
+    public void SetVSync(bool setOn)
     {
-        Screen.fullScreen = !Screen.fullScreen;
-
-        //UI
-        FindObjectOfType<OptionsUI>().UpdateFullScreenText();
-    }
-
-    public void SetVSync()
-    {
-        QualitySettings.vSyncCount = QualitySettings.vSyncCount <= 0 ? 1 : 0;
+        QualitySettings.vSyncCount = setOn ? 1 : 0;
 
         //UI
         FindObjectOfType<OptionsUI>().UpdateVSyncText();
+
+        //Save
+        PlayerPrefs.SetInt("VSync", setOn ? 1 : 0);
     }
 
-    public void SetSound()
+    public void SetSound(bool setOn)
     {
-        sound = !sound;
+        Sound = setOn;
 
         //UI
-        FindObjectOfType<OptionsUI>().UpdateSoundText(sound);
+        FindObjectOfType<OptionsUI>().UpdateSoundText(setOn);
+
+        //Save
+        PlayerPrefs.SetInt("Sound", setOn ? 1 : 0);
     }
 
-    public void SetMusic()
+    public void SetMusic(bool setOn)
     {
-        music = !music;
+        Music = setOn;
 
         //UI
-        FindObjectOfType<OptionsUI>().UpdateMusicText(music);
+        FindObjectOfType<OptionsUI>().UpdateMusicText(setOn);
+
+        //Save
+        PlayerPrefs.SetInt("Music", setOn ? 1 : 0);
     }
 
     public void ResetGame()
     {
         PlayerPrefs.DeleteAll();
     }
+
+    #endregion
 }

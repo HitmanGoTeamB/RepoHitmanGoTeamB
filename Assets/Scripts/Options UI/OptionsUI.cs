@@ -6,74 +6,93 @@ using UnityEngine.UI;
 [AddComponentMenu("Hitman GO/UI/Options UI")]
 public class OptionsUI : MonoBehaviour
 {
-    [Header("PC - Text")]
-    [SerializeField] Text resolutionText = default;
-    [SerializeField] Text fullScreenText = default;
-    [SerializeField] Text vSyncText = default;
-    [SerializeField] Text soundText = default;
-    [SerializeField] Text musicText = default;
+    [Header("Sound")]
+    [SerializeField] GameObject[] soundOn = default;
+    [SerializeField] GameObject[] soundOff = default;
 
-    [Header("Mobile")]
-    [SerializeField] Text qualityText = default;
-    [SerializeField] Text soundTextMobile = default;
-    [SerializeField] Text musicTextMobile = default;
+    [Header("Music")]
+    [SerializeField] GameObject[] musicOn = default;
+    [SerializeField] GameObject[] musicOff = default;
 
-    [Header("String")]
-    [SerializeField] string resolutionString = "RESOLUTION - ";
-    [SerializeField] string fullScreenString = "FULLSCREEN";
-    [SerializeField] string windowScreenString = "WINDOW MODE";
-    [SerializeField] string vSyncString = "V SYNC ";
-    [SerializeField] string soundString = "SOUND - ";
-    [SerializeField] string musicString = "MUSIC - ";
+    [Header("Quality")]
+    [SerializeField] Text[] quality = default;
+    [SerializeField] string beforeQuality = "QUALITY - ";
 
-    void Awake()
+    [Header("Resolution")]
+    [SerializeField] Text[] resolution = default;
+
+    [Header("Full Screen")]
+    [SerializeField] GameObject[] fullScreenOn = default;
+    [SerializeField] GameObject[] fullScreenOff = default;
+
+    [Header("VSync")]
+    [SerializeField] GameObject[] vSyncOn = default;
+    [SerializeField] GameObject[] vSyncOff = default;
+
+    void Start()
     {
+        UpdateSoundText(FunctionsUI.instance.Sound);
+        UpdateMusicText(FunctionsUI.instance.Music);
+        UpdateQualityText();
         UpdateResolutionText(Screen.currentResolution);
         UpdateFullScreenText();
         UpdateVSyncText();
-        UpdateQualityText();
-        UpdateSoundText(true);
-        UpdateMusicText(true);
-    }
-
-    public void UpdateResolutionText(Resolution resolution)
-    {
-        if (resolutionText == null)
-            return;
-
-        resolutionText.text = resolutionString + resolution.width + " x " + resolution.height + ", " + resolution.refreshRate + "Hz";
-    }
-
-    public void UpdateFullScreenText()
-    {
-        if (fullScreenText == null)
-            return;
-
-        fullScreenText.text = Screen.fullScreen ? fullScreenString : windowScreenString;
-    }
-
-    public void UpdateVSyncText()
-    {
-        if (vSyncText == null)
-            return;
-
-        vSyncText.text = QualitySettings.vSyncCount <= 0 ? vSyncString + "OFF" : vSyncString + "ON";
-    }
-
-    public void UpdateQualityText()
-    {
-        qualityText.text = QualitySettings.names[QualitySettings.GetQualityLevel()];
     }
 
     public void UpdateSoundText(bool isOn)
     {
-        soundText.text = soundString + (isOn ? "ON" : "OFF");
-        soundTextMobile.text = soundString + (isOn ? "ON" : "OFF");
+        //set on and off
+        foreach (GameObject on in soundOn)
+            on.SetActive(isOn);
+
+        foreach (GameObject off in soundOff)
+            off.SetActive(!isOn);
     }
 
     public void UpdateMusicText(bool isOn)
     {
-        musicText.text = musicString + (isOn ? "ON" : "OFF");
-        musicTextMobile.text = musicString + (isOn ? "ON" : "OFF");
+        //set on and off
+        foreach (GameObject on in musicOn)
+            on.SetActive(isOn);
+
+        foreach (GameObject off in musicOff)
+            off.SetActive(!isOn);
+    }
+
+    public void UpdateQualityText()
+    {
+        //set text
+        foreach (Text qualityText in quality)
+            qualityText.text = beforeQuality + QualitySettings.names[QualitySettings.GetQualityLevel()];
+    }
+
+    public void UpdateResolutionText(Resolution newResolution)
+    {
+        foreach (Text resolutionText in resolution)
+            resolutionText.text = newResolution.width + " x " + newResolution.height + ", " + newResolution.refreshRate + "hz";
+    }
+
+    public void UpdateFullScreenText()
+    {
+        bool isOn = Screen.fullScreen;
+
+        //set on and off
+        foreach (GameObject on in fullScreenOn)
+            on.SetActive(isOn);
+
+        foreach (GameObject off in fullScreenOff)
+            off.SetActive(!isOn);
+    }
+
+    public void UpdateVSyncText()
+    {
+        bool isOn = QualitySettings.vSyncCount > 0;
+
+        //set on and off
+        foreach (GameObject on in vSyncOn)
+            on.SetActive(isOn);
+
+        foreach (GameObject off in vSyncOff)
+            off.SetActive(!isOn);
     }
 }

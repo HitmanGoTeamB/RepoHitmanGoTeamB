@@ -40,7 +40,8 @@ public class GameManager : MonoBehaviour
         uiManager = FindObjectOfType<UIManager>();
 
         //check last level
-        CheckLastLevel();
+        if(LevelManager)
+            CheckLastLevel();
     }
 
     void CheckLastLevel()
