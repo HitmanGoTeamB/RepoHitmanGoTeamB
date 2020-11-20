@@ -14,8 +14,12 @@ public class LevelManager : StateMachine
     [Header("Gameplay")]
     [Tooltip("Minimum time duration for enemy turn (when there is no enemy, or every enemy is in idle)")] 
     [SerializeField] float minimumEnemyTurnDuration = 0f;
-
     [SerializeField] int rockAreaEffect = 1;
+
+    [Header("Enemies")]
+    [SerializeField] float timeDeathAnimation = 0.7f;
+    [SerializeField] Transform[] positionsToDeath = default;
+    int deathPositionIndex;
 
     public float TimeCinemachine => timeCinemachine;
     public float MinimumEnemyTurnDuration => minimumEnemyTurnDuration;
@@ -69,6 +73,17 @@ public class LevelManager : StateMachine
 
         //reload
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    IEnumerator EnemyDeathAnimation(Enemy enemy, Transform deathPosition)
+    {
+        Vector3 positionToDeath = new Vector3(deathPosition.position.x, enemy.transform.position.y, deathPosition.position.z);
+
+        //wait
+        yield return new WaitForSeconds(timeDeathAnimation);
+
+        //move to position
+        enemy.transform.position = positionToDeath;
     }
 
     bool OnClick()
@@ -160,6 +175,19 @@ public class LevelManager : StateMachine
             foreach (Enemy enemy in waypoint.GetObjectsOnWaypoint<Enemy>())
                 enemy.SetPathFinding(waypointToReach);
         }
+    }
+
+    public void EnemyDeath(Enemy enemy)
+    {
+        //remove from list
+        enemiesInScene.Remove(enemy);
+
+        //move to death position
+        if (deathPositionIndex < positionsToDeath.Length)
+            StartCoroutine(EnemyDeathAnimation(enemy, positionsToDeath[deathPositionIndex]));
+
+        //increase index
+        deathPositionIndex++;
     }
 
     /// <summary>

@@ -86,6 +86,11 @@ public class Waypoint : MonoBehaviour
                 StartCoroutine(PositionateObjectOnWaypoint(ObjectsOnWaypoint[i], position));
             }
         }
+        //else if only one object, move to the center of the waypoint
+        else if (ObjectsOnWaypoint.Count == 1)
+        {
+            ObjectsOnWaypoint[0].transform.position = new Vector3(transform.position.x, ObjectsOnWaypoint[0].transform.position.y, transform.position.z);
+        }
     }
 
     /// <summary>

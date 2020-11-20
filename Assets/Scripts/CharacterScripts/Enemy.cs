@@ -19,9 +19,15 @@ public class Enemy : Character, IMovable
     Coroutine rotate_Coroutine;
     Coroutine removeAlertFeedback;
 
+    Animator anim;
+    bool isAlive = true;
+
     void Awake()
     {
         SetState(new Wait(this));
+
+        //set animator reference
+        anim = GetComponentInChildren<Animator>();
 
         //hide alert feedback at start
         if (alertFeedback)
@@ -67,7 +73,7 @@ public class Enemy : Character, IMovable
         if(PathToRock != null && PathToRock.Count > 0)
         {
             //get rotation to reach
-            Vector3 lookDirection = PathToRock[0].transform.position - CurrentWaypoint.transform.position;
+            Vector3 lookDirection = (PathToRock[0].transform.position - CurrentWaypoint.transform.position).normalized;
             Quaternion lookRotation = Quaternion.LookRotation(lookDirection, Vector3.up);
 
             //be sure is going only one coroutine
@@ -132,17 +138,22 @@ public class Enemy : Character, IMovable
             if (removeAlertFeedback != null)
                 StopCoroutine(removeAlertFeedback);
 
+            //remove alert feedback after few seconds
             removeAlertFeedback = StartCoroutine(RemoveAlertFeedback());
         }
     }
 
     public void Die()
     {
-        //remove from level manager list
-        GameManager.instance.LevelManager.enemiesInScene.Remove(this);
+        if (isAlive)
+        {
+            isAlive = false;
 
-        //TODO
-        //muovilo alla nello spazio adiacente alla scacchiera
-        Destroy(this.gameObject);
+            //animation
+            anim.SetTrigger("Death");
+
+            //remove from level manager list and move to death position
+            GameManager.instance.LevelManager.EnemyDeath(this);
+        }
     }
 }
