@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlayerWaitThrowInput : State
 {
@@ -91,8 +92,8 @@ public class PlayerWaitThrowInput : State
 
         RaycastHit hit;
 
-        //if hit waypoint, save start input waypoint and start throwing
-        if (Physics.Raycast(ray, out hit, 100, layer))
+        //if hit waypoint, save start input waypoint and start throwing - be sure doesn't hit UI
+        if (Physics.Raycast(ray, out hit, 100, layer) && EventSystem.current.IsPointerOverGameObject() == false)
         {
             startInputPosition = hit.transform.GetComponentInParent<Waypoint>();
             isThrowing = true;
@@ -111,7 +112,7 @@ public class PlayerWaitThrowInput : State
         RaycastHit hit;
 
         //if hit waypoint, check is the same waypoint and throw rock
-        if (Physics.Raycast(ray, out hit, 100, layer))
+        if (Physics.Raycast(ray, out hit, 100, layer) && EventSystem.current.IsPointerOverGameObject() == false)
         {
             if(hit.transform.GetComponentInParent<Waypoint>() == startInputPosition)
             {

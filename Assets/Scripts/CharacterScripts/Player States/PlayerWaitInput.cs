@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlayerWaitInput : State
 {
@@ -75,8 +76,8 @@ public class PlayerWaitInput : State
         Ray ray = cam.ScreenPointToRay(inputPosition);
         int layer = CreateLayer.LayerOnly("Player");
 
-        //if hit player, save start input position and start moving
-        if (Physics.Raycast(ray, 100, layer))
+        //if hit player, save start input position and start moving - be sure doesn't hit UI
+        if (Physics.Raycast(ray, 100, layer) && EventSystem.current.IsPointerOverGameObject() == false)
         {
             startInputPosition = inputPosition;
             isMoving = true;
@@ -94,8 +95,8 @@ public class PlayerWaitInput : State
         Ray ray = cam.ScreenPointToRay(inputPosition);
         int layer = CreateLayer.LayerOnly("Player");
 
-        //be sure doesn't hit player again (no movement)
-        if (Physics.Raycast(ray, 100, layer))
+        //be sure doesn't hit player again (no movement) - and be sure doesn't hit UI
+        if (Physics.Raycast(ray, 100, layer) || EventSystem.current.IsPointerOverGameObject())
         {
             anim.SetTrigger("OnRelease");
             return;
