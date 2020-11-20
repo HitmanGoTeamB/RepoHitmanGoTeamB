@@ -179,6 +179,8 @@ public class LevelManager : StateMachine
             foreach (Achievement achievement in GetComponents<Achievement>())
                 achievement.CheckAchievement(win);
 
+            //deactive player and active end menu
+            GameManager.instance.player.enabled = false;
             GameManager.instance.uiManager.EndMenu(true);
         }
         else

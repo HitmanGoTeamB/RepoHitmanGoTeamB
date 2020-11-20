@@ -24,10 +24,9 @@ public class UIManager : MonoBehaviour
 
     void Start()
     {
-        PanelInGame(true);
         PauseMenu(false);
         EndMenu(false);
-        HintMenu(false);
+        ActiveElements(false, hintMenu);
     }
 
     #region private API
@@ -100,31 +99,33 @@ public class UIManager : MonoBehaviour
 
     #region canvas
 
-    public void PanelInGame(bool active)
-    {
-        ActiveElements(active, panelInGame);
-    }
-
     public void PauseMenu(bool active)
     {
         ActiveElements(active, pauseMenu);
+
+        //panel in game active or deactive based on pause menu
+        ActiveElements(!active, panelInGame);
     }
 
     public void EndMenu(bool active)
     {
         ActiveElements(active, endMenu);
 
-        //if active, be sure to deactive pause menu
-        if (active)
-            PauseMenu(false);
-    }
-
-    public void HintMenu(bool active)
-    {
-        ActiveElements(active, hintMenu);
+        //if active, deactive every other menu
+        if(active)
+        {
+            ActiveElements(false, pauseMenu);
+            ActiveElements(false, panelInGame);
+            ActiveElements(false, hintMenu);
+        }
     }
 
     #endregion
+
+    public bool IsPauseOrEndGame()
+    {
+        return pauseMenu[0].activeSelf || endMenu[0].activeSelf;
+    }
 
     #endregion
 }

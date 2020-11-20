@@ -26,6 +26,25 @@ public class Player : Character
     void Update()
     {
         state?.Execution();
+
+        Pause(Input.GetKeyDown(KeyCode.Escape));
+    }
+
+    void Pause(bool pauseInput)
+    {
+        if(pauseInput)
+        {
+            //resume
+            if (GameManager.instance.uiManager.IsPauseOrEndGame())
+            {
+                GameManager.instance.uiManager.PauseMenu(false);
+            }
+            //pause game
+            else
+            {
+                GameManager.instance.uiManager.PauseMenu(true);
+            }
+        }
     }
 
     /// <summary>
