@@ -206,7 +206,16 @@ public class FunctionsUI : MonoBehaviour
 
     public void ResetGame()
     {
+        //delete all
         PlayerPrefs.DeleteAll();
+
+        //save options
+        PlayerPrefs.SetInt("Quality", QualitySettings.GetQualityLevel());
+        PlayerPrefs.SetInt("FullScreen", Screen.fullScreen ? 1 : 0);
+        PlayerPrefs.SetInt("Resolution", FindCurrentResolution(newResolution));
+        PlayerPrefs.SetInt("VSync", QualitySettings.vSyncCount > 0 ? 1 : 0);
+        PlayerPrefs.SetInt("Sound", Sound ? 1 : 0);
+        PlayerPrefs.SetInt("Music", Music ? 1 : 0);
     }
 
     #endregion
