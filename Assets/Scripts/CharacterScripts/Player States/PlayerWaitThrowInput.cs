@@ -114,7 +114,7 @@ public class PlayerWaitThrowInput : State
         //if hit waypoint, check is the same waypoint and throw rock
         if (Physics.Raycast(ray, out hit, 100, layer) && EventSystem.current.IsPointerOverGameObject() == false)
         {
-            if(hit.transform.GetComponentInParent<Waypoint>() == startInputPosition)
+            if(hit.transform.GetComponentInParent<Waypoint>() == startInputPosition && waypointsAround.ContainsValue(startInputPosition))
             {
                 ThrowRock(startInputPosition);
             }
