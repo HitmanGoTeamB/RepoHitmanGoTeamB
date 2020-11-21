@@ -8,6 +8,15 @@ public class AttackState : StateMovement
     {
     }
 
+    public override void Enter()
+    {
+        base.Enter();
+
+        //animation
+        Animator anim = stateMachine.GetComponentInChildren<Animator>();
+        anim.SetTrigger("Attack");
+    }
+
     public override void Exit()
     {
         //kill player (this state is called when the enemy move on the player waypoint)

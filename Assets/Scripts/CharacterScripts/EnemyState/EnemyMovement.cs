@@ -8,6 +8,23 @@ public class EnemyMovement : StateMovement
     {
     }
 
+    public override void Enter()
+    {
+        base.Enter();
+
+        //get references
+        Animator anim = stateMachine.GetComponentInChildren<Animator>();
+
+        if (IsOnPlayer())
+        {
+            anim.SetTrigger("Attack");
+        }
+        else
+        {
+            anim.SetTrigger("Move");
+        }
+    }
+
     public override void Exit()
     {
         //if next waypoint has player, kill him
@@ -38,5 +55,11 @@ public class EnemyMovement : StateMovement
 
             enemy.Rotate();
         }
+    }
+
+    bool IsOnPlayer()
+    {
+        //all player in the waypoint you are moving into
+        return waypointToReach.GetObjectsOnWaypoint<Player>().Count > 0;
     }
 }

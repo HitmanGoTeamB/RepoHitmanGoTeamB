@@ -3,6 +3,7 @@ public class StateMovement : State
 {
     IMovable objectToMove;
     protected Waypoint waypointToReach;
+    Waypoint startWaypoint;
 
     public StateMovement(StateMachine stateMachine, IMovable objectToMove, Waypoint waypointToReach) : base(stateMachine)
     {
@@ -15,6 +16,9 @@ public class StateMovement : State
     {
         base.Enter();
 
+        Character character = stateMachine as Character;
+        startWaypoint = character.CurrentWaypoint;
+
         //calculate necessary to move object
         objectToMove.SetTargetPosition(waypointToReach);
 
@@ -25,6 +29,9 @@ public class StateMovement : State
     public override void Exit()
     {
         base.Exit();
+
+        //set position of every object on previous waypoint
+        startWaypoint.SetPositionsOnWaypoint();
 
         //set position of every object on this waypoint
         waypointToReach.SetPositionsOnWaypoint();

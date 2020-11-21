@@ -5,8 +5,10 @@ public class NoKill : Achievement
 {
     Enemy[] startingEnemiesInScene;
 
-    void Start()
+    protected override void Awake()
     {
+        base.Awake();
+
         startingEnemiesInScene = FindObjectsOfType<Enemy>();
     }
 

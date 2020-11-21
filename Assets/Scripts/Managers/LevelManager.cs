@@ -14,8 +14,12 @@ public class LevelManager : StateMachine
     [Header("Gameplay")]
     [Tooltip("Minimum time duration for enemy turn (when there is no enemy, or every enemy is in idle)")] 
     [SerializeField] float minimumEnemyTurnDuration = 0f;
-
     [SerializeField] int rockAreaEffect = 1;
+
+    [Header("Enemies")]
+    [SerializeField] float timeDeathAnimation = 0.7f;
+    [SerializeField] Transform[] positionsToDeath = default;
+    int deathPositionIndex;
 
     public float TimeCinemachine => timeCinemachine;
     public float MinimumEnemyTurnDuration => minimumEnemyTurnDuration;
@@ -69,6 +73,17 @@ public class LevelManager : StateMachine
 
         //reload
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    IEnumerator EnemyDeathAnimation(Enemy enemy, Transform deathPosition)
+    {
+        Vector3 positionToDeath = new Vector3(deathPosition.position.x, enemy.transform.position.y, deathPosition.position.z);
+
+        //wait
+        yield return new WaitForSeconds(timeDeathAnimation);
+
+        //move to position
+        enemy.transform.position = positionToDeath;
     }
 
     bool OnClick()
@@ -162,6 +177,19 @@ public class LevelManager : StateMachine
         }
     }
 
+    public void EnemyDeath(Enemy enemy)
+    {
+        //remove from list
+        enemiesInScene.Remove(enemy);
+
+        //move to death position
+        if (deathPositionIndex < positionsToDeath.Length)
+            StartCoroutine(EnemyDeathAnimation(enemy, positionsToDeath[deathPositionIndex]));
+
+        //increase index
+        deathPositionIndex++;
+    }
+
     /// <summary>
     /// Called by player when is killed or reached final waypoint
     /// </summary>
@@ -175,18 +203,13 @@ public class LevelManager : StateMachine
 
         if(win)
         {
-            //show achievement and menu to change level
-            //TODO
-
             //check every achievement
             foreach (Achievement achievement in GetComponents<Achievement>())
                 achievement.CheckAchievement(win);
 
-#if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;
-#else
-            Application.Quit();
-#endif
+            //deactive player and active end menu
+            GameManager.instance.player.enabled = false;
+            GameManager.instance.uiManager.EndMenu(true);
         }
         else
         {

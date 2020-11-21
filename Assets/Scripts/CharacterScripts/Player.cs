@@ -17,15 +17,39 @@ public class Player : Character
 
     private bool isAlive = true;
 
+    Animator anim;
+
     void Awake()
     {
         NormalPose();
         SetState(new Wait(this));
+
+        //set animator reference
+        anim = GetComponentInChildren<Animator>();
     }
 
     void Update()
     {
         state?.Execution();
+
+        Pause(Input.GetKeyDown(KeyCode.Escape));
+    }
+
+    void Pause(bool pauseInput)
+    {
+        if(pauseInput)
+        {
+            //resume
+            if (GameManager.instance.uiManager.IsPauseOrEndGame())
+            {
+                GameManager.instance.uiManager.PauseMenu(false);
+            }
+            //pause game
+            else
+            {
+                GameManager.instance.uiManager.PauseMenu(true);
+            }
+        }
     }
 
     /// <summary>
@@ -46,17 +70,17 @@ public class Player : Character
     /// </summary>
     public void PlayerGotKilled()
     {
-        //animazione di morte
-        //chiama un endgame
         //REMEMBER this can be called more times, but it has to work only one time
-        //TODO
         if(isAlive == true)
         {
-            GetComponent<LookCamera>().enabled = false;
-            GetComponentInChildren<Animator>().SetTrigger("Death");
-
-            GameManager.instance.LevelManager.EndGame(false);
             isAlive = false;
+
+            //animation
+            GetComponent<LookCamera>().enabled = false;
+            anim.SetTrigger("Death");
+
+            //call end game
+            GameManager.instance.LevelManager.EndGame(false);
         }
         
     }
