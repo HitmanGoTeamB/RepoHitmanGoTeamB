@@ -78,6 +78,13 @@ public abstract class Achievement : MonoBehaviour
         PlayerPrefs.SetInt(achievementName, 1);
     }
 
+    void ActivateHintsAfterFewSeconds()
+    {
+        //active hint mode and first hint
+        hintMode.SetActive(true);
+        hints[0].hintToActivate.SetActive(true);
+    }
+
     #region hints
 
     public void StartHints()
@@ -88,12 +95,10 @@ public abstract class Achievement : MonoBehaviour
 
     public void ActivateHints()
     {
-        //active hint mode and first hint
-        hintMode.SetActive(true);
-        hints[0].hintToActivate.SetActive(true);
-
         //set reference
         hintActive = this;
+
+        Invoke("ActivateHintsAfterFewSeconds", 0.1f);
     }
 
     public void CheckHint(Waypoint waypoint)
