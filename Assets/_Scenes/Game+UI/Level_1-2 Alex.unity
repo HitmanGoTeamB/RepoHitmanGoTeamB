@@ -972,6 +972,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8df2100a25d2ff945b662448e3364c53, type: 3}
+--- !u!1 &756368576 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3054624309008697395, guid: 8df2100a25d2ff945b662448e3364c53,
+    type: 3}
+  m_PrefabInstance: {fileID: 756368575}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &762681682
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1176,6 +1182,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8df2100a25d2ff945b662448e3364c53, type: 3}
+--- !u!1 &816417105 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3054624309008697395, guid: 8df2100a25d2ff945b662448e3364c53,
+    type: 3}
+  m_PrefabInstance: {fileID: 816417104}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &845168303
 GameObject:
   m_ObjectHideFlags: 0
@@ -1593,6 +1605,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: StartHints
+      objectReference: {fileID: 0}
+    - target: {fileID: 5080043112738956397, guid: 89f59ce7760699a4d9d0257644065d0a,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -34.160156
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89f59ce7760699a4d9d0257644065d0a, type: 3}
@@ -2082,6 +2099,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8df2100a25d2ff945b662448e3364c53, type: 3}
+--- !u!1 &1210523381 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3054624309008697395, guid: 8df2100a25d2ff945b662448e3364c53,
+    type: 3}
+  m_PrefabInstance: {fileID: 1210523380}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1253705323
 GameObject:
   m_ObjectHideFlags: 0
@@ -2097,7 +2120,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1253705324
 Transform:
   m_ObjectHideFlags: 0
@@ -2394,6 +2417,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1318424698}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1318424700 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3054624309008697395, guid: 8df2100a25d2ff945b662448e3364c53,
+    type: 3}
+  m_PrefabInstance: {fileID: 1318424698}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1364741497
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2543,6 +2572,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7687598410835700019, guid: 40558c0aac5bf844198a786a52cd6d8b,
         type: 3}
+      propertyPath: hints.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7687598410835700019, guid: 40558c0aac5bf844198a786a52cd6d8b,
+        type: 3}
       propertyPath: achievementName
       value: EndLevel_1-2
       objectReference: {fileID: 0}
@@ -2571,6 +2605,56 @@ PrefabInstance:
       propertyPath: hintMode
       value: 
       objectReference: {fileID: 1253705323}
+    - target: {fileID: 7687598410835700019, guid: 40558c0aac5bf844198a786a52cd6d8b,
+        type: 3}
+      propertyPath: hints.Array.data[0].hintToActivate
+      value: 
+      objectReference: {fileID: 756368576}
+    - target: {fileID: 7687598410835700019, guid: 40558c0aac5bf844198a786a52cd6d8b,
+        type: 3}
+      propertyPath: hints.Array.data[1].hintToActivate
+      value: 
+      objectReference: {fileID: 1210523381}
+    - target: {fileID: 7687598410835700019, guid: 40558c0aac5bf844198a786a52cd6d8b,
+        type: 3}
+      propertyPath: hints.Array.data[2].hintToActivate
+      value: 
+      objectReference: {fileID: 816417105}
+    - target: {fileID: 7687598410835700019, guid: 40558c0aac5bf844198a786a52cd6d8b,
+        type: 3}
+      propertyPath: hints.Array.data[3].hintToActivate
+      value: 
+      objectReference: {fileID: 1548122715}
+    - target: {fileID: 7687598410835700019, guid: 40558c0aac5bf844198a786a52cd6d8b,
+        type: 3}
+      propertyPath: hints.Array.data[4].hintToActivate
+      value: 
+      objectReference: {fileID: 1318424700}
+    - target: {fileID: 7687598410835700019, guid: 40558c0aac5bf844198a786a52cd6d8b,
+        type: 3}
+      propertyPath: hints.Array.data[0].waypointToReach
+      value: 
+      objectReference: {fileID: 1694794862}
+    - target: {fileID: 7687598410835700019, guid: 40558c0aac5bf844198a786a52cd6d8b,
+        type: 3}
+      propertyPath: hints.Array.data[1].waypointToReach
+      value: 
+      objectReference: {fileID: 1639025643}
+    - target: {fileID: 7687598410835700019, guid: 40558c0aac5bf844198a786a52cd6d8b,
+        type: 3}
+      propertyPath: hints.Array.data[2].waypointToReach
+      value: 
+      objectReference: {fileID: 2026523348}
+    - target: {fileID: 7687598410835700019, guid: 40558c0aac5bf844198a786a52cd6d8b,
+        type: 3}
+      propertyPath: hints.Array.data[3].waypointToReach
+      value: 
+      objectReference: {fileID: 1043789749}
+    - target: {fileID: 7687598410835700019, guid: 40558c0aac5bf844198a786a52cd6d8b,
+        type: 3}
+      propertyPath: hints.Array.data[4].waypointToReach
+      value: 
+      objectReference: {fileID: 61518554}
     - target: {fileID: 7687598410835700017, guid: 40558c0aac5bf844198a786a52cd6d8b,
         type: 3}
       propertyPath: positionsToDeath.Array.size
@@ -2832,6 +2916,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8df2100a25d2ff945b662448e3364c53, type: 3}
+--- !u!1 &1548122715 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3054624309008697395, guid: 8df2100a25d2ff945b662448e3364c53,
+    type: 3}
+  m_PrefabInstance: {fileID: 1548122714}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1612774639
 GameObject:
   m_ObjectHideFlags: 0
