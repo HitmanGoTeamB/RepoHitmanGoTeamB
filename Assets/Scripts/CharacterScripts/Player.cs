@@ -25,7 +25,6 @@ public class Player : Character
     private bool isAlive = true;
 
     Animator anim;
-    AudioSource audio;
 
     void Awake()
     {
@@ -34,7 +33,6 @@ public class Player : Character
 
         //set animator reference
         anim = GetComponentInChildren<Animator>();
-        audio = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -100,8 +98,7 @@ public class Player : Character
         throwRockModel.SetActive(false);
 
         //play sound when rock hit ground
-        audio.clip = rockHitSound[Random.Range(0, rockHitSound.Length)];
-        audio.Play();
+        AudioManager.PlaySound(rockHitSound[Random.Range(0, rockHitSound.Length)]);
     }
 
     public void ThrowRockPose()
@@ -109,28 +106,26 @@ public class Player : Character
         normalModel.SetActive(false);
         throwRockModel.SetActive(true);
 
-        //play sound
-        audio.clip = pickRockSound[Random.Range(0, pickRockSound.Length)];
-        audio.Play();
+        //play pick rock sound
+        AudioManager.PlaySound(pickRockSound[Random.Range(0, pickRockSound.Length)]);
     }
 
     public void SoundMovement(bool attack)
     {
+        //play sound attack or movement
         if(attack)
         {
-            audio.clip = movementSound[Random.Range(0, movementSound.Length)];
+            AudioManager.PlaySound( movementSound[Random.Range(0, movementSound.Length)]);
         }
         else
         {
-            audio.clip = attackSound[Random.Range(0, attackSound.Length)];
+            AudioManager.PlaySound(attackSound[Random.Range(0, attackSound.Length)]);
         }
-
-        audio.Play();
     }
 
     public void ThrowRockSound()
     {
-        audio.clip = throwRockSound[Random.Range(0, throwRockSound.Length)];
-        audio.Play();
+        //play sound throw rock
+        AudioManager.PlaySound(throwRockSound[Random.Range(0, throwRockSound.Length)]);
     }
 }

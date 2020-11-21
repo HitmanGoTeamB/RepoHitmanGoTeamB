@@ -18,6 +18,7 @@ public class Enemy : Character, IMovable
     [SerializeField] AudioClip[] attackSound = default;
     [SerializeField] AudioClip[] alertSound = default;
     [SerializeField] AudioClip[] rotateSound = default;
+    [SerializeField] AudioClip deathsSound = default;
 
     //to use when set pathfinding
     public List<Waypoint> PathToRock { get; private set; } = new List<Waypoint>();
@@ -26,7 +27,6 @@ public class Enemy : Character, IMovable
     Coroutine removeAlertFeedback;
 
     Animator anim;
-    AudioSource audio;
     bool isAlive = true;
 
     void Awake()
@@ -35,7 +35,6 @@ public class Enemy : Character, IMovable
 
         //set animator reference
         anim = GetComponentInChildren<Animator>();
-        audio = GetComponent<AudioSource>();
 
         //hide alert feedback at start
         if (alertFeedback)
@@ -92,23 +91,21 @@ public class Enemy : Character, IMovable
             rotate_Coroutine = StartCoroutine(Rotate_Coroutine(lookRotation));
 
             //play rotate sound
-            audio.clip = rotateSound[Random.Range(0, rotateSound.Length)];
-            audio.Play();
+            AudioManager.PlaySound(rotateSound[Random.Range(0, rotateSound.Length)]);
         }
     }
 
     public void SoundMovement(bool attack)
     {
+        //play sound attack or movement
         if (attack)
         {
-            audio.clip = movementSound[Random.Range(0, movementSound.Length)];
+            AudioManager.PlaySound( movementSound[Random.Range(0, movementSound.Length)]);
         }
         else
         {
-            audio.clip = attackSound[Random.Range(0, attackSound.Length)];
+            AudioManager.PlaySound(attackSound[Random.Range(0, attackSound.Length)]);
         }
-
-        audio.Play();
     }
 
     /// <summary>
@@ -168,8 +165,7 @@ public class Enemy : Character, IMovable
             removeAlertFeedback = StartCoroutine(RemoveAlertFeedback());
 
             //play alert sound
-            audio.clip = alertSound[Random.Range(0, alertSound.Length)];
-            audio.Play();
+            AudioManager.PlaySound(alertSound[Random.Range(0, alertSound.Length)]);
         }
     }
 
@@ -184,6 +180,9 @@ public class Enemy : Character, IMovable
 
             //remove from level manager list and move to death position
             GameManager.instance.LevelManager.EnemyDeath(this);
+
+            //play death sound
+            AudioManager.PlaySound(deathsSound);
         }
     }
 }

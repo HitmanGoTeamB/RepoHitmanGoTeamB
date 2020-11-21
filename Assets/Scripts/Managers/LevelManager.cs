@@ -21,6 +21,9 @@ public class LevelManager : StateMachine
     [SerializeField] Transform[] positionsToDeath = default;
     int deathPositionIndex;
 
+    [Header("Music")]
+    [SerializeField] AudioClip musicLevel = default;
+
     [Header("Sounds")]
     [SerializeField] AudioClip soundWin = default;
     [SerializeField] AudioClip soundLose = default;
@@ -39,8 +42,6 @@ public class LevelManager : StateMachine
 
     bool isGameEnded;
 
-    AudioSource audio;
-
     #endregion
 
     void Start()
@@ -49,7 +50,8 @@ public class LevelManager : StateMachine
         enemiesInScene = FindObjectsOfType<Enemy>().ToList();
         SetState(new PrelevelState(this));
 
-        audio = GetComponent<AudioSource>();
+        //play music
+        AudioManager.PlayMusic(musicLevel);
     }
 
     #region private API
@@ -226,8 +228,7 @@ public class LevelManager : StateMachine
         }
 
         //play sound
-        audio.clip = win ? soundWin : soundLose;
-        audio.Play();
+        AudioManager.PlaySound( win ? soundWin : soundLose );
     }
 
     #endregion

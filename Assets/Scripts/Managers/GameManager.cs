@@ -41,8 +41,15 @@ public class GameManager : MonoBehaviour
         uiManager = FindObjectOfType<UIManager>();
 
         //check last level
-        if(LevelManager)
+        if (LevelManager)
+        {
             CheckLastLevel();
+        }
+        else
+        {
+            //if there is not level manager (play menu music)
+            AudioManager.instance.PlayMusic();
+        }
 
         //check hint
         if (hintToActivate != null)

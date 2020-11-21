@@ -38,13 +38,6 @@ public class ShowPath : MonoBehaviour
     List<Path> pathsAlreadyEvaluated = new List<Path>();
     System.Action onEnd;
 
-    AudioSource audioSource;
-
-    private void Awake()
-    {
-        audioSource = GetComponent<AudioSource>();
-    }
-
     public void CreatePath(System.Action onEnd, bool isAgainSameLevel)
     {
         //save references
@@ -52,8 +45,7 @@ public class ShowPath : MonoBehaviour
         this.isAgainSameLevel = isAgainSameLevel;
 
         //create audio
-        audioSource.clip = soundCreatePath;
-        audioSource.Play();
+        AudioManager.PlaySound(soundCreatePath);
 
         StartPath();
     }
