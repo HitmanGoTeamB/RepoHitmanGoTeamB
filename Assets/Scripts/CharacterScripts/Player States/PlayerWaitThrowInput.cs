@@ -136,6 +136,10 @@ public class PlayerWaitThrowInput : State
             GameManager.instance.LevelManager.SetEnemiesPathFinding(waypoint);
             stateMachine.SetState(new Wait(stateMachine));
 
+            //check hint if active
+            if (Achievement.hintActive)
+                Achievement.hintActive.CheckHint(waypoint);
+
             anim.SetTrigger("Throw Rock");
         }
     }

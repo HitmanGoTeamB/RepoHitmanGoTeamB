@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public UIManager uiManager { get; private set; }
 
     int lastLevel = -1;
+    System.Type hintToActivate;
 
     void Awake()
     {
@@ -42,6 +43,10 @@ public class GameManager : MonoBehaviour
         //check last level
         if(LevelManager)
             CheckLastLevel();
+
+        //check hint
+        if (hintToActivate != null)
+            ActivateHint();
     }
 
     void CheckLastLevel()
@@ -61,4 +66,35 @@ public class GameManager : MonoBehaviour
         //set last level
         lastLevel = currentLevel;
     }
+
+    #region hint
+
+    void ActivateHint()
+    {
+        //foreach achievement in scene
+        Achievement[] achievements = FindObjectsOfType<Achievement>();
+        foreach(Achievement achievement in achievements)
+        {
+            //find one of this type and activate
+            if(achievement.GetType() == hintToActivate)
+            {
+                achievement.ActivateHints();
+                break;
+            }
+        }
+
+        //remove reference
+        hintToActivate = null;
+    }
+
+    public void StartHints<T>(T hintToActivate)
+    {
+        //save reference
+        this.hintToActivate = hintToActivate.GetType();
+
+        //reload scene
+        FunctionsUI.instance.ReloadScene();
+    }
+
+    #endregion
 }

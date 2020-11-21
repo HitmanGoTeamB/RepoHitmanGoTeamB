@@ -489,6 +489,7 @@ GameObject:
   m_Component:
   - component: {fileID: 227811973}
   - component: {fileID: 227811975}
+  - component: {fileID: 227811974}
   m_Layer: 0
   m_Name: HintModeCamera
   m_TagString: Untagged
@@ -510,6 +511,18 @@ Transform:
   m_Father: {fileID: 1194347442}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 39.04, y: 0, z: 0}
+--- !u!114 &227811974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 227811972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 350ebce5c4378bc4caf7692183190504, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!20 &227811975
 Camera:
   m_ObjectHideFlags: 0
@@ -1231,15 +1244,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2045635192725653390, guid: 7b2c1526378390248acaa8652749ae46,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5606825967691216981, guid: 7b2c1526378390248acaa8652749ae46,
         type: 3}
       propertyPath: m_LocalPosition.z
       value: -0.32
+      objectReference: {fileID: 0}
+    - target: {fileID: 2045635192725653390, guid: 7b2c1526378390248acaa8652749ae46,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7b2c1526378390248acaa8652749ae46, type: 3}

@@ -102,6 +102,14 @@ public class FunctionsUI : MonoBehaviour
         Application.OpenURL(url);
     }
 
+    public void Toggle(GameObject obj)
+    {
+        if (obj.activeInHierarchy)
+            obj.SetActive(false);
+        else
+            obj.SetActive(true);
+    }
+
     #endregion
 
     #region options

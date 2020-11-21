@@ -137,6 +137,10 @@ public class PlayerWaitInput : State
         if (waypointToMove != null)
         {
             stateMachine.SetState(new PlayerMovement(stateMachine, objectToMove, waypointToMove));
+
+            //check hint if active
+            if(Achievement.hintActive)
+                Achievement.hintActive.CheckHint(waypointToMove);
         }
         else
         {
