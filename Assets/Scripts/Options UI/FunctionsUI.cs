@@ -149,7 +149,7 @@ public class FunctionsUI : MonoBehaviour
 
     public void ChangeResolution(bool forward)
     {
-        int currentResolution = FindCurrentResolution(newResolution);
+        int currentResolution = FindCurrentResolution(instance.newResolution);
         int nextResolution = 0;
 
         //get next resolution
@@ -165,18 +165,18 @@ public class FunctionsUI : MonoBehaviour
         }
 
         //set new resolution
-        newResolution = Screen.resolutions[nextResolution];
+        instance.newResolution = Screen.resolutions[nextResolution];
 
         //UI
-        FindObjectOfType<OptionsUI>().UpdateResolutionText(newResolution);
+        FindObjectOfType<OptionsUI>().UpdateResolutionText(instance.newResolution);
     }
 
     public void SetResolution()
     {
-        Screen.SetResolution(newResolution.width, newResolution.height, Screen.fullScreen, newResolution.refreshRate);
+        Screen.SetResolution(instance.newResolution.width, instance.newResolution.height, Screen.fullScreen, instance.newResolution.refreshRate);
 
         //Save
-        PlayerPrefs.SetInt("Resolution", FindCurrentResolution(newResolution));
+        PlayerPrefs.SetInt("Resolution", FindCurrentResolution(instance.newResolution));
     }
 
     public void SetVSync(bool setOn)
@@ -192,7 +192,7 @@ public class FunctionsUI : MonoBehaviour
 
     public void SetSound(bool setOn)
     {
-        Sound = setOn;
+        instance.Sound = setOn;
 
         //UI
         FindObjectOfType<OptionsUI>().UpdateSoundText(setOn);
@@ -203,7 +203,7 @@ public class FunctionsUI : MonoBehaviour
 
     public void SetMusic(bool setOn)
     {
-        Music = setOn;
+        instance.Music = setOn;
 
         //UI
         FindObjectOfType<OptionsUI>().UpdateMusicText(setOn);
@@ -220,10 +220,10 @@ public class FunctionsUI : MonoBehaviour
         //save options
         PlayerPrefs.SetInt("Quality", QualitySettings.GetQualityLevel());
         PlayerPrefs.SetInt("FullScreen", Screen.fullScreen ? 1 : 0);
-        PlayerPrefs.SetInt("Resolution", FindCurrentResolution(newResolution));
+        PlayerPrefs.SetInt("Resolution", FindCurrentResolution(instance.newResolution));
         PlayerPrefs.SetInt("VSync", QualitySettings.vSyncCount > 0 ? 1 : 0);
-        PlayerPrefs.SetInt("Sound", Sound ? 1 : 0);
-        PlayerPrefs.SetInt("Music", Music ? 1 : 0);
+        PlayerPrefs.SetInt("Sound", instance.Sound ? 1 : 0);
+        PlayerPrefs.SetInt("Music", instance.Music ? 1 : 0);
     }
 
     #endregion

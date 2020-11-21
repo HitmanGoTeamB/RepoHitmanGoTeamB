@@ -33,44 +33,41 @@ public class AudioManager : MonoBehaviour
 
     public void PlayMusic()
     {
-        //menu music
-        musicAudio.clip = menuMusic;
-        musicAudio.Play();
+        AudioManager.PlayMusic(instance.menuMusic);
     }
 
     public void PlaySound()
     {
-        //instantiate sound
-        AudioSource soundAudio = instance.poolingSound.Instantiate(soundPrefab, instance.transform);
-        soundAudio.transform.position = instance.transform.position;
-
-        //click button
-        soundAudio.clip = instance.clickButton;
-        soundAudio.Play();
-
-        //stop after few seconds
-        instance.StartCoroutine(instance.StopSound(soundAudio, clickButton.length));
+        AudioManager.PlaySound(instance.clickButton);
     }
 
     public static void PlayMusic(AudioClip clip)
     {
-        //music 
-        instance.musicAudio.clip = clip;
-        instance.musicAudio.Play();
+        //do only if music active
+        if (FunctionsUI.instance.Music)
+        {
+            //music 
+            instance.musicAudio.clip = clip;
+            instance.musicAudio.Play();
+        }
     }
 
     public static void PlaySound(AudioClip clip)
     {
-        //instantiate sound
-        AudioSource soundAudio = instance.poolingSound.Instantiate(instance.soundPrefab, instance.transform);
-        soundAudio.transform.position = instance.transform.position;
+        //do only if sound active
+        if (FunctionsUI.instance.Sound)
+        {
+            //instantiate sound
+            AudioSource soundAudio = instance.poolingSound.Instantiate(instance.soundPrefab, instance.transform);
+            soundAudio.transform.position = instance.transform.position;
 
-        //set clip and play
-        soundAudio.clip = clip;
-        soundAudio.Play();
+            //set clip and play
+            soundAudio.clip = clip;
+            soundAudio.Play();
 
-        //stop after few seconds
-        instance.StartCoroutine(instance.StopSound(soundAudio, clip.length));
+            //stop after few seconds
+            instance.StartCoroutine(instance.StopSound(soundAudio, clip.length));
+        }
     }
 
     public IEnumerator StopSound(AudioSource soundAudioSource, float timer)
