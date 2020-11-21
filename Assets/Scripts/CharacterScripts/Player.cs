@@ -115,11 +115,11 @@ public class Player : Character
         //play sound attack or movement
         if(attack)
         {
-            AudioManager.PlaySound( movementSound[Random.Range(0, movementSound.Length)]);
+            AudioManager.PlaySound( attackSound[Random.Range(0, attackSound.Length)]);
         }
         else
         {
-            AudioManager.PlaySound(attackSound[Random.Range(0, attackSound.Length)]);
+            AudioManager.PlaySound(movementSound[Random.Range(0, movementSound.Length)]);
         }
     }
 

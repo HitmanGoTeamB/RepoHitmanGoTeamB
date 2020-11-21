@@ -7,6 +7,7 @@ public class AudioManager : MonoBehaviour
     public static AudioManager instance { get; private set; }
 
     [Header("Audio Source")]
+    [SerializeField] AudioSource soundPrefab = default;
     [SerializeField] AudioSource musicAudio = default;
     Pooling<AudioSource> poolingSound = new Pooling<AudioSource>();
 
@@ -40,7 +41,7 @@ public class AudioManager : MonoBehaviour
     public void PlaySound()
     {
         //instantiate sound
-        AudioSource soundAudio = instance.poolingSound.Instantiate(new AudioSource(), instance.transform);
+        AudioSource soundAudio = instance.poolingSound.Instantiate(soundPrefab, instance.transform);
         soundAudio.transform.position = instance.transform.position;
 
         //click button
@@ -61,7 +62,7 @@ public class AudioManager : MonoBehaviour
     public static void PlaySound(AudioClip clip)
     {
         //instantiate sound
-        AudioSource soundAudio = instance.poolingSound.Instantiate(new AudioSource(), instance.transform);
+        AudioSource soundAudio = instance.poolingSound.Instantiate(instance.soundPrefab, instance.transform);
         soundAudio.transform.position = instance.transform.position;
 
         //set clip and play
