@@ -70,10 +70,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4dbe7080cdd300418de1e9d4b9a6046, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundAudio: {fileID: 0}
   musicAudio: {fileID: 2727121572553498321}
   menuMusic: {fileID: 0}
-  clickButton: {fileID: 0}
+  clickButton: {fileID: 8300000, guid: 9807d7f98904a4d4b88ab6ad03864050, type: 3}
 --- !u!82 &2727121572553498321
 AudioSource:
   m_ObjectHideFlags: 0

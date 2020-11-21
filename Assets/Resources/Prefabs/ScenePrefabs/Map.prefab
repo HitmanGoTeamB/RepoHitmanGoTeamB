@@ -64,4 +64,4 @@ MonoBehaviour:
   height: 1.6
   distFromPoint: 0.1
   distFromEndPoint: 0.7
-  soundCreatePath: {fileID: 0}
+  soundCreatePath: {fileID: 8300000, guid: 6302c4d26490893479aabfdd5d4e5176, type: 3}

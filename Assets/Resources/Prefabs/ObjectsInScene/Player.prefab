@@ -100,11 +100,16 @@ MonoBehaviour:
   rockThrowTime: 1
   normalModel: {fileID: 5444617898134328268}
   throwRockModel: {fileID: 5788322395452542286}
-  movementSound: []
+  movementSound:
+  - {fileID: 8300000, guid: 7e5219780e283ee408e38d37b24c24e6, type: 3}
+  - {fileID: 8300000, guid: f535447df2d087942b64fcc50d86a8e5, type: 3}
   attackSound: []
-  pickRockSound: []
-  throwRockSound: []
-  rockHitSound: []
+  pickRockSound:
+  - {fileID: 8300000, guid: 48b561be965510047a7e1e4a27c63b5f, type: 3}
+  throwRockSound:
+  - {fileID: 8300000, guid: 65fd9845d78ca84468c021ebbff867d8, type: 3}
+  rockHitSound:
+  - {fileID: 8300000, guid: 52eaa15f81bfb904891477a56ab560ae, type: 3}
 --- !u!114 &4551857780677896268
 MonoBehaviour:
   m_ObjectHideFlags: 0
