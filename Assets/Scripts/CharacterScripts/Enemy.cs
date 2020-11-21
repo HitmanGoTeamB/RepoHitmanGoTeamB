@@ -18,7 +18,7 @@ public class Enemy : Character, IMovable
     [SerializeField] AudioClip[] attackSound = default;
     [SerializeField] AudioClip[] alertSound = default;
     [SerializeField] AudioClip[] rotateSound = default;
-    [SerializeField] AudioClip deathsSound = default;
+    [SerializeField] AudioClip[] deathsSound = default;
 
     //to use when set pathfinding
     public List<Waypoint> PathToRock { get; private set; } = new List<Waypoint>();
@@ -182,7 +182,7 @@ public class Enemy : Character, IMovable
             GameManager.instance.LevelManager.EnemyDeath(this);
 
             //play death sound
-            AudioManager.PlaySound(deathsSound);
+            AudioManager.PlaySound(deathsSound[Random.Range(0, deathsSound.Length)]);
         }
     }
 }
