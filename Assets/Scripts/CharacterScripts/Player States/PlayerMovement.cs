@@ -31,6 +31,8 @@ public class PlayerMovement : StateMovement
         {
             anim.SetTrigger("Move");
         }
+
+        player.SoundMovement(IsOnEnemy());
     }
 
     public override void Exit()

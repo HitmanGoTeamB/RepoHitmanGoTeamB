@@ -13,6 +13,12 @@ public class Enemy : Character, IMovable
     [SerializeField] GameObject alertFeedback = default;
     [SerializeField] float timeBeforeRemove = 1.5f;
 
+    [Header("Sounds")]
+    [SerializeField] AudioClip[] movementSound = default;
+    [SerializeField] AudioClip[] attackSound = default;
+    [SerializeField] AudioClip[] alertSound = default;
+    [SerializeField] AudioClip[] rotateSound = default;
+
     //to use when set pathfinding
     public List<Waypoint> PathToRock { get; private set; } = new List<Waypoint>();
 
@@ -20,6 +26,7 @@ public class Enemy : Character, IMovable
     Coroutine removeAlertFeedback;
 
     Animator anim;
+    AudioSource audio;
     bool isAlive = true;
 
     void Awake()
@@ -28,6 +35,7 @@ public class Enemy : Character, IMovable
 
         //set animator reference
         anim = GetComponentInChildren<Animator>();
+        audio = GetComponent<AudioSource>();
 
         //hide alert feedback at start
         if (alertFeedback)
@@ -82,7 +90,25 @@ public class Enemy : Character, IMovable
 
             //start rotation coroutine (animation)
             rotate_Coroutine = StartCoroutine(Rotate_Coroutine(lookRotation));
+
+            //play rotate sound
+            audio.clip = rotateSound[Random.Range(0, rotateSound.Length)];
+            audio.Play();
         }
+    }
+
+    public void SoundMovement(bool attack)
+    {
+        if (attack)
+        {
+            audio.clip = movementSound[Random.Range(0, movementSound.Length)];
+        }
+        else
+        {
+            audio.clip = attackSound[Random.Range(0, attackSound.Length)];
+        }
+
+        audio.Play();
     }
 
     /// <summary>
@@ -140,6 +166,10 @@ public class Enemy : Character, IMovable
 
             //remove alert feedback after few seconds
             removeAlertFeedback = StartCoroutine(RemoveAlertFeedback());
+
+            //play alert sound
+            audio.clip = alertSound[Random.Range(0, alertSound.Length)];
+            audio.Play();
         }
     }
 

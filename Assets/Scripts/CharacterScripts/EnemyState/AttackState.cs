@@ -15,6 +15,9 @@ public class AttackState : StateMovement
         //animation
         Animator anim = stateMachine.GetComponentInChildren<Animator>();
         anim.SetTrigger("Attack");
+
+        Enemy enemy = stateMachine as Enemy;
+        enemy.SoundMovement(true);
     }
 
     public override void Exit()

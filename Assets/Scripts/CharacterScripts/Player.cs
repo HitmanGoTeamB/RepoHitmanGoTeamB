@@ -13,11 +13,19 @@ public class Player : Character
     [SerializeField] GameObject normalModel = default;
     [SerializeField] GameObject throwRockModel = default;
 
+    [Header("Sounds")]
+    [SerializeField] AudioClip[] movementSound = default;
+    [SerializeField] AudioClip[] attackSound = default;
+    [SerializeField] AudioClip[] pickRockSound = default;
+    [SerializeField] AudioClip[] throwRockSound = default;
+    [SerializeField] AudioClip[] rockHitSound = default;
+
     public float RockThrowTime => rockThrowTime;
 
     private bool isAlive = true;
 
     Animator anim;
+    AudioSource audio;
 
     void Awake()
     {
@@ -26,6 +34,7 @@ public class Player : Character
 
         //set animator reference
         anim = GetComponentInChildren<Animator>();
+        audio = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -89,11 +98,39 @@ public class Player : Character
     {
         normalModel.SetActive(true);
         throwRockModel.SetActive(false);
+
+        //play sound when rock hit ground
+        audio.clip = rockHitSound[Random.Range(0, rockHitSound.Length)];
+        audio.Play();
     }
 
     public void ThrowRockPose()
     {
         normalModel.SetActive(false);
         throwRockModel.SetActive(true);
+
+        //play sound
+        audio.clip = pickRockSound[Random.Range(0, pickRockSound.Length)];
+        audio.Play();
+    }
+
+    public void SoundMovement(bool attack)
+    {
+        if(attack)
+        {
+            audio.clip = movementSound[Random.Range(0, movementSound.Length)];
+        }
+        else
+        {
+            audio.clip = attackSound[Random.Range(0, attackSound.Length)];
+        }
+
+        audio.Play();
+    }
+
+    public void ThrowRockSound()
+    {
+        audio.clip = throwRockSound[Random.Range(0, throwRockSound.Length)];
+        audio.Play();
     }
 }

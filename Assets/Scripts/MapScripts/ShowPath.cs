@@ -28,6 +28,9 @@ public class ShowPath : MonoBehaviour
     [SerializeField] float distFromPoint = 0.2f;
     [SerializeField] float distFromEndPoint = 0.3f;
 
+    [Header("Sounds")]
+    [SerializeField] AudioClip soundCreatePath = default;
+
     bool isAgainSameLevel;
 
     List<Waypoint> waypointsAlreadyEvaluated = new List<Waypoint>();
@@ -35,11 +38,22 @@ public class ShowPath : MonoBehaviour
     List<Path> pathsAlreadyEvaluated = new List<Path>();
     System.Action onEnd;
 
+    AudioSource audioSource;
+
+    private void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+
     public void CreatePath(System.Action onEnd, bool isAgainSameLevel)
     {
         //save references
         this.onEnd = onEnd;
         this.isAgainSameLevel = isAgainSameLevel;
+
+        //create audio
+        audioSource.clip = soundCreatePath;
+        audioSource.Play();
 
         StartPath();
     }

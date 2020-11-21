@@ -23,6 +23,9 @@ public class EnemyMovement : StateMovement
         {
             anim.SetTrigger("Move");
         }
+
+        Enemy enemy = stateMachine as Enemy;
+        enemy.SoundMovement(IsOnPlayer());
     }
 
     public override void Exit()
