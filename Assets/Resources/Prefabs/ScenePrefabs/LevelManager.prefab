@@ -49,9 +49,9 @@ MonoBehaviour:
   rockAreaEffect: 1
   timeDeathAnimation: 0.7
   positionsToDeath: []
-  musicLevel: {fileID: 8300000, guid: b84d20f531727174eb1c5ac33c49c480, type: 3}
-  soundWin: {fileID: 8300000, guid: f535447df2d087942b64fcc50d86a8e5, type: 3}
-  soundLose: {fileID: 8300000, guid: 6f996bd634b42ee4887567dd8a903210, type: 3}
+  musicLevel: {fileID: 0}
+  soundWin: {fileID: 8300000, guid: 6f996bd634b42ee4887567dd8a903210, type: 3}
+  soundLose: {fileID: 8300000, guid: 91157a6b0072e074999394e4a9f1c97b, type: 3}
 --- !u!114 &7687598410835700019
 MonoBehaviour:
   m_ObjectHideFlags: 0

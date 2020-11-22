@@ -73,7 +73,7 @@ MonoBehaviour:
   soundPrefab: {fileID: 9102175239340378065, guid: 7f7366c8e755b164cafbfcb6bc853d51,
     type: 3}
   musicAudio: {fileID: 2727121572553498321}
-  menuMusic: {fileID: 0}
+  menuMusic: {fileID: 8300000, guid: 80f7a912dd6fdf444aadf583b4d25cf0, type: 3}
   clickButton: {fileID: 8300000, guid: 9807d7f98904a4d4b88ab6ad03864050, type: 3}
 --- !u!82 &2727121572553498321
 AudioSource:
@@ -85,7 +85,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 9807d7f98904a4d4b88ab6ad03864050, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
