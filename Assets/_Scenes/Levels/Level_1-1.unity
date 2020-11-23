@@ -613,10 +613,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d4c0d7e9ae6d9546899366042eaebda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainCamera: {fileID: 0}
-  mainCameraBrain: {fileID: 0}
-  cameraLookAtPoint: {fileID: 0}
-  mapCenter: {fileID: 0}
+  mainCamera: {fileID: 152082849}
+  mainCameraBrain: {fileID: 152082851}
+  cameraLookAtPoint: {fileID: 1490188912}
+  mapCenter: {fileID: 1490188912}
 --- !u!1001 &234466961
 PrefabInstance:
   m_ObjectHideFlags: 0
