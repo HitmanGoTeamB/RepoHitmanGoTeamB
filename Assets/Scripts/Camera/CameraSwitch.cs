@@ -6,8 +6,10 @@ using Cinemachine;
 public class CameraSwitch : MonoBehaviour
 {
     public CinemachineBrain mainCameraBrain;
-    //list of cameras to switch
-    public List<CinemachineVirtualCamera> cameras;
+    //default camera in scene
+    public CinemachineVirtualCamera defaultCamera;
+    //camera to switch to from the default one
+    public CinemachineVirtualCamera switchCamera;
     //list of tile positions where the camera switch
     public List<Waypoint> cameraSwitchWaypoints; 
 
@@ -26,23 +28,16 @@ public class CameraSwitch : MonoBehaviour
     void SwitchCameraPosition()
     {
         Player player = GameManager.instance.player;
-        if(player.CurrentWaypoint == cameraSwitchWaypoints[0])
+
+        if (cameraSwitchWaypoints.Contains(player.CurrentWaypoint))
         {
-            //attiva la camera relativa al punto
-            cameras[0].VirtualCameraGameObject.SetActive(true);
-            //disattiva la camera precedente se esiste
-            if(cameras[1].VirtualCameraGameObject.activeInHierarchy == true)
-            {
-                cameras[1].VirtualCameraGameObject.SetActive(false);
-            }
+            switchCamera.VirtualCameraGameObject.SetActive(true);
+            defaultCamera.VirtualCameraGameObject.SetActive(false);
         }
-        if(player.CurrentWaypoint == cameraSwitchWaypoints[1])
+        else
         {
-            cameras[1].VirtualCameraGameObject.SetActive(true);
-            if (cameras[0].VirtualCameraGameObject.activeInHierarchy == true)
-            {
-                cameras[0].VirtualCameraGameObject.SetActive(false);
-            }
+            defaultCamera.VirtualCameraGameObject.SetActive(true);
+            switchCamera.VirtualCameraGameObject.SetActive(false);
         }
     }
 }

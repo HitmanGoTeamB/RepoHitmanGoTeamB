@@ -17,6 +17,8 @@ public class PlayerWaitInput : State
 
     Animator anim;
 
+    CameraMovement CameraMovementComponent;
+
     public override void Enter()
     {
         Player player = stateMachine as Player;
@@ -27,6 +29,8 @@ public class PlayerWaitInput : State
         //get references
         cam = Camera.main;
         anim = stateMachine.GetComponentInChildren<Animator>();
+        if(CameraMovementComponent == null)
+            CameraMovementComponent = CameraMovement.FindObjectOfType<CameraMovement>().GetActiveCameraMovementComponent();
     }
 
     public override void Execution()
@@ -82,6 +86,9 @@ public class PlayerWaitInput : State
         //if hit player, save start input position and start moving - be sure doesn't hit UI
         if (Physics.Raycast(ray, 100, layer) && EventSystem.current.IsPointerOverGameObject(pointerId) == false)
         {
+            //remove camera component
+            CameraMovementComponent.enabled = false;
+
             startInputPosition = inputPosition;
             isMoving = true;
 
@@ -93,6 +100,8 @@ public class PlayerWaitInput : State
     {
         //stop moving
         isMoving = false;
+
+        CameraMovementComponent.enabled = true;
 
         int pointerId;
         Vector2 inputPosition = GetInput(out pointerId);
