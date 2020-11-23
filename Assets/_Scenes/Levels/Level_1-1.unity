@@ -456,6 +456,7 @@ GameObject:
   - component: {fileID: 152082851}
   - component: {fileID: 152082852}
   - component: {fileID: 152082853}
+  - component: {fileID: 152082854}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -579,12 +580,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCameraBrain: {fileID: 152082851}
-  cameras:
-  - {fileID: 682965883}
-  - {fileID: 1404213652}
+  defaultCamera: {fileID: 682965883}
+  switchCamera: {fileID: 1404213652}
   cameraSwitchWaypoints:
-  - {fileID: 1965361418}
   - {fileID: 629842016}
+  - {fileID: 528701346}
 --- !u!114 &152082853
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -601,6 +601,22 @@ MonoBehaviour:
   mainCameraBrain: {fileID: 152082851}
   cameraLookAtPoint: {fileID: 1490188912}
   mapCenter: {fileID: 1490188912}
+--- !u!114 &152082854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 152082847}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d4c0d7e9ae6d9546899366042eaebda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainCamera: {fileID: 0}
+  mainCameraBrain: {fileID: 0}
+  cameraLookAtPoint: {fileID: 0}
+  mapCenter: {fileID: 0}
 --- !u!1001 &234466961
 PrefabInstance:
   m_ObjectHideFlags: 0
