@@ -205,7 +205,7 @@ PrefabInstance:
     - target: {fileID: -676863727857625395, guid: ae4740a1e7a30dc4c91b0805f7d72b43,
         type: 3}
       propertyPath: m_CastShadows
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ae4740a1e7a30dc4c91b0805f7d72b43, type: 3}
