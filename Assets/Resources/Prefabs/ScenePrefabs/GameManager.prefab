@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 864034640717295539}
+  - component: {fileID: 4360269977215250576}
   - component: {fileID: 864034640717295538}
   - component: {fileID: -3473883090874332273}
-  - component: {fileID: 4360269977215250576}
   - component: {fileID: 2727121572553498321}
   m_Layer: 0
   m_Name: GameManager
@@ -34,6 +34,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4360269977215250576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 864034640717295549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4dbe7080cdd300418de1e9d4b9a6046, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundPrefab: {fileID: 9102175239340378065, guid: 7f7366c8e755b164cafbfcb6bc853d51,
+    type: 3}
+  musicAudio: {fileID: 2727121572553498321}
+  menuMusic: {fileID: 8300000, guid: 80f7a912dd6fdf444aadf583b4d25cf0, type: 3}
+  clickButton: {fileID: 8300000, guid: 9807d7f98904a4d4b88ab6ad03864050, type: 3}
 --- !u!114 &864034640717295538
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -58,23 +75,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 580a020384a23c9498b5787d18c474a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4360269977215250576
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 864034640717295549}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4dbe7080cdd300418de1e9d4b9a6046, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  soundPrefab: {fileID: 9102175239340378065, guid: 7f7366c8e755b164cafbfcb6bc853d51,
-    type: 3}
-  musicAudio: {fileID: 2727121572553498321}
-  menuMusic: {fileID: 8300000, guid: 80f7a912dd6fdf444aadf583b4d25cf0, type: 3}
-  clickButton: {fileID: 8300000, guid: 9807d7f98904a4d4b88ab6ad03864050, type: 3}
 --- !u!82 &2727121572553498321
 AudioSource:
   m_ObjectHideFlags: 0
