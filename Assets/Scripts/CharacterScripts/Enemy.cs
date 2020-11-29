@@ -13,6 +13,13 @@ public class Enemy : Character, IMovable
     [SerializeField] GameObject alertFeedback = default;
     [SerializeField] float timeBeforeRemove = 1.5f;
 
+    [Header("Sounds")]
+    [SerializeField] AudioClip[] movementSound = default;
+    [SerializeField] AudioClip[] attackSound = default;
+    [SerializeField] AudioClip[] alertSound = default;
+    [SerializeField] AudioClip[] rotateSound = default;
+    [SerializeField] AudioClip[] deathsSound = default;
+
     //to use when set pathfinding
     public List<Waypoint> PathToRock { get; private set; } = new List<Waypoint>();
 
@@ -82,6 +89,22 @@ public class Enemy : Character, IMovable
 
             //start rotation coroutine (animation)
             rotate_Coroutine = StartCoroutine(Rotate_Coroutine(lookRotation));
+
+            //play rotate sound
+            AudioManager.PlaySound(rotateSound[Random.Range(0, rotateSound.Length)]);
+        }
+    }
+
+    public void SoundMovement(bool attack)
+    {
+        //play sound attack or movement
+        if (attack)
+        {
+            AudioManager.PlaySound( attackSound[Random.Range(0, attackSound.Length)]);
+        }
+        else
+        {
+            AudioManager.PlaySound(movementSound[Random.Range(0, movementSound.Length)]);
         }
     }
 
@@ -140,6 +163,9 @@ public class Enemy : Character, IMovable
 
             //remove alert feedback after few seconds
             removeAlertFeedback = StartCoroutine(RemoveAlertFeedback());
+
+            //play alert sound
+            AudioManager.PlaySound(alertSound[Random.Range(0, alertSound.Length)]);
         }
     }
 
@@ -154,6 +180,9 @@ public class Enemy : Character, IMovable
 
             //remove from level manager list and move to death position
             GameManager.instance.LevelManager.EnemyDeath(this);
+
+            //play death sound
+            AudioManager.PlaySound(deathsSound[Random.Range(0, deathsSound.Length)]);
         }
     }
 }

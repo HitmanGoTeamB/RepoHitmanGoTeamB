@@ -2055,6 +2055,11 @@ PrefabInstance:
       propertyPath: positionsToDeath.Array.data[3]
       value: 
       objectReference: {fileID: 1317413139}
+    - target: {fileID: 7687598410835700017, guid: 40558c0aac5bf844198a786a52cd6d8b,
+        type: 3}
+      propertyPath: musicLevel
+      value: 
+      objectReference: {fileID: 8300000, guid: b84d20f531727174eb1c5ac33c49c480, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 40558c0aac5bf844198a786a52cd6d8b, type: 3}
 --- !u!1 &407904512 stripped

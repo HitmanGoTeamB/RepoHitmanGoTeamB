@@ -21,6 +21,13 @@ public class LevelManager : StateMachine
     [SerializeField] Transform[] positionsToDeath = default;
     int deathPositionIndex;
 
+    [Header("Music")]
+    [SerializeField] AudioClip musicLevel = default;
+
+    [Header("Sounds")]
+    [SerializeField] AudioClip soundWin = default;
+    [SerializeField] AudioClip soundLose = default;
+
     public float TimeCinemachine => timeCinemachine;
     public float MinimumEnemyTurnDuration => minimumEnemyTurnDuration;
     public int RockAreaEffect => rockAreaEffect;
@@ -42,6 +49,9 @@ public class LevelManager : StateMachine
         //find every enemy and start prelevel state
         enemiesInScene = FindObjectsOfType<Enemy>().ToList();
         SetState(new PrelevelState(this));
+
+        //play music
+        AudioManager.PlayMusic(musicLevel);
     }
 
     #region private API
@@ -216,6 +226,9 @@ public class LevelManager : StateMachine
             //restart scene
             StartCoroutine(PlayerDeath());
         }
+
+        //play sound
+        AudioManager.PlaySound( win ? soundWin : soundLose );
     }
 
     #endregion

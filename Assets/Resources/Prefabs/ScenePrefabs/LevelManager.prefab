@@ -44,8 +44,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d9c5a827bf8c924ea260b4f1e3afbb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timeCinemachine: 5
   minimumEnemyTurnDuration: 0
   rockAreaEffect: 1
+  timeDeathAnimation: 0.7
+  positionsToDeath: []
+  musicLevel: {fileID: 0}
+  soundWin: {fileID: 8300000, guid: 6f996bd634b42ee4887567dd8a903210, type: 3}
+  soundLose: {fileID: 8300000, guid: 91157a6b0072e074999394e4a9f1c97b, type: 3}
 --- !u!114 &7687598410835700019
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59,3 +65,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   achievementName: 
+  stamps: []
+  hintMode: {fileID: 0}
+  hints: []

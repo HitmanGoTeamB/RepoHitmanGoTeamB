@@ -141,6 +141,7 @@ public class PlayerWaitThrowInput : State
                 Achievement.hintActive.CheckHint(waypoint);
 
             anim.SetTrigger("Throw Rock");
+            player.ThrowRockSound();
         }
     }
 

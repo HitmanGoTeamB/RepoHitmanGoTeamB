@@ -379,6 +379,23 @@ MonoBehaviour:
   timeToRotate: 1
   alertFeedback: {fileID: 3294253602351256418}
   timeBeforeRemove: 1.5
+  movementSound:
+  - {fileID: 8300000, guid: 4420b5e612faa204081dc2d66c888fd6, type: 3}
+  - {fileID: 8300000, guid: 7ae987d74810f3544b5ca62dcbbb2e08, type: 3}
+  attackSound:
+  - {fileID: 8300000, guid: 91157a6b0072e074999394e4a9f1c97b, type: 3}
+  alertSound:
+  - {fileID: 8300000, guid: 7f1c15c67aff9a5418a7b175a496bc97, type: 3}
+  - {fileID: 8300000, guid: 544b6b4cbac53204f9636f1e974817ca, type: 3}
+  - {fileID: 8300000, guid: 62aea6be95a3c15468fee4e83e52e209, type: 3}
+  rotateSound:
+  - {fileID: 8300000, guid: c95c86c292fdbba4ba85eb05c06f8edf, type: 3}
+  - {fileID: 8300000, guid: 8850be2e1effd034ca971e314b406af0, type: 3}
+  - {fileID: 8300000, guid: bdbabcc6f5d7bf442bd230cbfe1789f8, type: 3}
+  deathsSound:
+  - {fileID: 8300000, guid: 17478c30ea430fe409653797468d1c6f, type: 3}
+  - {fileID: 8300000, guid: 8f9515d4e6a8b9f49ba2bea7b727c70d, type: 3}
+  - {fileID: 8300000, guid: 2e5e2689084a1d44d86c356b83929b23, type: 3}
 --- !u!114 &5874447973973556851
 MonoBehaviour:
   m_ObjectHideFlags: 0
