@@ -587,11 +587,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCameraBrain: {fileID: 152082851}
-  defaultCamera: {fileID: 0}
-  switchCamera: {fileID: 0}
+  defaultCamera: {fileID: 682965883}
+  switchCamera: {fileID: 1404213652}
   cameraSwitchWaypoints:
-  - {fileID: 1965361418}
   - {fileID: 629842016}
+  - {fileID: 528701346}
 --- !u!114 &152082853
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2661,6 +2661,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: CanvasUI_1-5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7567373871882892434, guid: 89f59ce7760699a4d9d0257644065d0a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8034874980078271957, guid: 89f59ce7760699a4d9d0257644065d0a,
         type: 3}
