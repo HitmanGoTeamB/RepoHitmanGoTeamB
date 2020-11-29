@@ -382,7 +382,8 @@ MonoBehaviour:
   movementSound:
   - {fileID: 8300000, guid: 4420b5e612faa204081dc2d66c888fd6, type: 3}
   - {fileID: 8300000, guid: 7ae987d74810f3544b5ca62dcbbb2e08, type: 3}
-  attackSound: []
+  attackSound:
+  - {fileID: 8300000, guid: 91157a6b0072e074999394e4a9f1c97b, type: 3}
   alertSound:
   - {fileID: 8300000, guid: 7f1c15c67aff9a5418a7b175a496bc97, type: 3}
   - {fileID: 8300000, guid: 544b6b4cbac53204f9636f1e974817ca, type: 3}

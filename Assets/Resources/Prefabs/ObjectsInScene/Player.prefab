@@ -103,7 +103,10 @@ MonoBehaviour:
   movementSound:
   - {fileID: 8300000, guid: 7e5219780e283ee408e38d37b24c24e6, type: 3}
   - {fileID: 8300000, guid: f535447df2d087942b64fcc50d86a8e5, type: 3}
-  attackSound: []
+  attackSound:
+  - {fileID: 8300000, guid: 17478c30ea430fe409653797468d1c6f, type: 3}
+  - {fileID: 8300000, guid: 8f9515d4e6a8b9f49ba2bea7b727c70d, type: 3}
+  - {fileID: 8300000, guid: 2e5e2689084a1d44d86c356b83929b23, type: 3}
   pickRockSound:
   - {fileID: 8300000, guid: 48b561be965510047a7e1e4a27c63b5f, type: 3}
   throwRockSound:
