@@ -192,6 +192,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7160612554647441062, guid: eb7f28eeb79343044a85ca35099235ea,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5421262250431427993, guid: eb7f28eeb79343044a85ca35099235ea,
         type: 3}
       propertyPath: m_SceneBindings.Array.size
@@ -208,11 +213,6 @@ PrefabInstance:
       propertyPath: m_SceneBindings.Array.data[1].value
       value: 
       objectReference: {fileID: 6839214}
-    - target: {fileID: 7160612554647441062, guid: eb7f28eeb79343044a85ca35099235ea,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eb7f28eeb79343044a85ca35099235ea, type: 3}
 --- !u!1 &6839214 stripped
@@ -3358,6 +3358,16 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3664815107217894755, guid: 2568ce9114d92114cb6f23ab85a616cd,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3664815106367125311, guid: 2568ce9114d92114cb6f23ab85a616cd,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2568ce9114d92114cb6f23ab85a616cd, type: 3}
 --- !u!1 &563972221 stripped
@@ -3900,7 +3910,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 669824518}
-  m_LocalRotation: {x: 0.5428184, y: 0.1826405, z: -0.122309074, w: 0.81057453}
+  m_LocalRotation: {x: 0.5428185, y: 0.18264045, z: -0.12230905, w: 0.8105746}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -8912,7 +8922,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1681194952}
-  m_LocalRotation: {x: 0.5428184, y: 0.1826405, z: -0.122309074, w: 0.81057453}
+  m_LocalRotation: {x: 0.5428185, y: 0.18264045, z: -0.12230905, w: 0.8105746}
   m_LocalPosition: {x: -5.76, y: 21.29, z: -1.92}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -8995,11 +9005,11 @@ MonoBehaviour:
   defaultCamera: {fileID: 695230670}
   switchCamera: {fileID: 1191830245}
   cameraSwitchWaypoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 770915032}
+  - {fileID: 10522773}
+  - {fileID: 963990811}
+  - {fileID: 1941429882}
+  - {fileID: 1050514793}
 --- !u!114 &1681194958
 MonoBehaviour:
   m_ObjectHideFlags: 0
