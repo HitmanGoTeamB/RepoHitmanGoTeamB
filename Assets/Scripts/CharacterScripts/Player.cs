@@ -12,6 +12,7 @@ public class Player : Character
     [Header("Models")]
     [SerializeField] GameObject normalModel = default;
     [SerializeField] GameObject throwRockModel = default;
+    public GameObject Rockgraphic;
 
     [Header("Sounds")]
     [SerializeField] AudioClip[] movementSound = default;

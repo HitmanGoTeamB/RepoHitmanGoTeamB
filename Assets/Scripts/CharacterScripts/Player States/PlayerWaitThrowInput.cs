@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Playables;
 
 public class PlayerWaitThrowInput : State
 {
@@ -140,7 +141,10 @@ public class PlayerWaitThrowInput : State
             if (Achievement.hintActive)
                 Achievement.hintActive.CheckHint(waypoint);
 
-            anim.SetTrigger("Throw Rock");
+            GameObject rocktothrow = GameManager.instance.player.Rockgraphic;
+            rocktothrow.transform.LookAt(new Vector3(waypoint.gameObject.transform.position.x, waypoint.gameObject.transform.position.y, waypoint.gameObject.transform.position.z));
+            rocktothrow.GetComponentInChildren<PlayableDirector>().Play();
+            //anim.SetTrigger("Throw Rock");
             player.ThrowRockSound();
         }
     }
