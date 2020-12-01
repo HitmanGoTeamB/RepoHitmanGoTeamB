@@ -7494,7 +7494,7 @@ PrefabInstance:
         type: 3}
       propertyPath: hints.Array.data[8].waypointToReach
       value: 
-      objectReference: {fileID: 702750262}
+      objectReference: {fileID: 583506502}
     - target: {fileID: 7687598410835700019, guid: 40558c0aac5bf844198a786a52cd6d8b,
         type: 3}
       propertyPath: hints.Array.data[9].waypointToReach
@@ -7504,7 +7504,7 @@ PrefabInstance:
         type: 3}
       propertyPath: hints.Array.data[10].waypointToReach
       value: 
-      objectReference: {fileID: 583506502}
+      objectReference: {fileID: 702750262}
     - target: {fileID: 7687598410835700019, guid: 40558c0aac5bf844198a786a52cd6d8b,
         type: 3}
       propertyPath: hints.Array.data[11].waypointToReach
