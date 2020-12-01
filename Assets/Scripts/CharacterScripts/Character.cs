@@ -70,8 +70,11 @@ public class Character : StateMachine, IMovable
         currentWaypoint = waypointToReach;
         CurrentWaypoint.AddObjectToWaypoint(this.gameObject);
 
-
-        GameManager.instance.player.modelSon.transform.rotation = Quaternion.identity;
+        //reset rotation of the son model with and without rock
+        Quaternion ResetRotationModel = new Quaternion(0f, GameManager.instance.player.modelSon.transform.rotation.y, 0f, GameManager.instance.player.modelSon.transform.rotation.w);
+        GameManager.instance.player.modelSon.transform.rotation = ResetRotationModel;
+        Quaternion ResetRotationRockModel = new Quaternion(0f, GameManager.instance.player.modelSonWithRock.transform.rotation.y, 0f, GameManager.instance.player.modelSonWithRock.transform.rotation.w);
+        GameManager.instance.player.modelSonWithRock.transform.rotation = ResetRotationRockModel;
 
         //go to wait state after finish the movement
         SetState(new Wait(this));

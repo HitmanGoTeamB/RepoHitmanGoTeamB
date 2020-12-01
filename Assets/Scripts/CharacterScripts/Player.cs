@@ -14,6 +14,7 @@ public class Player : Character
     [SerializeField] GameObject throwRockModel = default;
     public GameObject Rockgraphic;
     public GameObject modelSon;
+    public GameObject modelSonWithRock;
 
     [Header("Sounds")]
     [SerializeField] AudioClip[] movementSound = default;

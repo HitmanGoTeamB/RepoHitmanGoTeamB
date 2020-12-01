@@ -103,6 +103,7 @@ MonoBehaviour:
   throwRockModel: {fileID: 5788322395452542286}
   Rockgraphic: {fileID: 5421262249931779489}
   modelSon: {fileID: 4507681584848526265}
+  modelSonWithRock: {fileID: 7448770798044145037}
   movementSound:
   - {fileID: 8300000, guid: 7e5219780e283ee408e38d37b24c24e6, type: 3}
   - {fileID: 8300000, guid: f535447df2d087942b64fcc50d86a8e5, type: 3}
@@ -303,6 +304,16 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -668740904000487194, guid: 908c0ad64a4669f4784f74312bbe6004,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -668740904000487194, guid: 908c0ad64a4669f4784f74312bbe6004,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: -1504981713932161579, guid: 908c0ad64a4669f4784f74312bbe6004,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -382,6 +393,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2555139246653199431}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &7448770798044145037 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -4311365377069862454, guid: 908c0ad64a4669f4784f74312bbe6004,
+    type: 3}
+  m_PrefabInstance: {fileID: 2555139246653199431}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6182749783122990241 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -668740904000487194, guid: 908c0ad64a4669f4784f74312bbe6004,
@@ -409,6 +426,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -2997253801463293948, guid: 57f2066c4ad65714d9daa332cb460565,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -2997253801463293948, guid: 57f2066c4ad65714d9daa332cb460565,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -1504981713932161579, guid: 57f2066c4ad65714d9daa332cb460565,
         type: 3}
