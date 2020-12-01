@@ -233,17 +233,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5351476560886178598, guid: a61cddfb52597fe4baae35874def7140,
         type: 3}
-      propertyPath: m_LocalPosition.y
+      propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5351476560886178598, guid: a61cddfb52597fe4baae35874def7140,
         type: 3}
-      propertyPath: m_LocalPosition.x
+      propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5421262250888564132, guid: a61cddfb52597fe4baae35874def7140,
         type: 3}
       propertyPath: m_InitialState
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7160612556170016411, guid: a61cddfb52597fe4baae35874def7140,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

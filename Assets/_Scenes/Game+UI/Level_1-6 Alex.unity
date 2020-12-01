@@ -2245,62 +2245,62 @@ PrefabInstance:
         type: 3}
       propertyPath: hints.Array.data[0].waypointToReach
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 191774032}
     - target: {fileID: 7687598410835700019, guid: 40558c0aac5bf844198a786a52cd6d8b,
         type: 3}
       propertyPath: hints.Array.data[1].waypointToReach
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 770915032}
     - target: {fileID: 7687598410835700019, guid: 40558c0aac5bf844198a786a52cd6d8b,
         type: 3}
       propertyPath: hints.Array.data[2].waypointToReach
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1972656655}
     - target: {fileID: 7687598410835700019, guid: 40558c0aac5bf844198a786a52cd6d8b,
         type: 3}
       propertyPath: hints.Array.data[3].waypointToReach
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1872744398}
     - target: {fileID: 7687598410835700019, guid: 40558c0aac5bf844198a786a52cd6d8b,
         type: 3}
       propertyPath: hints.Array.data[4].waypointToReach
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1972656655}
     - target: {fileID: 7687598410835700019, guid: 40558c0aac5bf844198a786a52cd6d8b,
         type: 3}
       propertyPath: hints.Array.data[5].waypointToReach
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 633808643}
     - target: {fileID: 7687598410835700019, guid: 40558c0aac5bf844198a786a52cd6d8b,
         type: 3}
       propertyPath: hints.Array.data[6].waypointToReach
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1872744398}
     - target: {fileID: 7687598410835700019, guid: 40558c0aac5bf844198a786a52cd6d8b,
         type: 3}
       propertyPath: hints.Array.data[7].waypointToReach
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1664767627}
     - target: {fileID: 7687598410835700019, guid: 40558c0aac5bf844198a786a52cd6d8b,
         type: 3}
       propertyPath: hints.Array.data[8].waypointToReach
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 799852099}
     - target: {fileID: 7687598410835700019, guid: 40558c0aac5bf844198a786a52cd6d8b,
         type: 3}
       propertyPath: hints.Array.data[9].waypointToReach
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 770915032}
     - target: {fileID: 7687598410835700019, guid: 40558c0aac5bf844198a786a52cd6d8b,
         type: 3}
       propertyPath: hints.Array.data[10].waypointToReach
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 10522773}
     - target: {fileID: 7687598410835700019, guid: 40558c0aac5bf844198a786a52cd6d8b,
         type: 3}
       propertyPath: hints.Array.data[11].waypointToReach
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 963990811}
     - target: {fileID: 7687598410835700017, guid: 40558c0aac5bf844198a786a52cd6d8b,
         type: 3}
       propertyPath: positionsToDeath.Array.size
@@ -2359,37 +2359,37 @@ MonoBehaviour:
   - {fileID: 563972222}
   hintMode: {fileID: 349188150}
   hints:
-  - waypointToReach: {fileID: 0}
+  - waypointToReach: {fileID: 191774032}
     hintToActivate: {fileID: 248221182}
-  - waypointToReach: {fileID: 0}
+  - waypointToReach: {fileID: 770915032}
     hintToActivate: {fileID: 783638233}
-  - waypointToReach: {fileID: 0}
+  - waypointToReach: {fileID: 1972656655}
     hintToActivate: {fileID: 1640530429}
-  - waypointToReach: {fileID: 0}
+  - waypointToReach: {fileID: 1872744398}
     hintToActivate: {fileID: 2057207586}
-  - waypointToReach: {fileID: 0}
+  - waypointToReach: {fileID: 1972656655}
     hintToActivate: {fileID: 977939008}
-  - waypointToReach: {fileID: 0}
+  - waypointToReach: {fileID: 633808643}
     hintToActivate: {fileID: 1328615201}
-  - waypointToReach: {fileID: 0}
+  - waypointToReach: {fileID: 648068024}
     hintToActivate: {fileID: 568866310}
-  - waypointToReach: {fileID: 0}
+  - waypointToReach: {fileID: 264682579}
     hintToActivate: {fileID: 1104207482}
-  - waypointToReach: {fileID: 0}
+  - waypointToReach: {fileID: 648068024}
     hintToActivate: {fileID: 1837145917}
-  - waypointToReach: {fileID: 0}
+  - waypointToReach: {fileID: 633808643}
     hintToActivate: {fileID: 1767655794}
-  - waypointToReach: {fileID: 0}
+  - waypointToReach: {fileID: 1872744398}
     hintToActivate: {fileID: 1672810617}
-  - waypointToReach: {fileID: 0}
+  - waypointToReach: {fileID: 1664767627}
     hintToActivate: {fileID: 1730678013}
-  - waypointToReach: {fileID: 0}
+  - waypointToReach: {fileID: 799852099}
     hintToActivate: {fileID: 933016223}
-  - waypointToReach: {fileID: 0}
+  - waypointToReach: {fileID: 770915032}
     hintToActivate: {fileID: 1810825552}
-  - waypointToReach: {fileID: 0}
+  - waypointToReach: {fileID: 10522773}
     hintToActivate: {fileID: 465035970}
-  - waypointToReach: {fileID: 0}
+  - waypointToReach: {fileID: 963990811}
     hintToActivate: {fileID: 1952993668}
 --- !u!114 &407904514
 MonoBehaviour:
@@ -3368,6 +3368,16 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3664815108007580025, guid: 2568ce9114d92114cb6f23ab85a616cd,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3664815107551754646, guid: 2568ce9114d92114cb6f23ab85a616cd,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2568ce9114d92114cb6f23ab85a616cd, type: 3}
 --- !u!1 &563972221 stripped
@@ -3910,7 +3920,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 669824518}
-  m_LocalRotation: {x: 0.5428185, y: 0.18264045, z: -0.12230905, w: 0.8105746}
+  m_LocalRotation: {x: 0.5428184, y: 0.18264045, z: -0.122309044, w: 0.8105746}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -8922,7 +8932,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1681194952}
-  m_LocalRotation: {x: 0.5428185, y: 0.18264045, z: -0.12230905, w: 0.8105746}
+  m_LocalRotation: {x: 0.5428184, y: 0.18264045, z: -0.122309044, w: 0.8105746}
   m_LocalPosition: {x: -5.76, y: 21.29, z: -1.92}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
