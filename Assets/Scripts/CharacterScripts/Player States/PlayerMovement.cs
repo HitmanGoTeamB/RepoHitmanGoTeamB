@@ -19,11 +19,11 @@ public class PlayerMovement : StateMovement
 
         //rotate player, necessary for animation
         Player player = stateMachine as Player;
-        Vector3 movementDirection = (waypointToReach.transform.position - player.CurrentWaypoint.transform.position).normalized;
-        Quaternion rotation = Quaternion.LookRotation(movementDirection, Vector3.up);
-        player.transform.rotation = rotation;
+        //Vector3 movementDirection = (waypointToReach.transform.position - player.CurrentWaypoint.transform.position).normalized;
+        //Quaternion rotation = Quaternion.LookRotation(movementDirection, Vector3.up);
+        //player.transform.rotation = rotation;
 
-        if(IsOnEnemy())
+        if (IsOnEnemy())
         {
             anim.SetTrigger("Attack");
         }

@@ -70,6 +70,9 @@ public class Character : StateMachine, IMovable
         currentWaypoint = waypointToReach;
         CurrentWaypoint.AddObjectToWaypoint(this.gameObject);
 
+
+        GameManager.instance.player.modelSon.transform.rotation = Quaternion.identity;
+
         //go to wait state after finish the movement
         SetState(new Wait(this));
 
